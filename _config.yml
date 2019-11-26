@@ -1,0 +1,16 @@
+title: spidermonkey.dev
+description: Website and team blog for the SpiderMonkey JavaScript engine.
+twitter_username: spidermonkeyjs
+
+baseurl: "/spidermonkey.dev"
+url: "https://mozilla-spidermonkey.github.io"
+permalink: /blog/:year/:month/:day/:title.html
+
+theme: minima
+plugins:
+  - jekyll-feed
+
+header_pages:
+  - index.markdown
+  - blog.markdown
+  - docs/index.markdown
