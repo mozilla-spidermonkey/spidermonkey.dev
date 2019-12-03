@@ -2,7 +2,7 @@ title: spidermonkey.dev
 description: Website and team blog for the SpiderMonkey JavaScript engine.
 twitter_username: spidermonkeyjs
 
-baseurl: "/spidermonkey.dev"
+baseurl: "/"
 url: "https://mozilla-spidermonkey.github.io"
 permalink: /blog/:year/:month/:day/:title.html
 
