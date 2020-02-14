@@ -16,6 +16,6 @@ Note: documentation may be outdated or incomplete. If you have any questions or 
 * [Examples and Documentation](https://github.com/mozilla-spidermonkey/spidermonkey-embedding-examples)
 
 # Where to find us
-* IRC: #jsapi channel on [irc.mozilla.org](https://wiki.mozilla.org/IRC) (requires a registered account to avoid spam)
+* Matrix room: [#spidermonkey:mozilla.org](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org)
 * Mailing list: [dev-tech-js-engine-internals](https://lists.mozilla.org/listinfo/dev-tech-js-engine-internals)
 * Twitter: [spidermonkeyjs](https://www.twitter.com/spidermonkeyjs)
