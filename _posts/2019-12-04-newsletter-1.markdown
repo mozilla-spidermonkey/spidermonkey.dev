@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Newsletter 1 (Firefox 72)"
+title:  "SpiderMonkey Newsletter 1 (Firefox 72)"
 date:   2019-12-04 15:00:00 +0100
 ---
 
