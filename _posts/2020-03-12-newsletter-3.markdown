@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Newsletter 3 (Firefox 74-75)"
+title:  "SpiderMonkey Newsletter 3 (Firefox 74-75)"
 date:   2020-03-12 15:00:00 +0100
 ---
 ### JavaScript
