@@ -93,6 +93,8 @@ If you like these newsletters, you may also enjoy Yulia's weekly [Compiler Compi
 *   Arai is [implementing](https://github.com/mozilla-spidermonkey/jsparagus/issues/526) function compilation, while updating the [Stencil interface for function](https://bugzilla.mozilla.org/show_bug.cgi?id=1641202).
 *   Arai [landed a tool](https://github.com/mozilla-spidermonkey/jsparagus/pull/567) and [automation](https://github.com/mozilla-spidermonkey/jsparagus/pull/570) to improve the development workflow.
 *   Arai [bumped](https://github.com/mozilla-spidermonkey/jsparagus/pull/542) the supported Unicode version to 13.
+*   Yulia [is working on](https://github.com/codehag/jsparagus/tree/error-sep) separating the error checking phase from the AST building phase. This will allow running the error checking phase without building an AST for validating JavaScript files when they are received, and also building an AST without doing the validation which would speed-up the first execution of scripts, which are compiled on-demand.
+*   Nicolas is rebasing the performance work implemented in a fork, in order to bring it to the main development tree of SmooshMonkey.
 
 
 #### 🚀 WarpBuilder
