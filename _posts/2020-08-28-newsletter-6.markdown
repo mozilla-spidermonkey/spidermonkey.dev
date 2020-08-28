@@ -85,6 +85,8 @@ We expect to [switch](https://bugzilla.mozilla.org/show_bug.cgi?id=1660798) the 
 *   André [converted](https://bugzilla.mozilla.org/show_bug.cgi?id=1651732) code from `ValueToId` to `ToPropertyKey` to fix subtle correctness bugs.
 *   Jeff [moved](https://bugzilla.mozilla.org/show_bug.cgi?id=1656411) [more](https://bugzilla.mozilla.org/show_bug.cgi?id=1654927) [code](https://bugzilla.mozilla.org/show_bug.cgi?id=1659885) out of `jsfriendapi.h` into smaller headers.
 *   Barun [renamed](https://bugzilla.mozilla.org/show_bug.cgi?id=1483269) `gc::AbortReason` to `GCAbortReason` to fix a conflict with `jit::AbortReason`.
+*   Steve [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1648646) an option to the `shortestPaths` test function to find out why a given JS value is alive.
+*   Steve [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1642121) the JS gdb prettyprinters for the firefox binary as well as making them independent from the working directory.
 
 
 ### WebAssembly
