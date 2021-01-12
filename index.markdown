@@ -11,9 +11,10 @@ and various other projects. It is written in C++ and Rust.
 # What's New
 * [SpiderMonkey Blog](./blog)
 
-# SpiderMonkey Implementation
+# SpiderMonkey Internals
 * [Overview of SpiderMonkey](https://firefox-source-docs.mozilla.org/js/index.html)
 * [Browse the code](https://searchfox.org/mozilla-central/source/js/src)
+* [SMDOC Source Comments](https://searchfox.org/mozilla-central/search?q=[SMDOC]&path=js%2F)
 
 # Building and Contributing
 * [New to SpiderMonkey](https://wiki.mozilla.org/JavaScript:New_to_SpiderMonkey)
