@@ -15,6 +15,12 @@ and various other projects. It is written in C++ and Rust.
 * [Overview of SpiderMonkey](https://firefox-source-docs.mozilla.org/js/index.html)
 * [Browse the code](https://searchfox.org/mozilla-central/source/js/src)
 * [SMDOC Source Comments](https://searchfox.org/mozilla-central/search?q=[SMDOC]&path=js%2F)
+* In-depth Articles
+    * [Warp: Improved JS Performance](https://hacks.mozilla.org/2020/11/warp-improved-js-performance-in-firefox-83/)
+    * [Compiler Compiler: A Twitch series](https://hacks.mozilla.org/2020/06/compiler-compiler-working-on-a-javascript-engine/)
+    * [A New RegExp Engine](https://hacks.mozilla.org/2020/06/a-new-regexp-engine-in-spidermonkey/)
+    * [Future-proofing the Debugger Implementation](https://hacks.mozilla.org/2020/03/future-proofing-firefoxs-javascript-debugger-implementation/)
+    * [The Baseline Interpreter](https://hacks.mozilla.org/2019/08/the-baseline-interpreter-a-faster-js-interpreter-in-firefox-70/)
 
 # Building and Contributing
 * [New to SpiderMonkey](https://wiki.mozilla.org/JavaScript:New_to_SpiderMonkey)
@@ -27,6 +33,12 @@ and various other projects. It is written in C++ and Rust.
 * [Examples and Documentation](https://github.com/mozilla-spidermonkey/spidermonkey-embedding-examples)
 
 # Where to find us
-* Matrix room: [#spidermonkey:mozilla.org](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org)
-* Mailing list: [dev-tech-js-engine-internals](https://lists.mozilla.org/listinfo/dev-tech-js-engine-internals)
+* Matrix chat: [#spidermonkey:mozilla.org](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org)
+* Discourse: [SpiderMonkey](https://discourse.mozilla.org/c/spidermonkey)
 * Twitter: [spidermonkeyjs](https://www.twitter.com/spidermonkeyjs)
+
+NOTE: The mailing lists are being phased out. You can now connect to our
+Discourse category by email for a similar experience. The archives should
+continue to remain available at:
+* [mozilla.dev.tech.js-engine](https://groups.google.com/g/mozilla.dev.tech.js-engine)
+* [mozilla.dev.tech.js-engine.internals]https://groups.google.com/g/mozilla.dev.tech.js-engine.internals)
