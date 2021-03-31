@@ -3,7 +3,7 @@ description: Website and team blog for the SpiderMonkey JavaScript engine.
 twitter_username: spidermonkeyjs
 
 baseurl: "/"
-url: "https://mozilla-spidermonkey.github.io"
+url: "https://spidermonkey.dev"
 permalink: /blog/:year/:month/:day/:title.html
 
 theme: minima
