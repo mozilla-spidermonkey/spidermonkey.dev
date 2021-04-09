@@ -24,7 +24,7 @@ import { process } from "./some-module.mjs";
 let output;
 async function main() {
   const response = await fetch("./data.json");
-  const parsedData = JSON.parse(await response.json());
+  const parsedData = await response.json();
   output = process(parsedData);
 }
 main();
