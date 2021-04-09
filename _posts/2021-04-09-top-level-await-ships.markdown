@@ -11,8 +11,8 @@ For example, if you want to instantiate your file with some custom data, you can
 ```js
 import process from "./api.js";
 
-const data = await fetch("./data.json");
-const parsedData = JSON.parse(data);
+const response = await fetch("./data.json");
+const parsedData = await response.json();
 
 export process(parsedData);
 ```
@@ -23,8 +23,8 @@ This is much simpler and robust than previous solutions, such as:
 import { process } from "./some-module.mjs";
 let output;
 async function main() {
-  const data = await fetch("./data.json");
-  const parsedData = JSON.parse(data);
+  const response = await fetch("./data.json");
+  const parsedData = await response.json();
   output = process(parsedData);
 }
 main();
