@@ -12,7 +12,7 @@ For example, if you want to instantiate your file with some custom data, you can
 import process from "./api.js";
 
 const response = await fetch("./data.json");
-const parsedData = JSON.parse(await response.json());
+const parsedData = await response.json();
 
 export process(parsedData);
 ```
