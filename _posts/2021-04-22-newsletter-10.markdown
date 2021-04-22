@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "SpiderMonkey Newsletter 10 (Firefox 88-89)"
+date:   2021-04-22 17:30:00 +0100
+---
+SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 88 and 89 Nightly release cycles.
+
+In this newsletter we bid a fond farewell to module owner emeritus Jason Orendorff, and say hello to Jan de Mooij as [the new JavaScript Engine module owner](https://groups.google.com/g/mozilla.dev.platform/c/EMCKV2_xRrY). 
+
+If you like these newsletters, you may also enjoy Yulia's [Compiler Compiler live stream](https://developer.mozilla.com/events/compiler-compiler-yulia-startsev/).
+
+
+### 🏆 New contributors
+
+We’d like to thank our new contributors. We are working with [Outreachy](https://www.outreachy.org/) for the May 2021 cohort, and so have been fortunate enough to have more than the usual number of new contributors.
+
+
+
+*   Sneha K fixed three bugs (🎉) by doing [some refactoring](https://bugzilla.mozilla.org/show_bug.cgi?id=1608927) around [parser scopes](https://bugzilla.mozilla.org/show_bug.cgi?id=1697538), and [removing an old duplicate API](https://bugzilla.mozilla.org/show_bug.cgi?id=1491055).
+*   Yohei [improved several SIMD instructions](https://bugzilla.mozilla.org/show_bug.cgi?id=1693482) by implementing constant inlining.
+*   Shariff [removed use of an old macro](https://bugzilla.mozilla.org/show_bug.cgi?id=1699273)
+*   Ashita fixed three bugs (🎉) [cleaned up some unused enum values](https://bugzilla.mozilla.org/show_bug.cgi?id=1698105), [removed an old macro from a few files](https://bugzilla.mozilla.org/show_bug.cgi?id=1699276), and [fixed the naming schema for Warp’s tooling](https://bugzilla.mozilla.org/show_bug.cgi?id=1697644).
+*   Ashwini also [cleaned up some ](https://bugzilla.mozilla.org/show_bug.cgi?id=1703597)uses [of the JSID macros](https://bugzilla.mozilla.org/show_bug.cgi?id=1703599). 
+*   Pavel also [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1699279) [uses](https://bugzilla.mozilla.org/show_bug.cgi?id=1699275) of the JSID_IS_ATOM macro.
+*   Bukola Akinnadeju cleaned up some [uses of the JSID macros](https://bugzilla.mozilla.org/show_bug.cgi?id=1703596). 
+*   Jane Kotovich also [worked on the](https://bugzilla.mozilla.org/show_bug.cgi?id=1705198) [JSID macro removal project](https://bugzilla.mozilla.org/show_bug.cgi?id=1703598). 
+
+
+### 👷🏽‍♀️ JS features
+
+
+
+*   We [enabled](https://spidermonkey.dev/blog/2021/04/05/top-level-await-ships.html) Top-Level Await for Firefox 89.
+*   We [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1519483) the RegExp Match Indices [proposal](https://github.com/tc39/proposal-regexp-match-indices) for Firefox 88.
+*   Intl `DisplayNames` and `ListFormat` were [changed](https://bugzilla.mozilla.org/show_bug.cgi?id=1696881) to use the new `GetOption` behavior.
+*   Contributor Jonatan [is working on the Import Assertions proposal](https://bugzilla.mozilla.org/show_bug.cgi?id=1668330), and is landing preliminary code for that.
+*   We [landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1645093) a number of `ReadableStream` changes to match the new WebIDL semantics.
+
+
+### ⚡ WebAssembly
+
+
+
+*   We [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1703505) support for large ArrayBuffers and 4 GB Wasm memories in Firefox 89.
+*   We [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1695585) support for SIMD on x86 and x64 in Firefox 89.
+*   Igalia [finished](https://bugzilla.mozilla.org/show_bug.cgi?id=1335652) the [implementation](https://bugzilla.mozilla.org/show_bug.cgi?id=1690965) of the Exception Handling proposal in the Baseline Compiler.
+*   We implemented support for [arrays](https://bugzilla.mozilla.org/show_bug.cgi?id=1670103) and [rtt-based downcasting](https://bugzilla.mozilla.org/show_bug.cgi?id=1670104) in our Wasm GC prototype.
+*   We've [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1686626) the Ion backend for ARM64 in Nightly builds.
+*   We've [landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1625130) many changes and optimizations for SIMD support.
+*   We [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1677204) various prefs for features we've been shipping for some time.
+
+
+### ❇️ Stencil
+
+[Stencil](https://bugzilla.mozilla.org/show_bug.cgi?id=1601332) is our project to create an explicit interface between the frontend (parser, bytecode emitter) and the rest of the VM, decoupling those components. This lets us improve web-browsing performance, simplify a lot of code and improve bytecode caching.
+
+
+
+*   We [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1687095) a mechanism for function delazification information to be merged with the initial stencil before writing to caches.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1701305) support for modules and off-thread compilation to the Stencil API.
+*   We [optimized](https://bugzilla.mozilla.org/show_bug.cgi?id=1692577) use of `CompilationState` in the parser for certain cases.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1693184) magic values to the Stencil bytecode serialization format to detect corrupt data and handle this more gracefully.
+*   We [fixed](https://bugzilla.mozilla.org/show_bug.cgi?id=1704141) the Stencil bytecode serialization format to deduplicate bytecode. 
+*   We're [getting](https://bugzilla.mozilla.org/show_bug.cgi?id=1458339) closer to sharing Stencil information for self-hosted code across content processes. We expect significant memory usage and performance improvements from this in the coming weeks.
+
+
+### 🧹 Garbage Collection
+
+
+
+*   We [simplified](https://bugzilla.mozilla.org/show_bug.cgi?id=1693792) and optimized the `WeakMap` code a bit.
+*   We [disabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1697479) nursery poisoning for Nightly release builds. The poisoning was pretty expensive and often caused slowdowns compared to release builds that didn't have the poisoning.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1660006) support for decommitting free arenas on Apple's M1 hardware. This required some changes due to the 16 KB page size.
+*   We [changed](https://bugzilla.mozilla.org/show_bug.cgi?id=1694209) the pre-write barrier to use a buffering mechanism instead of marking directly.
+*   GC markers now [describe](https://bugzilla.mozilla.org/show_bug.cgi?id=1698172) what they are, hopefully reducing confusion over whether the browser is paused throughout a major GC
+
+
+### 🚀 JIT
+
+
+
+*   We [changed](https://bugzilla.mozilla.org/show_bug.cgi?id=1688033) how `arguments` objects are optimized. Instead of doing an (expensive) analysis for all functions that use `arguments`, we now use Scalar Replacement in the Warp backend to optimize away `arguments` allocations. The new implementation is simpler, more self-contained, and lets us avoid doing the analysis for cold functions.
+*   We fixed the Scalar Replacement code for [arrays](https://bugzilla.mozilla.org/show_bug.cgi?id=1650233) and [objects](https://bugzilla.mozilla.org/show_bug.cgi?id=1699851) to work with Warp.
+*   We also [added back](https://bugzilla.mozilla.org/show_bug.cgi?id=1697696) [support](https://bugzilla.mozilla.org/show_bug.cgi?id=1702306) for branch pruning with Warp.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1695736) CacheIR support for optimizing `GetElem`, `SetElem` and `in` operations with null or undefined property keys. This turned out to be very common on certain websites.
+*   We [optimized](https://bugzilla.mozilla.org/show_bug.cgi?id=1697803) DOM getters for `window.foo` (`WindowProxy` objects).
+*   We [improved](https://bugzilla.mozilla.org/show_bug.cgi?id=1687025) function inlining in Warp for certain self-hosted functions (for example `Array.prototype.map`) that benefit from inlining.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1700771) a browser pref to control the function inlining size threshold, to help us investigate performance issues.
+
+
+### 📐 ReShape
+
+Now that Warp is on by default and we've removed the old backend and Type Inference mechanism, we're able to optimize our object representation more. Modern websites spend a significant amount of time doing property lookups, and property information takes up a lot of space, so we expect improvements in this area to pay off.
+
+
+
+*   We've [merged](https://bugzilla.mozilla.org/show_bug.cgi?id=1689413) `ObjectGroup` (used by the old Type Inference system) into `Shape` and `BaseShape`. This removed a word from every JS object and is also [simpler](https://bugzilla.mozilla.org/show_bug.cgi?id=1696861).
+*   We [cleaned up](https://bugzilla.mozilla.org/show_bug.cgi?id=1694044) and deduplicated our property lookup code.
+*   We've [replaced](https://bugzilla.mozilla.org/show_bug.cgi?id=1404885) the old `JSGetterOp` and `JSSetterOp` getters/setters with a property attribute.
+*   We [changed](https://bugzilla.mozilla.org/show_bug.cgi?id=1700052) our implementation of getter/setter properties: instead of storing the getter and setter objects in the shape tree, we now store them in object slots. This fixes some performance cliffs and unblocks future Shape changes.
+*   We've [started](https://bugzilla.mozilla.org/show_bug.cgi?id=1704744) adding better abstractions for property information stored in shapes. This will make it easier to experiment with different representations in the coming weeks.
+
+
+### 🛠 Testing
+
+
+
+*   We made SpiderMonkey's test suites on Android about four times faster by [optimizing](https://bugzilla.mozilla.org/show_bug.cgi?id=1690570) the test runner, [copying](https://bugzilla.mozilla.org/show_bug.cgi?id=1692178) fewer files to the device, and [reducing](https://bugzilla.mozilla.org/show_bug.cgi?id=1692096) the number of jit-test configurations.
+*   We [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1694318) the Rust API crates because upstream Servo uses its own version instead of the one we maintained in-tree.
+*   We [landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1689599) support for the Fuzzilli JS engine fuzzer in the JS shell.
+
+
+### 📚 Miscellaneous
+
+
+
+*   We [cleaned up](https://bugzilla.mozilla.org/show_bug.cgi?id=1688055) the lexical environment class hierarchy.
+*   We [optimized](https://bugzilla.mozilla.org/show_bug.cgi?id=1696178) `Object.assign`. Modern JS frameworks use this function a lot.
+*   The bytecode emitter now [emits](https://bugzilla.mozilla.org/show_bug.cgi?id=1697223) optimized bytecode for name lookups in strict-mode `eval`.
+*   We [updated](https://bugzilla.mozilla.org/show_bug.cgi?id=1690142) irregexp to the latest upstream version.
+*   We [optimized](https://bugzilla.mozilla.org/show_bug.cgi?id=1698791) checks for strings representing an index by adding a flag for this to atoms.
+*   Function delazification is now properly [reported](https://bugzilla.mozilla.org/show_bug.cgi?id=1692130) in the profiler.
+*   The profiler reports more useful stacks for JS code because it's now able to [retrieve](https://bugzilla.mozilla.org/show_bug.cgi?id=1700869) registers from the JIT trampoline to resume stack walking.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1689503) memory reporting for external `ArrayBuffer` memory and also [reduced](https://bugzilla.mozilla.org/show_bug.cgi?id=1704570) heap-unclassified memory by adding some new memory reporters.
+*   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1509094) documentation for the `LifoAlloc` allocator.
+*   We [fixed](https://bugzilla.mozilla.org/show_bug.cgi?id=1698127) Clang static analysis and formatting issues in the Wasm code.
+*   We've [started](https://bugzilla.mozilla.org/show_bug.cgi?id=1701904) cleaning up `PropertyDescriptor` by using `Maybe<PropertyDescriptor>`.
