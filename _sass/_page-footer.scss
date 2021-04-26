@@ -1,0 +1,126 @@
+.synopsis {
+  clear: both;
+  font-weight: 400;
+  overflow: auto;
+  padding: 0 4% $grid-gutter;
+  width: 100%;
+}
+
+.synopsis ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.synopsis a,
+.synopsis h3 {
+  font-weight: $font-weight-regular;
+}
+
+.page-footer {
+  color: $color-dim-gray;
+  font-size: 12px;
+  min-height: 100px;
+  width: 100%;
+}
+
+.page-footer h3 {
+  border-bottom: 1px solid mix($color-bg, $color-dim-gray, $weight: 80%);
+  margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
+  padding-bottom: 1em;
+}
+
+@media (min-width: $bp-tablet) {
+  .page-footer h3 {
+    margin-top: 0;
+  }
+
+  .page-footer .synopsis .g-col-3:not(:last-child) {
+    border-right: solid 1px mix($color-bg, $color-dim-gray, $weight: 80%);
+    padding-right: $grid-gutter;
+  }
+
+  .page-footer .synopsis .g-col-3:not(:first-child) {
+    padding-left: $grid-gutter;
+  }
+}
+
+.page-footer a {
+  color: $color-link;
+  font-weight: $font-weight-regular;
+  line-height: 24px;
+  text-decoration: underline;
+
+  .icon {
+    clear: left;
+    float: left;
+    padding-right: 1em;
+  }
+
+  .icon path {
+    fill: $color-dim-gray;
+  }
+
+  &:active .icon path,
+  &:focus .icon path,
+  &:hover .icon path {
+    fill: $color-link;
+  }
+
+  span {
+    line-height: 32px;
+  }
+}
+
+.page-footer a:hover {
+  text-decoration: none;
+}
+
+.page-footer .pipe-nav {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.page-footer .pipe-nav li {
+  display: inline-block;
+  list-style: none;
+}
+
+.page-footer .pipe-nav li+li::before {
+  content: '| ';
+  padding: 0 .5em;
+}
+
+.page-footer .grid-container {
+  border-top: solid 1px mix($color-bg, $color-dim-gray, $weight: 80%);
+  margin: 0 auto;
+  overflow: auto;
+  padding: $grid-gutter 0;
+}
+
+.page-footer .grid-start {
+  float: none;
+  text-align: center;
+}
+
+.page-footer .grid-end {
+  float: none;
+  padding-top: 1em;
+  text-align: center;
+}
+
+@media (min-width: $bp-tablet) {
+  .page-footer .grid-start {
+    float: left;
+    text-align: left;
+  }
+
+  .page-footer .grid-end {
+    float: right;
+    padding-top: 0;
+    text-align: right;
+  }
+}

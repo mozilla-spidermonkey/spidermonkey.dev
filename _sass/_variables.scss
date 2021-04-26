@@ -1,0 +1,63 @@
+// Colors
+$color-lightmode-primary: orange;
+$color-lightmode-link: orange;
+$color-lightmode-text: #000;
+$color-lightmode-nav: #444;
+$color-lightmode-spacer: #eee;
+$color-lightmode-submenu-bg: white;
+$color-lightmode-bg: white;
+$color-lightmode-dim-gray: #696969;
+
+$color-darkmode-primary: #ffc752;
+$color-darkmode-link: #ffc752;
+$color-darkmode-text: #ffc752;
+$color-darkmode-nav: #444;
+$color-darkmode-spacer: #eee;
+$color-darkmode-submenu-bg: white;
+$color-darkmode-bg: #1b143b;
+$color-darkmode-dim-gray: #696969;
+
+$color-primary: #ffc752;
+$color-text: #ffc752;
+$color-link: #ffc752;
+$color-text: #ffc752;
+$color-nav: #ffc752;
+$color-spacer: #eee;
+$color-submenu-bg: #1b143b;
+$color-bg: #1b143b;
+$color-dim-gray: #696969;
+
+$color-logo-full: #ffc752;
+$color-logo-1: #1b143b;
+$color-logo-2: #ffc752;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 550;
+
+// Spacing
+$grid-gutter: 40px;
+$spacing-paragraph: 40px;
+
+// Breakpoints
+$bp-tablet: 920px;
+$bp-desktop: 1200px;
+
+// Tags
+$tag-tests: #017e78;
+$tag-spec: #AB6700;
+$tag-presented: #a63446;
+
+@font-face {
+  font-family: ZillaSlab-regular;
+  src: url("/assets/fonts/ZillaSlab-Regular.ttf");
+}
+@font-face {
+  font-family: ZillaSlab-Medium;
+  src: url("/assets/fonts/ZillaSlab-Medium.ttf");
+}
+@font-face {
+  font-family: ZillaSlab-Bold;
+  src: url("/assets/fonts/ZillaSlab-Bold.ttf");
+}
