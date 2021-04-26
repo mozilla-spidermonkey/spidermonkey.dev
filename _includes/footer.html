@@ -1,10 +1,12 @@
-<footer class="site-footer h-card">
+<footer class="site-footer h-card page-footer container">
+  <section class="synopsis grid-container">
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
 
   <div class="wrapper">
     <a href="{{ "/feed.xml" | relative_url }}">RSS feed</a> | &nbsp;
-    
+
     {%- if site.twitter_username -%}<a href="https://www.twitter.com/{{ site.twitter_username| cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}"></use></svg><span class="username">{{ site.twitter_username| escape }}</span></a>{%- endif -%}
   </div>
 
+  </section>
 </footer>

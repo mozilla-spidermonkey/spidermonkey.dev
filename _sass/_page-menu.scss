@@ -1,0 +1,94 @@
+$svg-height: 24;
+$trans-timing: 600ms;
+@mixin svgMenuIcon($color: currentColor, $height: $svg-height) {
+  background: url(../img/menu.svg) no-repeat 50%;
+}
+
+@mixin rotateSubmenuToggle() {
+  transform: rotateX(180deg);
+}
+
+.skip-menu {
+  opacity: 0;
+  position: absolute;
+  right: 84px;
+  top: 10px;
+  z-index: 10;
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.page-menu {
+  $mobile-mt: 15px;
+  font-size: 18px;
+  margin-top: $mobile-mt;
+  a {
+    font-family: ZillaSlab-regular, sans-serif;
+  }
+  text-align: end;
+  width: 100%;
+  &-link {
+  }
+  $mt: 73.6px;
+  margin-top: $mt;
+  .menu {
+    background: $color-submenu-bg;
+    display: block;
+    left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    position: relative;
+    text-align: start;
+    width: 100%;
+    &-toggle {
+      display: none;
+    }
+    &-item {
+      &.has-submenu {
+        display: block;
+      }
+      &:hover .submenu {
+        max-height: none;
+        overflow: visible;
+      }
+    }
+    &-link {
+      color: $color-nav;
+      cursor: pointer;
+      display: block;
+      flex: none;
+      padding: 10px 40px;
+      min-width: 50px;
+      padding: 10px 10px;
+      text-decoration: none;
+      &:focus {
+        ~.submenu-toggle {
+          @include rotateSubmenuToggle();
+        }
+        ~.submenu {
+          max-height: none;
+          overflow: visible;
+        }
+      }
+      &:hover,
+      &:focus {
+        color: $color-primary;
+        font-weight: $font-weight-semi-bold;
+        text-decoration: none;
+      }
+    }
+    &-item {
+      display: block;
+      &.has-submenu {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}
