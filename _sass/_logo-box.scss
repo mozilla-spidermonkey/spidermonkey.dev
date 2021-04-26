@@ -1,0 +1,45 @@
+.logo-box {
+  a {
+    text-decoration: none;
+  }
+  flex-shrink: 0;
+  z-index: 3;
+  padding-top: 3em;
+  text-decoration: none;
+  .large {
+    display: none;
+  }
+  .small {
+    display: block;
+    height: 100px;
+    width: 100px;
+  }
+  @media (min-width: $bp-tablet) {
+    .large {
+      display: block;
+      height: 90px;
+      width: 600px;
+    }
+    .small {
+      display: none;
+    }
+  }
+}
+.spidermonkey-logo {
+  fill: $color-logo-full;
+  fill-opacity:1;
+  stroke:none
+}
+
+.spidermonkey-text {
+  font-size:17.6389px;
+  font-family: ZillaSlab-regular;
+  fill: $color-logo-full;
+}
+
+.spidermonkey-circle {
+  fill: $color-logo-1;
+}
+.spidermonkey-small {
+  fill: $color-logo-2;
+}
