@@ -6,7 +6,6 @@ baseurl: "/"
 url: "https://spidermonkey.dev"
 permalink: /blog/:year/:month/:day/:title.html
 
-theme: minima
 plugins:
   - jekyll-feed
 
@@ -14,3 +13,5 @@ header_pages:
   - index.markdown
   - blog.markdown
   - docs/index.markdown
+sass:
+  style: compressed
