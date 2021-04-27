@@ -23,11 +23,10 @@ and various other projects. It is written in C++ and Rust.
     * [The Baseline Interpreter](https://hacks.mozilla.org/2019/08/the-baseline-interpreter-a-faster-js-interpreter-in-firefox-70/)
 
 # Building and Contributing
-* [New to SpiderMonkey](https://wiki.mozilla.org/JavaScript:New_to_SpiderMonkey)
-* [Good first bugs](https://codetribute.mozilla.org/projects/jseng)
 * [Build Documentation](https://firefox-source-docs.mozilla.org/js/build.html)
 * [Running tests](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey/Running_Automated_JavaScript_Tests)
 * [File a bug](https://bugzilla.mozilla.org/enter_bug.cgi?product=Core&component=JavaScript%20Engine)
+* [Good first bugs](https://codetribute.mozilla.org/projects/jseng)
 
 # Embedding SpiderMonkey
 * [Examples and Documentation](https://github.com/mozilla-spidermonkey/spidermonkey-embedding-examples)
