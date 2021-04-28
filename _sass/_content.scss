@@ -14,6 +14,12 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+  h1 {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    display: inline-block;
+    padding: 0 10px 0 10px;
+  }
   .section-headline {
     font-size: 2rem;
     font-weight: $font-weight-semi-bold;
