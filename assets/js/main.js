@@ -1,23 +1,7 @@
 'use strict';
 
-function openMenu(menu) {
-  menu.style.maxHeight = menu.scrollHeight + 'px';
-  setTimeout(function() {
-    menu.style.maxHeight = 'none';
-  }, 600);
-}
-
-function closeMenu(menu) {
-  menu.style.maxHeight = menu.scrollHeight + 'px';
-  setTimeout(function() {
-    menu.style.maxHeight = '';
-  }, 0);
-}
-
 function toggleMenu(menu) {
   menu = menu || document.querySelector('#menu');
-  var maxHeight = menu.style.maxHeight;
-  maxHeight ? closeMenu(menu) : openMenu(menu);
   menu.classList.toggle('open');
 }
 
