@@ -13,5 +13,6 @@ header_pages:
   - index.markdown
   - blog.markdown
   - docs/index.markdown
+
 sass:
   style: compressed
