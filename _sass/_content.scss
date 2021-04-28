@@ -19,25 +19,20 @@
     color: var(--color-bg);
     display: inline-block;
     padding: 0 10px 0 10px;
-  }
-  .section-headline {
-    font-size: 2rem;
-    font-weight: $font-weight-semi-bold;
-    margin-top: 0;
+    &::after {
+      position:absolute;
+      margin-left: -10px;
+      display:block;
+      width: 66%;
+      content: ' ';
+      border-bottom: 1px solid var(--color-primary);
+    }
   }
   p {
     margin: 0 0 $spacing-paragraph;
   }
   @media (min-width: $bp-tablet) {
     padding: 0px 0;
-
-    .section-headline {
-      border-bottom: none;
-    }
-
-    .intro {
-      text-align: center;
-    }
   }
 }
 
