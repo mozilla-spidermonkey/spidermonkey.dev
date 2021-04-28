@@ -8,6 +8,7 @@ permalink: /blog/:year/:month/:day/:title.html
 
 plugins:
   - jekyll-feed
+  - jekyll-octicons
 
 header_pages:
   - blog.markdown
