@@ -5,7 +5,7 @@
   }
 }
 .g-row {
-  @media (min-width: $bp-tablet) {
+  @media (min-width: $bp-large-tablet) {
     display: flex;
     flex-direction: row;
     .flex-grow {
