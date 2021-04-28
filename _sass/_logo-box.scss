@@ -15,13 +15,21 @@
     width: 100px;
   }
   @media (min-width: $bp-tablet) {
+    padding-top: 4.5em;
     .large {
       display: block;
-      height: 90px;
-      width: 600px;
+      height: 60px;
+      width: 350px;
     }
     .small {
       display: none;
+    }
+  }
+  @media (min-width: $bp-large-tablet) {
+    padding-top: 3em;
+    .large {
+      height: 90px;
+      width: 600px;
     }
   }
 }

@@ -29,8 +29,8 @@
     --color-dim-gray: #696969;
     --color-dim-bg: #e1e1e1; // = 0.8 * --color-bg + 0.2 * --color-dim-gray
     --color-logo-full: black;
-    --color-logo-1: #1b143b;
-    --color-logo-2: #ffc752;
+    --color-logo-1: black;
+    --color-logo-2: white;
   }
 }
 
@@ -44,7 +44,8 @@ $grid-gutter: 40px;
 $spacing-paragraph: 40px;
 
 // Breakpoints
-$bp-tablet: 920px;
+$bp-tablet: 680px;
+$bp-large-tablet: 920px;
 $bp-desktop: 1200px;
 
 // Tags

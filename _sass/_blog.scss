@@ -6,9 +6,10 @@
       margin: 0px;
       a,
       h2 {
-        padding: 5px 10px 5px 10px;
         background-color: var(--color-bg);
         color: var(--color-primary);
+        padding: 5px 10px 5px 10px;
+        margin-left: -10px;
         &:hover {
           background-color: var(--color-primary);
           color: var(--color-bg);
