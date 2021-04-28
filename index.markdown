@@ -1,6 +1,6 @@
 ---
 layout: default
-title: SpiderMonkey
+title: Home
 ---
 
 # Welcome to SpiderMonkey
