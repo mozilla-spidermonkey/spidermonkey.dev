@@ -1,0 +1,40 @@
+.blog-list {
+  list-style: none;
+  &__item {
+    &-title {
+      display: block;
+      margin: 0px;
+      a,
+      h2 {
+        text-decoration: none;
+        padding: 5px 10px 5px 10px;
+        background-color: $color-bg;
+        color: $color-primary;
+        border-bottom: 1px solid $color-primary;
+        &:hover {
+          background-color: $color-primary;
+          color: $color-bg;
+          border-bottom: none;
+        }
+      }
+      @media (min-width: $bp-tablet) {
+        border-bottom: 1px solid $color-primary;
+        display: inline-block;
+      }
+    }
+    &-meta {
+      display: block;
+      margin-left: auto;
+      padding: 10px 0 0 10px;
+      @media (min-width: $bp-tablet) {
+        display: inline-block;
+      }
+    }
+    &-excerpt {
+      display: block;
+      padding: 10px;
+    }
+    clear: both;
+    margin: 35px 0 35px 0;
+  }
+}
