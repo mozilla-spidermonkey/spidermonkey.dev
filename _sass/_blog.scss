@@ -6,19 +6,15 @@
       margin: 0px;
       a,
       h2 {
-        text-decoration: none;
         padding: 5px 10px 5px 10px;
         background-color: var(--color-bg);
         color: var(--color-primary);
-        border-bottom: 1px solid var(--color-primary);
         &:hover {
           background-color: var(--color-primary);
           color: var(--color-bg);
-          border-bottom: none;
         }
       }
       @media (min-width: $bp-tablet) {
-        border-bottom: 1px solid var(--color-primary);
         display: inline-block;
       }
     }
