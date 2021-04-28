@@ -1,6 +1,9 @@
 .logo-box {
   a {
     text-decoration: none;
+    &:hover {
+      background-color: var(--color-bg);
+    }
   }
   flex-shrink: 0;
   z-index: 3;
