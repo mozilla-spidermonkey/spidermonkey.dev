@@ -1,19 +1,20 @@
-// Colors
+// Colors #ffc752 #1b143b;
+
 
 // Dark mode.
 :root {
-  --color-primary: #ffc752;
-  --color-text: #ffc752;
-  --color-link: #ffc752;
+  --color-primary: #ffd681;
+  --color-text: #ffd681;
+  --color-link: #ffd681;
   --color-nav: #444;
   --color-spacer: #eee;
-  --color-submenu-bg: #1b143b;
-  --color-bg: #1b143b;
+  --color-submenu-bg: #110b2b;
+  --color-bg: #110b2b;
   --color-dim-gray: #696969;
   --color-darkmode-dim-bg: #2b2544; // = 0.8 * --color-darkmode-bg + 0.2 * --color-darkmode-dim-gray
-  --color-logo-full: #ffc752;
-  --color-logo-1: #1b143b;
-  --color-logo-2: #ffc752;
+  --color-logo-full: #ffd681;
+  --color-logo-1: #110b2b;
+  --color-logo-2: #ffd681;
 }
 
 // Light mode
