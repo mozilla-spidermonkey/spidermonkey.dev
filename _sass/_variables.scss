@@ -1,35 +1,38 @@
 // Colors
-$color-lightmode-primary: orange;
-$color-lightmode-link: orange;
-$color-lightmode-text: #000;
-$color-lightmode-nav: #444;
-$color-lightmode-spacer: #eee;
-$color-lightmode-submenu-bg: white;
-$color-lightmode-bg: white;
-$color-lightmode-dim-gray: #696969;
 
-$color-darkmode-primary: #ffc752;
-$color-darkmode-link: #ffc752;
-$color-darkmode-text: #ffc752;
-$color-darkmode-nav: #444;
-$color-darkmode-spacer: #eee;
-$color-darkmode-submenu-bg: white;
-$color-darkmode-bg: #1b143b;
-$color-darkmode-dim-gray: #696969;
+// Dark mode.
+:root {
+  --color-primary: #ffc752;
+  --color-text: #ffc752;
+  --color-link: #ffc752;
+  --color-nav: #444;
+  --color-spacer: #eee;
+  --color-submenu-bg: #1b143b;
+  --color-bg: #1b143b;
+  --color-dim-gray: #696969;
+  --color-darkmode-dim-bg: #2b2544; // = 0.8 * --color-darkmode-bg + 0.2 * --color-darkmode-dim-gray
+  --color-logo-full: #ffc752;
+  --color-logo-1: #1b143b;
+  --color-logo-2: #ffc752;
+}
 
-$color-primary: #ffc752;
-$color-text: #ffc752;
-$color-link: #ffc752;
-$color-text: #ffc752;
-$color-nav: #ffc752;
-$color-spacer: #eee;
-$color-submenu-bg: #1b143b;
-$color-bg: #1b143b;
-$color-dim-gray: #696969;
-
-$color-logo-full: #ffc752;
-$color-logo-1: #1b143b;
-$color-logo-2: #ffc752;
+// Light mode
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-primary: orange;
+    --color-link: orange;
+    --color-text: #000;
+    --color-nav: #444;
+    --color-spacer: #eee;
+    --color-submenu-bg: white;
+    --color-bg: white;
+    --color-dim-gray: #696969;
+    --color-dim-bg: #e1e1e1; // = 0.8 * --color-bg + 0.2 * --color-dim-gray
+    --color-logo-full: #ffc752;
+    --color-logo-1: #1b143b;
+    --color-logo-2: #ffc752;
+  }
+}
 
 // Font weights
 $font-weight-light: 300;
