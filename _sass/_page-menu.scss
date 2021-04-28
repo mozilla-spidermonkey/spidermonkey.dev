@@ -39,7 +39,7 @@ $trans-timing: 600ms;
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     max-height: none;
     overflow: visible;
     padding: 0;
@@ -58,6 +58,9 @@ $trans-timing: 600ms;
         overflow: visible;
       }
     }
+    &-item:not(:last-child) {
+      border-right: 1px solid $color-primary;
+    }
     &-link {
       color: $color-nav;
       cursor: pointer;
@@ -65,7 +68,7 @@ $trans-timing: 600ms;
       flex: none;
       padding: 10px 40px;
       min-width: 50px;
-      padding: 10px 10px;
+      padding: 0 10px;
       text-decoration: none;
       &:focus {
         ~.submenu-toggle {
