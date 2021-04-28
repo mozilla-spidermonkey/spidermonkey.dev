@@ -14,7 +14,7 @@
   {%- assign my_page = site.pages | where: "path", path | first -%}
   {%- if my_page.title -%}
   <li class="menu-item">
-    <a href="{{ my_page.url | relative_url }}" class="menu-link">
+    <a href="{{ my_page.url | relative_url }}" class="menu-link{% if page.url == my_page.url %} active{% endif %}">
       {{ my_page.title | escape }}
     </a>
   </li>
