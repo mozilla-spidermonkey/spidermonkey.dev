@@ -18,14 +18,14 @@
 }
 
 .page-footer {
-  color: $color-dim-gray;
+  color: var(--color-dim-gray);
   font-size: 12px;
   min-height: 100px;
   width: 100%;
 }
 
 .page-footer h3 {
-  border-bottom: 1px solid mix($color-bg, $color-dim-gray, $weight: 80%);
+  border-bottom: 1px solid var(--color-dim-bg);
   margin-bottom: 1.25rem;
   margin-top: 1.25rem;
   padding-bottom: 1em;
@@ -37,7 +37,7 @@
   }
 
   .page-footer .synopsis .g-col-3:not(:last-child) {
-    border-right: solid 1px mix($color-bg, $color-dim-gray, $weight: 80%);
+    border-right: solid 1px var(--color-dim-bg);
     padding-right: $grid-gutter;
   }
 
@@ -47,7 +47,7 @@
 }
 
 .page-footer a {
-  color: $color-link;
+  color: var(--color-link);
   font-weight: $font-weight-regular;
   line-height: 24px;
   text-decoration: underline;
@@ -59,13 +59,13 @@
   }
 
   .icon path {
-    fill: $color-dim-gray;
+    fill: var(--color-dim-gray);
   }
 
   &:active .icon path,
   &:focus .icon path,
   &:hover .icon path {
-    fill: $color-link;
+    fill: var(--color-link);
   }
 
   span {
@@ -95,7 +95,7 @@
 }
 
 .page-footer .grid-container {
-  border-top: solid 1px mix($color-bg, $color-dim-gray, $weight: 80%);
+  border-top: solid 1px var(--color-dim-bg);
   margin: 0 auto;
   overflow: auto;
   padding: $grid-gutter 0;

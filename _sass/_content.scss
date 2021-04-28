@@ -7,7 +7,7 @@
   h4,
   h5,
   h6 {
-    color: $color-text;
+    color: var(--color-text);
     font-weight: $font-weight-semi-bold;
   }
   h3 {
@@ -40,7 +40,7 @@
 }
 
 a {
-  color: $color-link;
+  color: var(--color-link);
   font-weight: $font-weight-semi-bold;
 }
 
