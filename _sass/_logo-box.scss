@@ -26,7 +26,7 @@
   }
 }
 .spidermonkey-logo {
-  fill: $color-logo-full;
+  fill: var(--color-logo-full);
   fill-opacity:1;
   stroke:none
 }
@@ -34,12 +34,12 @@
 .spidermonkey-text {
   font-size:17.6389px;
   font-family: ZillaSlab-regular;
-  fill: $color-logo-full;
+  fill: var(--color-logo-full);
 }
 
 .spidermonkey-circle {
-  fill: $color-logo-1;
+  fill: var(--color-logo-1);
 }
 .spidermonkey-small {
-  fill: $color-logo-2;
+  fill: var(--color-logo-2);
 }
