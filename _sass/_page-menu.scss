@@ -1,8 +1,4 @@
 $svg-height: 24;
-$trans-timing: 600ms;
-@mixin svgMenuIcon($color: currentColor, $height: $svg-height) {
-  background: url(../img/menu.svg) no-repeat 50%;
-}
 
 @mixin rotateSubmenuToggle() {
   transform: rotateX(180deg);
@@ -20,9 +16,7 @@ $trans-timing: 600ms;
 }
 
 .page-menu {
-  $mobile-mt: 15px;
   font-size: 18px;
-  margin-top: $mobile-mt;
   a {
     font-family: ZillaSlab-regular, sans-serif;
   }
@@ -30,45 +24,74 @@ $trans-timing: 600ms;
   width: 100%;
   &-link {
   }
-  $mt: 73.6px;
-  margin-top: $mt;
+
+  $mobile-mt: 15px;
+  margin-top: $mobile-mt;
+  @media (min-width: $bp-tablet) {
+    $mt: 73.6px;
+    margin-top: $mt;
+  }
+
   .menu {
     background: var(--color-submenu-bg);
-    display: block;
-    left: 0;
     list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: right;
-    max-height: none;
-    overflow: visible;
+    margin: ($svg-height + $mobile-mt) 20px 10px 0;
     padding: 0;
-    position: relative;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+    overflow: hidden;
     text-align: start;
-    width: 100%;
+    &.open {
+      display: block;
+      border: 1px solid var(--color-primary);
+    }
+    @media (min-width: $bp-tablet) {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      margin: 1em 0;
+      position: relative;
+      overflow: visible;
+      width: 100%;
+    }
     &-toggle {
-      display: none;
+      position: relative;
+      z-index: 10;
+      display: inline-block;
+      span {
+        display: block;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+      @media (min-width: $bp-tablet) {
+        display: none;
+      }
     }
     &-item {
-      &.has-submenu {
-        display: block;
+      display: block;
+      @media (min-width: $bp-tablet) {
+        &.has-submenu {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        &:hover .submenu {
+          max-height: none;
+          overflow: visible;
+        }
+        &:not(:last-child) {
+          border-right: 1px solid var(--color-text);
+        }
       }
-      &:hover .submenu {
-        max-height: none;
-        overflow: visible;
-      }
-    }
-    &-item:not(:last-child) {
-      border-right: 1px solid var(--color-text);
     }
     &-link {
       color: var(--color-text);
       cursor: pointer;
       display: block;
       flex: none;
-      padding: 10px 40px;
       min-width: 50px;
-      padding: 0 10px;
+      padding: 10px 20px;
       text-decoration: none;
       &:focus {
         ~.submenu-toggle {
@@ -87,12 +110,8 @@ $trans-timing: 600ms;
         font-weight: $font-weight-semi-bold;
         text-decoration: none;
       }
-    }
-    &-item {
-      display: block;
-      &.has-submenu {
-        display: flex;
-        flex-wrap: wrap;
+      @media (min-width: $bp-tablet) {
+        padding: 0px 10px;
       }
     }
   }
