@@ -9,8 +9,8 @@ html {
 }
 
 body {
-  background: $color-bg;
-  color: $color-text;
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: sans-serif;
   font-size: 16px;
   font-weight: $font-weight-regular;
