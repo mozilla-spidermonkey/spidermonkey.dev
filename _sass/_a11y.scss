@@ -15,7 +15,7 @@
 }
 
 .logo-box a:focus {
-  outline-color: $color-nav;
+  outline: 0;
 }
 
 // Offset of 0 interacts better with menu separator.

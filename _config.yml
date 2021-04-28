@@ -10,9 +10,9 @@ plugins:
   - jekyll-feed
 
 header_pages:
-  - index.markdown
   - blog.markdown
-  - docs/index.markdown
+  - docs.markdown
+  - contribute.markdown
 
 sass:
   style: compressed
