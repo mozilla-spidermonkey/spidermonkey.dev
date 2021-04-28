@@ -37,8 +37,14 @@
 }
 
 a {
-  color: var(--color-link);
+  color: var(--color-primary);
   font-weight: $font-weight-semi-bold;
+  padding:2px;
+  &:hover {
+    color: var(--color-bg);
+    background-color: var(--color-primary);
+    text-decoration: none;
+  }
 }
 
 .text-end {
