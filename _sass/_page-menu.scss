@@ -33,7 +33,7 @@ $svg-height: 24;
   }
 
   .menu {
-    background: var(--color-submenu-bg);
+    background: var(--color-bg);
     list-style-type: none;
     margin: ($svg-height + $mobile-mt) 20px 10px 0;
     padding: 0;
@@ -81,12 +81,12 @@ $svg-height: 24;
           overflow: visible;
         }
         &:not(:last-child) {
-          border-right: 1px solid var(--color-text);
+          border-right: 1px solid var(--color-primary);
         }
       }
     }
     &-link {
-      color: var(--color-text);
+      color: var(--color-link);
       cursor: pointer;
       display: block;
       flex: none;
