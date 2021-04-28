@@ -37,7 +37,7 @@
   }
 }
 .spidermonkey-logo {
-  fill: var(--color-logo-full);
+  fill: var(--color-logo-primary);
   fill-opacity:1;
   stroke:none
 }
@@ -45,12 +45,12 @@
 .spidermonkey-text {
   font-size:17.6389px;
   font-family: ZillaSlab-regular;
-  fill: var(--color-logo-full);
+  fill: var(--color-logo-primary);
 }
 
 .spidermonkey-circle {
-  fill: var(--color-logo-1);
+  fill: var(--color-primary);
 }
 .spidermonkey-small {
-  fill: var(--color-logo-2);
+  fill: var(--color-bg);
 }

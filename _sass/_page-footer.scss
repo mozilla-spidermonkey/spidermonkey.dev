@@ -18,14 +18,14 @@
 }
 
 .page-footer {
-  color: var(--color-dim-gray);
+  color: var(--color-primary);
   font-size: 12px;
   min-height: 100px;
   width: 100%;
 }
 
 .page-footer h3 {
-  border-bottom: 1px solid var(--color-dim-bg);
+  border-bottom: 1px solid var(--color-primary);
   margin-bottom: 1.25rem;
   margin-top: 1.25rem;
   padding-bottom: 1em;
@@ -37,7 +37,7 @@
   }
 
   .page-footer .synopsis .g-col-3:not(:last-child) {
-    border-right: solid 1px var(--color-dim-bg);
+    border-right: solid 1px var(--color-primary);
     padding-right: $grid-gutter;
   }
 
@@ -47,7 +47,7 @@
 }
 
 .page-footer a {
-  color: var(--color-link);
+  color: var(--color-primary);
   font-weight: $font-weight-regular;
   line-height: 24px;
   text-decoration: underline;
@@ -59,7 +59,7 @@
   }
 
   .icon path {
-    fill: var(--color-dim-gray);
+    fill: var(--color-primary);
   }
 
   &:active .icon path,
