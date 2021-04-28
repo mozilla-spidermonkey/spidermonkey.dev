@@ -1,3 +1,6 @@
+{%- assign default_paths = site.pages | map: "path" -%}
+{%- assign page_paths = site.header_pages | default: default_paths -%}
+
 <a href="#content" class="skip-menu">
   skip menu
 </a>
@@ -7,19 +10,14 @@
   </span>
 </a>
 <ul class="menu" id="menu">
+  {%- for path in page_paths -%}
+  {%- assign my_page = site.pages | where: "path", path | first -%}
+  {%- if my_page.title -%}
   <li class="menu-item">
-    <a href="#blog" class="menu-link">
-      blog
-    </a>
-  </li class="menu-item">
-  <li class="menu-item">
-    <a href="#docs" class="menu-link">
-      docs
-    </a>
-  </li class="menu-item">
-  <li class="menu-item">
-    <a href="#contributing" class="menu-link">
-      contributing
+    <a href="{{ my_page.url | relative_url }}" class="menu-link">
+      {{ my_page.title | escape }}
     </a>
   </li>
+  {%- endif -%}
+  {%- endfor -%}
 </ul>
