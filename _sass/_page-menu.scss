@@ -80,8 +80,10 @@ $trans-timing: 600ms;
         }
       }
       &:hover,
-      &:focus {
-        color: $color-primary;
+      &:focus,
+      &.active {
+        color: $color-bg;
+        background-color: $color-primary;
         font-weight: $font-weight-semi-bold;
         text-decoration: none;
       }
