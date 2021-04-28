@@ -39,7 +39,7 @@ $trans-timing: 600ms;
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: right;
     max-height: none;
     overflow: visible;
     padding: 0;
@@ -80,8 +80,10 @@ $trans-timing: 600ms;
         }
       }
       &:hover,
-      &:focus {
-        color: $color-primary;
+      &:focus,
+      &.active {
+        color: $color-bg;
+        background-color: $color-primary;
         font-weight: $font-weight-semi-bold;
         text-decoration: none;
       }
