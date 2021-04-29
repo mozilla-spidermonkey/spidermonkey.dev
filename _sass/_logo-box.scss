@@ -7,32 +7,29 @@
   }
   flex-shrink: 0;
   z-index: 3;
-  padding-top: 3em;
+  padding-top: 0em;
   text-decoration: none;
   .large {
     display: none;
   }
   .small {
     display: block;
-    height: 100px;
     width: 100px;
   }
   @media (min-width: $bp-tablet) {
-    padding-top: 4.5em;
+    padding-top: 3.36em;
     .large {
       display: block;
-      height: 60px;
-      width: 350px;
+      width: 300px;
     }
     .small {
       display: none;
     }
   }
   @media (min-width: $bp-large-tablet) {
-    padding-top: 3em;
+    padding-top: 2.65em;
     .large {
-      height: 90px;
-      width: 600px;
+      width: 400px;
     }
   }
 }
