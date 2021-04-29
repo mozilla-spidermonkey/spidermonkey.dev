@@ -17,15 +17,12 @@
     display: inline-block;
     font-size: 1.5em;
     padding: 0 10px 0 10px;
-    &::after {
-      content: ' ';
-      border-bottom: 1px solid var(--color-primary);
-      display: block;
-      margin-left: -10px;
-      margin-top: -1px;
-      position:absolute;
-      width: 66%;
-    }
+  }
+  hr {
+    border: none;
+    border-bottom: 1px solid var(--color-primary);
+    margin-top: -20px;
+    width: 100%;
   }
   ul,
   p {

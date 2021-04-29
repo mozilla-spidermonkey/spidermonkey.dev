@@ -6,6 +6,8 @@ permalink: /etc/
 
 ## Remote work video backgrounds
 
+---
+
 ![baldr monkey](/assets/img/baldr-background.png "Baldr")
 
 ![ion monkey](/assets/img/ion-background.png "Ion")
