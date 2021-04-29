@@ -4,16 +4,24 @@ title: etc.
 permalink: /etc/
 ---
 
-## Remote work video backgrounds
+# Digital Swag
+
+## Remote Work in Style
 
 ---
 
-![baldr monkey](/assets/img/baldr-background.png "Baldr")
+<a href="/assets/img/baldr-background.png" download>
+<img class="gallery__remote" src="/assets/img/baldr-background.png" alt="Baldr Remote" title="Baldr Remote"/>
+</a>
+<a href="/assets/img/odin-background.png" download>
+<img class="gallery__remote" src="/assets/img/odin-background.png" alt="Odin Remote" title="Odin Remote"/>
+</a>
+<a href="/assets/img/jaeger-background.png" download>
+<img class="gallery__remote" src="/assets/img/jaeger-background.png" alt="Jaeger Remote" title="Jaeger Remote"/>
+</a>
+<a href="/assets/img/ion-background.png" download>
+<img class="gallery__remote" src="/assets/img/ion-background.png" alt="Ion Remote" title="Ion Remote"/>
+</a>
 
-![ion monkey](/assets/img/ion-background.png "Ion")
+---
 
-![jager monkey](/assets/img/jagermonkey-background.png "Jager")
-
-![odin monkey](/assets/img/odin-background.png "odin")
-
-![Spider monkey](/assets/img/sm-background.png "Spider")
