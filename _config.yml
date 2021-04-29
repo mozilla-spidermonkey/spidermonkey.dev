@@ -13,6 +13,7 @@ header_pages:
   - blog.markdown
   - docs.markdown
   - contribute.markdown
+  - etc.markdown
 
 sass:
   style: compressed
