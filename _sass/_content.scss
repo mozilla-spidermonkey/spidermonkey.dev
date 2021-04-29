@@ -31,13 +31,14 @@
   p {
     margin: 0 0 $spacing-paragraph;
   }
-  ul {
-    list-style: circle;
-  }
   @media (min-width: $bp-tablet) {
     padding: 0px 0;
   }
 
+}
+
+ul {
+  list-style: circle;
 }
 
 a {
