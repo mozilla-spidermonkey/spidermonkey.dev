@@ -4,7 +4,7 @@ layout: default
 
 <div class="home">
   {%- if page.title -%}
-    <h1 class="blog-heading">{{ page.title }}</h1>
+    <h2 class="blog-heading">{{ page.title }}</h2>
   {%- endif -%}
 
   {{ content }}
@@ -23,11 +23,11 @@ layout: default
       {%- for post in posts -%}
       <li class="blog-list__item">
         <div class="g-row">
-          <h2 class="g-col-8 blog-list__item-title">
+          <h3 class="g-col-8 blog-list__item-title">
             <a class="blog-list__item-link" href="{{ post.url | relative_url }}">
               {{ post.title | escape }}
             </a>
-          </h2>
+          </h3>
           <span class="blog-list__item-meta">{{ post.date | date: date_format }}</span>
         </div>
         <div class="blog-list__item-excerpt">
