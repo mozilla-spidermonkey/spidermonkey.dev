@@ -9,6 +9,7 @@
   h6 {
     color: var(--color-primary);
     font-weight: $font-weight-semi-bold;
+    font-family: ZillaSlab-Regular;
   }
   h3 {
     margin-top: 15px;
@@ -30,12 +31,17 @@
       width: 66%;
     }
   }
+  ul,
   p {
     margin: 0 0 $spacing-paragraph;
+  }
+  ul {
+    list-style: disclosure-closed;
   }
   @media (min-width: $bp-tablet) {
     padding: 0px 0;
   }
+
 }
 
 a {
