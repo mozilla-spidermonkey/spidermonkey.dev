@@ -4,7 +4,7 @@ title: etc.
 permalink: /etc/
 ---
 
-# Remote work video backgrounds
+## Remote work video backgrounds
 
 ![baldr monkey](/assets/img/baldr-background.png "Baldr")
 
