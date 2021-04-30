@@ -17,3 +17,6 @@ header_pages:
 
 sass:
   style: compressed
+
+collections:
+  - home
