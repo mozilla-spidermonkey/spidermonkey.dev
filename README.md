@@ -10,6 +10,7 @@ Note: Documentation itself should be kept in-tree when possible and linked to fr
 
 Ruby and [Bundler](https://bundler.io/) must be installed. On Ubuntu the following
 should work (replace $REPO_URL with the GitHub repository URL):
+
 ```
 $ sudo apt-get install git ruby bundler zlib1g-dev
 $ git clone $REPO_URL spidermonkey.dev
@@ -17,11 +18,28 @@ $ cd spidermonkey.dev
 $ bundle install --path vendor # If this complains about Bundler version, see below.
 $ bundle exec jekyll serve
 ```
+
 This will start a webserver on localhost. It rebuilds the website in the background
 when you update the markdown files.
 
 If `bundle install` fails with an error about the Bundler version, do what it suggests,
 for example:
+
 ```
 $ gem install bundler:2.0.2
 ```
+
+## Adding a new post
+
+- Create an entry in `_posts`, with title layout of `YYYY-MM-DD-title.markdown`
+- Add a frontsmatter:
+
+```
+---
+layout: post
+title: "My Title"
+date: 2021-05-03 09:30:00 +0700
+---
+```
+
+- **Important**: Note if that date is in the future, by default Jekyll will not include the post.
