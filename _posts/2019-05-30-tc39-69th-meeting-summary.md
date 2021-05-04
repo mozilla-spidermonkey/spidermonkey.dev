@@ -3,7 +3,6 @@ layout: post
 title:  "69th meeting of Ecma TC39"
 date:   2019-05-30 8:30:07 +0100
 ---
-## Summary:
 - Quite a bit of work on string methods and promise methods.
 - temporal is now blocked on standard modules, adding pressure to do that
 - dynamic import will move to stage 4 if all goes well with realms?
