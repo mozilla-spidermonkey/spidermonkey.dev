@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Private Fields and Methods ship with Firefox 90"
+author: Matthew Gaudet
 date: 2021-05-03 09:30:00 -0600
 ---
 

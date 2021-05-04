@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 2 (Firefox 73)"
+author: SpiderMonkey Team
 date:   2020-01-10 15:00:00 +0100
 ---
 
@@ -63,7 +64,7 @@ Tom Schuster [is investigating](https://bugzilla.mozilla.org/show_bug.cgi?id=156
 Logan Smyth [rewrote](https://bugzilla.mozilla.org/show_bug.cgi?id=1602699) debugger hooks to use the exception-based implementation for forced returns. This ended up removing and simplifying a lot of code in the debugger, interpreter and JITs because the exception handler is now the only place where forced returns have to be handled.
 
 
-#### Miscellaneous 
+#### Miscellaneous
 
 
 

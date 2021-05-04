@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 3 (Firefox 74-75)"
+author: SpiderMonkey Team
 date:   2020-03-12 15:00:00 +0100
 ---
 ### JavaScript
@@ -49,7 +50,7 @@ The next big step is delazifying/relazifying scripts [in place](https://bugzilla
 
 Ion, our optimizing JIT, currently relies on a global Type Inference (TI) mechanism. Ion and TI have a [number of shortcomings](https://bugzilla.mozilla.org/show_bug.cgi?id=1613592#c0) so we’re experimenting with a much simpler MIR builder for Ion that’s based on Baseline ICs (CacheIR) instead of TI. If this works out it will let us delete some of our most complicated code, allow us to do more work off-thread, and result in memory usage reductions and performance improvements across the engine.
 
-The past weeks Jan landed patches [preparing](https://bugzilla.mozilla.org/show_bug.cgi?id=1613594) for [this](https://bugzilla.mozilla.org/show_bug.cgi?id=1616188) and [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1617564) a very primitive WarpBuilder implementation that’s able to build MIR off-thread. He’s now [adding support](https://bugzilla.mozilla.org/show_bug.cgi?id=1618198) for more bytecode instructions. 
+The past weeks Jan landed patches [preparing](https://bugzilla.mozilla.org/show_bug.cgi?id=1613594) for [this](https://bugzilla.mozilla.org/show_bug.cgi?id=1616188) and [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1617564) a very primitive WarpBuilder implementation that’s able to build MIR off-thread. He’s now [adding support](https://bugzilla.mozilla.org/show_bug.cgi?id=1618198) for more bytecode instructions.
 
 
 #### ⏩ Regular expression engine update
@@ -67,7 +68,7 @@ André [added Ion support](https://bugzilla.mozilla.org/show_bug.cgi?id=1378189)
 *   Steve also [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1614518) a `mach hazards` command to make it easier to run the GC rooting analysis locally.
 *   Jon [enabled (browser) tests](https://bugzilla.mozilla.org/show_bug.cgi?id=1616230) for JS [WeakRefs](https://github.com/tc39/proposal-weakrefs).
 *   André [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1530372) nursery allocation support for BigInts.
-*   Iain noticed the C++ interpreter was not using [computed goto](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html) on Windows (supported since the switch to clang-cl) and [fixed this](https://bugzilla.mozilla.org/show_bug.cgi?id=1609229). 
+*   Iain noticed the C++ interpreter was not using [computed goto](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html) on Windows (supported since the switch to clang-cl) and [fixed this](https://bugzilla.mozilla.org/show_bug.cgi?id=1609229).
 *   IRC has been shut down. You can now find us in [chat.mozilla.org’s Spidermonkey room](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org).
 
 

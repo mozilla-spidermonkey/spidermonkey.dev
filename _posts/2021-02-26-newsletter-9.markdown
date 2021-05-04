@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 9 (Firefox 86-87)"
+author: SpiderMonkey Team
 date:   2021-02-26 17:30:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 86 and 87 Nightly release cycles.
@@ -12,7 +13,7 @@ If you like these newsletters, you may also enjoy Yulia's [Compiler Compiler liv
 
 
 
-*   Jonatan fixed [a subtle bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1683784) in how our error messages got printed around private fields. 
+*   Jonatan fixed [a subtle bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1683784) in how our error messages got printed around private fields.
 
 
 ### 👷🏽‍♀️ JS features
@@ -82,7 +83,7 @@ If you like these newsletters, you may also enjoy Yulia's [Compiler Compiler liv
 *   Matthew [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1680602) support for compiling async functions and generators with Warp. [Enabling this by default showed a 4% win on Ares6](https://bugzilla.mozilla.org/show_bug.cgi?id=1682623#c5).
 *   Iain improved the bailout code and [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1673497) a mechanism to catch bailout loops in debug builds. Bailout loops can result in performance cliffs, and this work [caught](https://bugzilla.mozilla.org/show_bug.cgi?id=1686207) [various](https://bugzilla.mozilla.org/show_bug.cgi?id=1687672) issues.
 *   Nicolas [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1679922) use of the `JSCVT` instruction on Apple ARM64 hardware.
-*   Caroline [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1672787) filtering for the JSON output used by the CacheIR health report tool, to get it down to reasonable size for complex websites. 
+*   Caroline [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1672787) filtering for the JSON output used by the CacheIR health report tool, to get it down to reasonable size for complex websites.
 *   André, Tom and Jan [cleaned up](https://bugzilla.mozilla.org/show_bug.cgi?id=1682767) [and](https://bugzilla.mozilla.org/show_bug.cgi?id=1687255) [deleted](https://bugzilla.mozilla.org/show_bug.cgi?id=1686692) [even](https://bugzilla.mozilla.org/show_bug.cgi?id=1689990) [more](https://bugzilla.mozilla.org/show_bug.cgi?id=1657367) [code](https://bugzilla.mozilla.org/show_bug.cgi?id=1683093) following the IonBuilder and TI removal in Firefox 85.
 *   Iain [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1674143) CacheIR and Warp optimizations for `Math.min/max` spread calls with arrays.
 *   André added CacheIR and Warp optimizations for [`Object.prototype.toString`](https://bugzilla.mozilla.org/show_bug.cgi?id=1687229), [`Atomics` functions](https://bugzilla.mozilla.org/show_bug.cgi?id=1638295) with `BigInt64Array` and `BigUint64Array`, and [various](https://bugzilla.mozilla.org/show_bug.cgi?id=1692517) `TypedArray`, `DataView` and `RegExp` getters.

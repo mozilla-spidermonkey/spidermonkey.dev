@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 7 (Firefox 82-83)"
+author: SpiderMonkey Team
 date:   2020-10-27 16:00:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 82 and 83 Nightly release cycles.
@@ -37,7 +38,7 @@ A few of the other Warp changes that landed the past months:
 *   Caroline [made](https://bugzilla.mozilla.org/show_bug.cgi?id=1657206) [changes](https://bugzilla.mozilla.org/show_bug.cgi?id=1662943) to [improve](https://bugzilla.mozilla.org/show_bug.cgi?id=1666615) the CacheIR analysis tool.
 *   André added CacheIR optimizations for [function.name](https://bugzilla.mozilla.org/show_bug.cgi?id=1643944), [arguments[Symbol.iterator]](https://bugzilla.mozilla.org/show_bug.cgi?id=1643948), [Object.prototype.isPrototypeOf](https://bugzilla.mozilla.org/show_bug.cgi?id=1664195).
 *   Tom [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1663260) CacheIR optimizations for `toString` and `valueOf` on numbers and strings.
-*   André [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1665348) [more](https://bugzilla.mozilla.org/show_bug.cgi?id=1664990) CacheIR instructions in the transpiler. 
+*   André [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1665348) [more](https://bugzilla.mozilla.org/show_bug.cgi?id=1664990) CacheIR instructions in the transpiler.
 
 
 ### 🧹 Garbage Collection

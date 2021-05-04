@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 1 (Firefox 72)"
+author: SpiderMonkey Team
 date:   2019-12-04 15:00:00 +0100
 ---
 
@@ -88,6 +89,6 @@ Lars Hansen [made](https://bugzilla.mozilla.org/show_bug.cgi?id=1581572) calls b
 
 
 #### Ongoing work
-*   The [multi-value proposal](https://github.com/WebAssembly/multi-value/blob/master/proposals/multi-value/Overview.md) allows WebAssembly functions and blocks to return multiple values. Andy Wingo from Igalia is [making steady progress](https://bugzilla.mozilla.org/show_bug.cgi?id=1401675) implementing this feature in SpiderMonkey. 
+*   The [multi-value proposal](https://github.com/WebAssembly/multi-value/blob/master/proposals/multi-value/Overview.md) allows WebAssembly functions and blocks to return multiple values. Andy Wingo from Igalia is [making steady progress](https://bugzilla.mozilla.org/show_bug.cgi?id=1401675) implementing this feature in SpiderMonkey.
 *   Igalia (Asumu Takikawa) is also [working on](https://bugzilla.mozilla.org/show_bug.cgi?id=1511958) the [JS-BigInt-integration proposal](https://github.com/WebAssembly/JS-BigInt-integration), so i64 values in WebAssembly can be converted to/from JavaScript BigInt.
 *   Tom Tung, Anne van Kesteren and others are [working](https://bugzilla.mozilla.org/show_bug.cgi?id=1477743) on [re-enabling](https://groups.google.com/forum/#!msg/mozilla.dev.platform/IHkBZlHETpA/dwsMNchWEQAJ) SharedArrayBuffer by default.

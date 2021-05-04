@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 5 (Firefox 78-79)"
+author: SpiderMonkey Team
 date:   2020-07-03 16:00:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 78 and 79 Nightly release cycles.
@@ -86,7 +87,7 @@ If you like these newsletters, you may also enjoy Yulia's weekly [Compiler Compi
 
 #### 🐒 SmooshMonkey
 
-[SmooshMonkey](https://github.com/mozilla-spidermonkey/jsparagus) is our project to reimplement the frontend in a safe language (Rust) and make it easier to implement new features and improve long-term maintainability of the code base. 
+[SmooshMonkey](https://github.com/mozilla-spidermonkey/jsparagus) is our project to reimplement the frontend in a safe language (Rust) and make it easier to implement new features and improve long-term maintainability of the code base.
 
 
 
@@ -151,7 +152,7 @@ Since the last newsletter we've implemented a lot more CacheIR instructions in t
 
 
 *   Asumu (from Igalia) [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1623628) support for [JS BigInt &lt;-> Int64 conversion](https://github.com/WebAssembly/JS-BigInt-integration) in Firefox 78.
-*   Andy (from Igalia) enabled support for [calling multi-result WebAssembly functions from JavaScript](https://bugzil.la/1625887) as well as having [JavaScript return multiple values to WebAssembly](https://bugzil.la/1622828). 
+*   Andy (from Igalia) enabled support for [calling multi-result WebAssembly functions from JavaScript](https://bugzil.la/1625887) as well as having [JavaScript return multiple values to WebAssembly](https://bugzil.la/1622828).
 *   Ryan [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1637884) support for [Reference types](https://github.com/WebAssembly/reference-types) in Firefox 79.
 *   Ryan [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1528294) support for [Bulk-memory operations](https://github.com/WebAssembly/bulk-memory-operations) in Firefox 79.
 *   Tom (from the DOM team) [re-enabled shared memory](https://bugzilla.mozilla.org/show_bug.cgi?id=1619649) in JS (for desktop systems) in Firefox 79, and in turn this enables [wasm thread operations ](https://github.com/webassembly/threads)in that same release.
