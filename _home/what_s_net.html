@@ -1,0 +1,27 @@
+---
+title: What's New
+order: 2
+---
+
+<div>
+{% assign posts = site.posts %}
+{%- if posts.size > 0 -%}
+  <ul class="blog-list blog-list__condensed">
+    {%- assign date_format = "%b %-d, %Y" -%}
+    {%- for post in posts limit:10 -%}
+    <li class="blog-list__item">
+      <div class="g-row">
+        <h4 class="g-col-8 blog-list__item-title">
+          <a class="blog-list__item-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h4>
+        <span class="blog-list__item-meta">{{ post.date | date: date_format }}</span></li>
+    {%- endfor -%}
+{%- endif -%}
+</div>
+
+
+<p>
+Read more in the <a href="./blog">SpiderMonkey Blog</a>
+</p>
