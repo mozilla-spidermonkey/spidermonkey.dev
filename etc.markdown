@@ -23,5 +23,3 @@ permalink: /etc/
 <img class="gallery__remote" src="/assets/img/ion-background.png" alt="Ion Remote" title="Ion Remote"/>
 </a>
 
----
-
