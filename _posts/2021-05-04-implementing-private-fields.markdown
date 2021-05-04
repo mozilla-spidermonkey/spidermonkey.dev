@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Implementing Private Fields for JavaScript"
+author: Matthew Gaudet
 date: 2021-05-04 09:00:00 -0600
 ---
 
