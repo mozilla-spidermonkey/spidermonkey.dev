@@ -40,12 +40,18 @@
 .blog-list__condensed {
   list-style: circle;
   .blog-list__item {
+    clear: both;
     &-title {
+      display: inline-block;
       a,
       h3 {
         padding: inherit;
         margin-left: 0;
       }
+    }
+    &-meta {
+      min-width: 100px;
+      display: inline-block;
     }
   }
 }

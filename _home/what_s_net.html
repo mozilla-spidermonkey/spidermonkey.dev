@@ -8,16 +8,16 @@ order: 2
 {%- if posts.size > 0 -%}
   <ul class="blog-list blog-list__condensed">
     {%- assign date_format = "%b %-d, %Y" -%}
-    {%- for post in posts limit:10 -%}
+    {%- for post in posts limit:5 -%}
     <li class="blog-list__item">
-      <div class="g-row">
-        <h4 class="g-col-8 blog-list__item-title">
+        <span class="blog-list__item-meta">{{ post.date | date: date_format }}</span>
+        <h4 class="blog-list__item-title">
           <a class="blog-list__item-link" href="{{ post.url | relative_url }}">
             {{ post.title | escape }}
           </a>
-        </h4>
-        <span class="blog-list__item-meta">{{ post.date | date: date_format }}</span></li>
+        </h4></li>
     {%- endfor -%}
+  </ul>
 {%- endif -%}
 </div>
 
