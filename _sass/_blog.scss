@@ -36,3 +36,20 @@
     margin: 35px 0 35px 0;
   }
 }
+
+.blog-list__condensed {
+  list-style: circle;
+  .blog-list__item {
+    &-title {
+      a,
+      h3 {
+        padding: inherit;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.blog-list__condensed .blog-list__item {
+  margin: 0 0 0 40px;
+}
