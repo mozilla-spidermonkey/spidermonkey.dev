@@ -5,9 +5,10 @@
       background-color: var(--color-bg);
     }
   }
+  line-height: 0px;
   flex-shrink: 0;
   z-index: 3;
-  padding-top: 0em;
+  padding-top: 1.5em;
   text-decoration: none;
   .large {
     display: none;
@@ -17,7 +18,7 @@
     width: 100px;
   }
   @media (min-width: $bp-tablet) {
-    padding-top: 3.36em;
+    padding-top: 4.85em;
     .large {
       display: block;
       width: 300px;
@@ -27,7 +28,7 @@
     }
   }
   @media (min-width: $bp-large-tablet) {
-    padding-top: 2.65em;
+    padding-top: 4.2em;
     .large {
       width: 400px;
     }

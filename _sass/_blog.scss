@@ -1,5 +1,6 @@
 .blog-list {
   list-style: none;
+  padding: 0;
   &__item {
     &-title {
       display: block;
@@ -29,7 +30,7 @@
     }
     &-excerpt {
       display: block;
-      padding: 10px;
+      padding: 10px 0;
     }
     clear: both;
     margin: 35px 0 35px 0;

@@ -50,7 +50,7 @@ $svg-height: 24;
     @media (min-width: $bp-tablet) {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: right;
       margin: 1em 0;
       position: relative;
       overflow: visible;
