@@ -26,7 +26,7 @@ p.useData(); // OK
 p.#private_data; // SyntaxError
 ```
 
-This is the last remaining piece of the [Stage 3 Proposal, Class field declarations for JavaScript][proposal], which
+This is the last remaining piece of the [Stage 4 Proposal, Class field declarations for JavaScript][proposal], which
 has many more details about the design of private data.
 
 [fields]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields
