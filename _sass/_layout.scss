@@ -11,16 +11,12 @@ html {
 body {
   background: var(--color-bg);
   color: var(--color-primary);
-  font-family: PT-Serif-F55F;
+  font-family: PT-Sans-S55;
   font-size: 16px;
   font-weight: $font-weight-regular;
   line-height: 1.5;
   margin: 0;
   padding: 0;
-}
-
-a {
-  font-family: PT-Serif-F55F, sans-serif;
 }
 
 h1 {
