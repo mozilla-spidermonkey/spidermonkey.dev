@@ -16,6 +16,8 @@ Stuff we are interested in or working on:
 
 ## Normative
 
+---
+
 The following are normative changes, the behaviour in SM and the conclusions from the plenary.
 
 CreateDynamicFunction early concatenates body
@@ -48,6 +50,8 @@ CreateDynamicFunction early concatenates body
 
 
 ## Proposals
+
+---
 
 The following list is of proposals presented at TC39. Proposals are grouped by theme and are presented in stage order from 4 to 1
 
