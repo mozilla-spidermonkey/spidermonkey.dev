@@ -46,7 +46,7 @@ footer {
 .page-footer a {
   color: var(--color-dim-primary);
   font-weight: $font-weight-regular;
-  line-height: 24px;
+  line-height: $footer-line-height;
   text-decoration: underline;
 
   .icon {
