@@ -4,14 +4,11 @@
 // Dark mode.
 :root {
   --color-primary: #ffd681;
+  --color-dim-primary: #8f8d8d;
+  --color-dim-bg: #201b37;
   --color-text: #ffd681;
   --color-link: #ffd681;
-  --color-nav: #444;
-  --color-spacer: #eee;
-  --color-submenu-bg: #110b2b;
   --color-bg: #110b2b;
-  --color-dim-gray: #696969;
-  --color-darkmode-dim-bg: #2b2544; // = 0.8 * --color-darkmode-bg + 0.2 * --color-darkmode-dim-gray
   --color-logo-full: #ffd681;
   --color-logo-1: #110b2b;
   --color-logo-2: #ffd681;
@@ -21,14 +18,10 @@
 @media (prefers-color-scheme: light) {
   :root {
     --color-primary: black;
+    --color-dim-primary: #696969;
+    --color-dim-bg: #fafafa;
     --color-link: #444;
-    --color-text: #000;
-    --color-nav: #444;
-    --color-spacer: #eee;
-    --color-submenu-bg: white;
     --color-bg: white;
-    --color-dim-gray: #696969;
-    --color-dim-bg: #e1e1e1; // = 0.8 * --color-bg + 0.2 * --color-dim-gray
     --color-logo-full: black;
     --color-logo-1: black;
     --color-logo-2: white;
@@ -44,6 +37,7 @@ $font-weight-semi-bold: 550;
 $grid-gutter: 40px;
 $spacing-paragraph: 40px;
 
+$footer-line-height: 32px;
 // Breakpoints
 $bp-tablet: 680px;
 $bp-large-tablet: 920px;

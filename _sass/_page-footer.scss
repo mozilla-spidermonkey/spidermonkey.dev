@@ -1,53 +1,50 @@
-.synopsis {
+footer {
+  background-color: var(--color-dim-bg);
+  padding-top:10px;
+}
+.page-footer {
   clear: both;
+  color: var(--color-dim-primary);
+  font-size: 12px;
   font-weight: 400;
+  min-height: 100px;
   overflow: auto;
   padding: 0 4% $grid-gutter;
   width: 100%;
 }
 
-.synopsis ul {
+.page-footer ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.synopsis a,
-.synopsis h3 {
+.page-footer .icon {
+  max-width: 36px;
+  max-height: $footer-line-height;
+}
+
+.page-footer a,
+.page-footer h3 {
   font-weight: $font-weight-regular;
 }
 
-.page-footer {
-  color: var(--color-primary);
-  font-size: 12px;
-  min-height: 100px;
-  width: 100%;
-}
-
 .page-footer h3 {
-  border-bottom: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-dim-primary);
   margin-bottom: 1.25rem;
   margin-top: 1.25rem;
   padding-bottom: 1em;
 }
 
-@media (min-width: $bp-tablet) {
+@media (min-width: $bp-large-tablet) {
   .page-footer h3 {
     margin-top: 0;
   }
 
-  .page-footer .synopsis .g-col-3:not(:last-child) {
-    border-right: solid 1px var(--color-primary);
-    padding-right: $grid-gutter;
-  }
-
-  .page-footer .synopsis .g-col-3:not(:first-child) {
-    padding-left: $grid-gutter;
-  }
 }
 
 .page-footer a {
-  color: var(--color-primary);
+  color: var(--color-dim-primary);
   font-weight: $font-weight-regular;
   line-height: 24px;
   text-decoration: underline;
@@ -59,7 +56,15 @@
   }
 
   .icon path {
-    fill: var(--color-primary);
+    fill: var(--color-dim-primary);
+  }
+
+  .icon .spidermonkey-small {
+    fill: var(--color-bg);
+  }
+
+  .icon .spidermonkey-circle {
+    fill: var(--color-dim-primary);
   }
 
   &:active .icon path,
@@ -67,9 +72,16 @@
   &:hover .icon path {
     fill: var(--color-link);
   }
+  &:hover .icon .spidermonkey-small {
+    fill: var(--color-bg);
+  }
+
+  &:hover .icon .spidermonkey-circle {
+    fill: var(--color-link);
+  }
 
   span {
-    line-height: 32px;
+    line-height: $footer-line-height;
   }
 }
 
@@ -96,7 +108,6 @@
 }
 
 .page-footer .grid-container {
-  border-top: solid 1px var(--color-dim-bg);
   margin: 0 auto;
   overflow: auto;
   padding: $grid-gutter 0;
@@ -113,7 +124,10 @@
   text-align: center;
 }
 
-@media (min-width: $bp-tablet) {
+@media (min-width: $bp-large-tablet) {
+  footer {
+    padding-top:30px;
+  }
   .page-footer .grid-start {
     float: left;
     text-align: left;

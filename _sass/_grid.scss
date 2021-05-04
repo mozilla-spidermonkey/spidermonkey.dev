@@ -26,8 +26,14 @@
     .g-col-8 {
       flex: 0 0 percentage(8/12);
     }
+    .g-col-9 {
+      flex: 0 0 percentage(9/12);
+    }
     .g-col-10 {
       flex: 0 0 percentage(10/12);
+    }
+    .g-col-12 {
+      flex: 0 0 100%;
       flex-grow: 2;
     }
   }
