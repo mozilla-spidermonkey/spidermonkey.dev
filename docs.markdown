@@ -4,7 +4,7 @@ title: docs
 permalink: /docs/
 ---
 
-# The Docs
+# Docs
 
 ## Understanding the engine
 
