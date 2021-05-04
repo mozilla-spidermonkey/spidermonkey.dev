@@ -92,7 +92,7 @@ The `WeakMap` model is, surprisingly, not how the feature is written in the spec
 
 The actual specification changes are provided by the [class fields proposal][class-fields], specifically the [changes to the specification text][specdiff]. I won't cover every piece of this specification text, but I'll call out specific aspects to help elucidate the differences between specification text and implementation.
 
-First, the specification adds the notion of [`[[PrivateName]]`][privatename], which is a globally unique field identifier. This global uniqueness is to ensure that if you two classes cannot access each other's fields merely by having the same name.
+First, the specification adds the notion of [`[[PrivateName]]`][privatename], which is a globally unique field identifier. This global uniqueness is to ensure that two classes cannot access each other's fields merely by having the same name.
 
 ```js
 function createClass() {
@@ -196,7 +196,7 @@ PS: Just because you _can_ stamp private fields into arbitrary objects, doesn't 
 
 When faced with implementing the specification, there is a tension between following the letter of the specification, and doing something different to improve the implementation on some dimension.
 
-Where it is possible to implement the steps of the specification directly, we prefer to do that, as it make maintenance of features easier as specification changes are made. SpiderMonkey does this in many places. You will see sections of code that are transcriptions of specification algorithms, [with step][stepnumbers1] [numbers for comments][stepnumbers2]. Following the exact letter of the specification can also be helpful where the specification is highly complex and small divergences can lead to compatibility risks.
+Where it is possible to implement the steps of the specification directly, we prefer to do that, as it makes maintenance of features easier as specification changes are made. SpiderMonkey does this in many places. You will see sections of code that are transcriptions of specification algorithms, [with step][stepnumbers1] [numbers for comments][stepnumbers2]. Following the exact letter of the specification can also be helpful where the specification is highly complex and small divergences can lead to compatibility risks.
 
 Sometimes however, there are good reasons to diverge from the specification language. JavaScript implementations have been honed for high performance for years, and there are many implementation tricks that have been applied to make that happen. Sometimes recasting a part of the specification in terms of code already written is the right thing to do, because that means the new code is also able to have the performance characteristics of the already written code.
 
