@@ -2,6 +2,9 @@
   list-style: none;
   padding: 0;
   &__item {
+    &-author {
+      display: block;
+    }
     &-title {
       display: block;
       margin: 0px;

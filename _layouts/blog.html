@@ -30,6 +30,10 @@ layout: default
           </h3>
           <span class="blog-list__item-meta">{{ post.date | date: date_format }}</span>
         </div>
+        {%- if post.author -%}
+
+          <div class="blog-list__item-author">by {{ post.author }}</div>
+        {%- endif -%}
         <div class="blog-list__item-excerpt">
           {{ post.excerpt }}
         </div>

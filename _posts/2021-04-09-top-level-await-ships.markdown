@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Top Level Await Ships with Firefox 89"
+author: Yulia Startsev
 date:   2021-04-05 17:30:00 +0100
 ---
 

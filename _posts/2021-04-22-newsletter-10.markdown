@@ -1,11 +1,12 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 10 (Firefox 88-89)"
+author: SpiderMonkey Team
 date:   2021-04-22 17:30:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 88 and 89 Nightly release cycles.
 
-In this newsletter we bid a fond farewell to module owner emeritus Jason Orendorff, and say hello to Jan de Mooij as [the new JavaScript Engine module owner](https://groups.google.com/g/mozilla.dev.platform/c/EMCKV2_xRrY). 
+In this newsletter we bid a fond farewell to module owner emeritus Jason Orendorff, and say hello to Jan de Mooij as [the new JavaScript Engine module owner](https://groups.google.com/g/mozilla.dev.platform/c/EMCKV2_xRrY).
 
 If you like these newsletters, you may also enjoy Yulia's [Compiler Compiler live stream](https://developer.mozilla.com/events/compiler-compiler-yulia-startsev/).
 
@@ -20,10 +21,10 @@ We’d like to thank our new contributors. We are working with [Outreachy](https
 *   Yohei [improved several SIMD instructions](https://bugzilla.mozilla.org/show_bug.cgi?id=1693482) by implementing constant inlining.
 *   Shariff [removed use of an old macro](https://bugzilla.mozilla.org/show_bug.cgi?id=1699273)
 *   Ashita fixed three bugs (🎉) [cleaned up some unused enum values](https://bugzilla.mozilla.org/show_bug.cgi?id=1698105), [removed an old macro from a few files](https://bugzilla.mozilla.org/show_bug.cgi?id=1699276), and [fixed the naming schema for Warp’s tooling](https://bugzilla.mozilla.org/show_bug.cgi?id=1697644).
-*   Ashwini also [cleaned up some ](https://bugzilla.mozilla.org/show_bug.cgi?id=1703597)uses [of the JSID macros](https://bugzilla.mozilla.org/show_bug.cgi?id=1703599). 
+*   Ashwini also [cleaned up some ](https://bugzilla.mozilla.org/show_bug.cgi?id=1703597)uses [of the JSID macros](https://bugzilla.mozilla.org/show_bug.cgi?id=1703599).
 *   Pavel also [removed](https://bugzilla.mozilla.org/show_bug.cgi?id=1699279) [uses](https://bugzilla.mozilla.org/show_bug.cgi?id=1699275) of the JSID_IS_ATOM macro.
-*   Bukola Akinnadeju cleaned up some [uses of the JSID macros](https://bugzilla.mozilla.org/show_bug.cgi?id=1703596). 
-*   Jane Kotovich also [worked on the](https://bugzilla.mozilla.org/show_bug.cgi?id=1705198) [JSID macro removal project](https://bugzilla.mozilla.org/show_bug.cgi?id=1703598). 
+*   Bukola Akinnadeju cleaned up some [uses of the JSID macros](https://bugzilla.mozilla.org/show_bug.cgi?id=1703596).
+*   Jane Kotovich also [worked on the](https://bugzilla.mozilla.org/show_bug.cgi?id=1705198) [JSID macro removal project](https://bugzilla.mozilla.org/show_bug.cgi?id=1703598).
 
 
 ### 👷🏽‍♀️ JS features
@@ -60,7 +61,7 @@ We’d like to thank our new contributors. We are working with [Outreachy](https
 *   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1701305) support for modules and off-thread compilation to the Stencil API.
 *   We [optimized](https://bugzilla.mozilla.org/show_bug.cgi?id=1692577) use of `CompilationState` in the parser for certain cases.
 *   We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1693184) magic values to the Stencil bytecode serialization format to detect corrupt data and handle this more gracefully.
-*   We [fixed](https://bugzilla.mozilla.org/show_bug.cgi?id=1704141) the Stencil bytecode serialization format to deduplicate bytecode. 
+*   We [fixed](https://bugzilla.mozilla.org/show_bug.cgi?id=1704141) the Stencil bytecode serialization format to deduplicate bytecode.
 *   We're [getting](https://bugzilla.mozilla.org/show_bug.cgi?id=1458339) closer to sharing Stencil information for self-hosted code across content processes. We expect significant memory usage and performance improvements from this in the coming weeks.
 
 
