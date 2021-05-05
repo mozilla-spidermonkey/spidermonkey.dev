@@ -5,10 +5,7 @@ defaults:
   - scope:
       path: ""
     values:
-      image:
-        path: /assets/img/twitter-dark.png
-        width: 60
-        height: 60
+      image: /assets/img/twitter-dark-large.png
 
 baseurl: "/"
 url: "https://spidermonkey.dev"
