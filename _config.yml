@@ -7,8 +7,6 @@ defaults:
     values:
       image: /assets/img/twitter-dark-large.png
 
-baseurl: "/"
-url: "https://spidermonkey.dev"
 permalink: /blog/:year/:month/:day/:title.html
 
 plugins:
