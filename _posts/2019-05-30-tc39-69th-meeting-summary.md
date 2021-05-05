@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "69th meeting of Ecma TC39"
+author: Yulia Startsev
 date:   2019-05-30 8:30:07 +0100
 ---
 - Quite a bit of work on string methods and promise methods.
