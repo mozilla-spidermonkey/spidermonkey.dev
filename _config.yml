@@ -3,7 +3,7 @@ description: SpiderMonkey is Mozilla's JavaScript and WebAssembly Engine, used i
 twitter_username: spidermonkeyjs
 twitter:
   username: spidermonkeyjs
-  card: summary
+  card: summary_large_image
 defaults:
   - scope:
       path: ""
