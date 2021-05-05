@@ -18,6 +18,55 @@ function toggleProposal(item) {
   item.classList.toggle('open');
 }
 
+function randomColor(saturationPercent = 100, lightnessPercent = 100) {
+  return "hsl(" + 360 * Math.random() + ',' +
+          (saturationPercent * Math.random()) + '%,' + 
+          (lightnessPercent * Math.random()) + '%)'
+}
+
+function getCookie(cname) {
+  var cookies = document.cookie.split(";");
+  for(var i = 0; i < cookies.length; i++) {
+    var myCookie = cookies[i].split("=");
+    if(cname == myCookie[0].trim()) {
+      return myCookie[1];
+    }
+  }
+  return null;
+}
+
+function setCookie(cname, value) {
+  document.cookie = cname + "=" + value + ";path=/;SameSite=Strict;"
+}
+
+function generateColorsCookie() {
+  document.cookie = setCookie("color-cookie", "true");
+  document.cookie = setCookie("color-primary", randomColor(90, 90));
+  document.cookie = setCookie("color-secondary", randomColor(54, 50));
+  document.cookie = setCookie("color-tertiary", randomColor());
+}
+
+function setFromColorsCookie() {
+  document.documentElement.style
+    .setProperty('--color-primary', getCookie("color-primary"));
+  document.documentElement.style
+    .setProperty('--color-dim-primary', getCookie("color-tertiary"));
+    document.documentElement.style
+    .setProperty('--color-dim-bg', 0.8 * getCookie("color-secondary") + 2.0);
+  document.documentElement.style
+    .setProperty('--color-text', getCookie("color-primary"));
+  document.documentElement.style
+    .setProperty('--color-link', getCookie("color-primary"));
+  document.documentElement.style
+    .setProperty('--color-bg', getCookie("color-secondary"));
+  document.documentElement.style
+    .setProperty('--color-logo-full', getCookie("color-primary"));
+  document.documentElement.style
+    .setProperty('--color-logo-1', getCookie("color-secondary"));
+  document.documentElement.style
+    .setProperty('--color-logo-2', getCookie("color-primary"));
+}
+
 /**
  * Represents the start of this application
  */
@@ -66,6 +115,27 @@ function start() {
       toggleMenu(submenu);
       t.classList.toggle('open');
     });
+  });
+
+  window.addEventListener('DOMContentLoaded', function() {
+    if (getCookie("color-cookie") == "true") {
+      setFromColorsCookie();
+    }
+  });
+
+  document
+    .querySelector('.color-toggle')
+    .addEventListener('click', function(ev) {
+      generateColorsCookie();
+      setFromColorsCookie();
+      location.reload();
+  });
+
+  document
+    .querySelector('.color-clear')
+    .addEventListener('click', function(ev) {
+      setCookie("color-cookie", "false");
+      location.reload();
   });
 }
 
