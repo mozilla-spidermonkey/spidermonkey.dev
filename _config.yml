@@ -5,7 +5,7 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/img/twitter-dark-large.png
+      image: /assets/img/twitter-dark-large.png?0
 
 baseurl: "/"
 url: "https://deploy-preview-71--spidermonkey-redesign.netlify.app"
