@@ -11,7 +11,7 @@ defaults:
       image: /assets/img/twitter-dark-large.png?1
 
 baseurl: "/"
-url: "https://deploy-preview-71--spidermonkey-redesign.netlify.app"
+url: "https://spidermonkey.dev"
 permalink: /blog/:year/:month/:day/:title.html
 
 plugins:
