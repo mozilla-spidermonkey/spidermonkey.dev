@@ -4,6 +4,7 @@ twitter_username: spidermonkeyjs
 twitter:
   username: spidermonkeyjs
   card: summary_large_image
+
 defaults:
   - scope:
       path: ""
