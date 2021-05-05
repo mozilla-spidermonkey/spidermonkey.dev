@@ -1,0 +1,51 @@
+.main-content {
+  font-size: 1rem;
+  padding: 0px 0;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-primary);
+    font-family: ZillaSlab-Regular;
+    font-weight: $font-weight-semi-bold;
+  }
+  h2 {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    display: inline-block;
+    font-size: 1.5em;
+    padding: 0 10px 0 10px;
+  }
+  hr {
+    border: none;
+    border-bottom: 1px solid var(--color-primary);
+    margin-top: -21px;
+    width: 100%;
+  }
+  ul,
+  p {
+    margin: 0 0 $spacing-text;
+  }
+  @media (min-width: $bp-tablet) {
+    padding: 0px 0;
+  }
+
+}
+
+ul {
+  list-style: circle;
+}
+
+a {
+  color: var(--color-primary);
+  font-weight: $font-weight-semi-bold;
+  padding:2px;
+  &:hover {
+    color: var(--color-bg);
+    background-color: var(--color-primary);
+    text-decoration: none;
+  }
+}
+

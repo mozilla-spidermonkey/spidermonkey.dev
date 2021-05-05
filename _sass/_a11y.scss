@@ -1,0 +1,31 @@
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+:focus {
+  outline-offset: .125rem;
+  outline-style: solid;
+  outline-width: .125rem;
+}
+
+.logo-box a:focus {
+  outline: 0;
+}
+
+// Offset of 0 interacts better with menu separator.
+.page-menu :focus {
+  outline-offset: 0;
+  outline-color: var(--color-primary);
+}
+
+.submenu {
+  :focus {
+    outline: 0;
+  }
+}

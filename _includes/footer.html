@@ -1,10 +1,61 @@
 <footer class="site-footer h-card">
-  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+  <section class="grid-container page-footer container">
+    <div class="g-row">
+      <div class="g-col-3">
+        <h3>Connect</h3>
+        <ul aria-labelledby="Connect">
+          <li><a class="page-footer__link" href="https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org" target="_blank">
+              <span class="icon">
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                viewBox="0 0 520 520" width="100%" >
+                  <path d="M13.7,11.9v496.2h35.7V520H0V0h49.4v11.9H13.7z"/>
+                  <path d="M166.3,169.2v25.1h0.7c6.7-9.6,14.8-17,24.2-22.2c9.4-5.3,20.3-7.9,32.5-7.9c11.7,0,22.4,2.3,32.1,6.8
+                    c9.7,4.5,17,12.6,22.1,24c5.5-8.1,13-15.3,22.4-21.5c9.4-6.2,20.6-9.3,33.5-9.3c9.8,0,18.9,1.2,27.3,3.6c8.4,2.4,15.5,6.2,21.5,11.5
+                    c6,5.3,10.6,12.1,14,20.6c3.3,8.5,5,18.7,5,30.7v124.1h-50.9V249.6c0-6.2-0.2-12.1-0.7-17.6c-0.5-5.5-1.8-10.3-3.9-14.3
+                    c-2.2-4.1-5.3-7.3-9.5-9.7c-4.2-2.4-9.9-3.6-17-3.6c-7.2,0-13,1.4-17.4,4.1c-4.4,2.8-7.9,6.3-10.4,10.8c-2.5,4.4-4.2,9.4-5,15.1
+                    c-0.8,5.6-1.3,11.3-1.3,17v103.3h-50.9v-104c0-5.5-0.1-10.9-0.4-16.3c-0.2-5.4-1.3-10.3-3.1-14.9c-1.8-4.5-4.8-8.2-9-10.9
+                    c-4.2-2.7-10.3-4.1-18.5-4.1c-2.4,0-5.6,0.5-9.5,1.6c-3.9,1.1-7.8,3.1-11.5,6.1c-3.7,3-6.9,7.3-9.5,12.9c-2.6,5.6-3.9,13-3.9,22.1
+                    v107.6h-50.9V169.2H166.3z"/>
+                  <path d="M506.3,508.1V11.9h-35.7V0H520v520h-49.4v-11.9H506.3z"/>
+                </svg>
+              </span>
+              <span>Matrix</span>
+            </a>
+          </li>
+          <li><a class="page-footer__link" href="https://discourse.mozilla.org/c/spidermonkey" target="_blank">
+              <span class="icon">{% octicon comment-discussion height:24 aria-label:Discourse %}</span>
+              <span>Discourse</span>
+            </a>
+          </li>
+            <li><a class="page-footer__link" href="http://twitter.com/spidermonkeyjs" target="_blank">
+                <span class="icon"><svg height="24" aria-label="Twitter" class="octicon octicon-mark-twitter" viewBox="0 0 16 16" version="1.1" width="24" role="img"><path d="m14.115 3.3111c0.67809-0.42788 1.1984-1.1064 1.4425-1.9146-0.63482 0.39718-1.3364 0.68442-2.0849 0.83993-0.59725-0.67353-1.4509-1.0935-2.3956-1.0935-1.8126 0-3.2814 1.5501-3.2814 3.4617 0 0.27139 0.027277 0.53585 0.083581 0.78842-2.7272-0.14461-5.1455-1.5214-6.7655-3.6172-0.28268 0.51307-0.44421 1.1074-0.44421 1.7413 0 1.2005 0.57944 2.2603 1.4603 2.8823-0.53812-0.017828-1.0443-0.17532-1.4876-0.43284v0.04259c0 1.6779 1.1307 3.0774 2.6343 3.3944-0.27611 0.081219-0.56535 0.12183-0.86588 0.12183-0.2113 0-0.41791-0.020801-0.617-0.061409 0.41697 1.3748 1.6294 2.3772 3.0662 2.4039-1.1241 0.92906-2.5394 1.4817-4.0767 1.4817-0.26484 0-0.52685-0.01486-0.78323-0.04755 1.4528 0.98156 3.178 1.555 5.0318 1.555 6.0386 0 9.3387-5.2753 9.3387-9.8503 0-0.15056-0.0018-0.30012-0.0084-0.4477 0.64147-0.48831 1.1993-1.0984 1.6379-1.7928-0.5888 0.27536-1.2218 0.46157-1.8849 0.54477z"/></svg></span>
+                <span>Twitter</span>
+              </a></li>
+          <li><a class="page-footer__link" href="https://github.com/mozilla-spidermonkey" target="_blank">
+              <span class="icon">{% octicon mark-github height:24 aria-label:GitHub %}</span>
+              <span>GitHub</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="g-col-3">
+        <h3>Read more</h3>
+        <ul aria-labelledby="Read More">
+          <li><a class="page-footer__link" href="/blog">Blog</a></li>
+          <li><a class="page-footer__link" href="/docs">Docs</a></li>
+          <li><a class="page-footer__link" href="/contribute">Contribute</a></li>
+          <li><a class="page-footer__link" href="https://searchfox.org/mozilla-central/source/js" target="_blank">Source</a></li>
 
-  <div class="wrapper">
-    <a href="{{ "/feed.xml" | relative_url }}">RSS feed</a> | &nbsp;
-    
-    {%- if site.twitter_username -%}<a href="https://www.twitter.com/{{ site.twitter_username| cgi_escape | escape }}"><svg class="svg-icon"><use xlink:href="{{ '/assets/minima-social-icons.svg#twitter' | relative_url }}"></use></svg><span class="username">{{ site.twitter_username| escape }}</span></a>{%- endif -%}
-  </div>
-
+        </ul>
+      </div>
+      <div class="g-col-3">
+        <h3>Specifications</h3>
+        <ul aria-labelledby="Specifications">
+          <li><a class="page-footer__link" href="https://tc39.es/ecma262/">ECMAScript</a></li>
+          <li><a class="page-footer__link" href="https://webassembly.org/">WebAssembly</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </footer>

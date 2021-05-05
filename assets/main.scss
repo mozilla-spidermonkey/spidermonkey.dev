@@ -1,7 +1,0 @@
----
----
-
-@import "{{ site.theme }}";
-
-// Override default font-size of 42px so long titles fit on one line.
-.post-title { font-size: 36px; }

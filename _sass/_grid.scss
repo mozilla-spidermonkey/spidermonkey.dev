@@ -1,0 +1,15 @@
+.g-row {
+  @media (min-width: $bp-large-tablet) {
+    display: flex;
+    flex-direction: row;
+    .g-col-3 {
+      flex: 0 0 percentage(3/12);
+    }
+    .g-col-8 {
+      flex: 0 0 percentage(8/12);
+    }
+    .g-col-9 {
+      flex: 0 0 percentage(9/12);
+    }
+  }
+}

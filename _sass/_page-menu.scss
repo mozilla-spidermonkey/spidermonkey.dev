@@ -1,0 +1,108 @@
+$svg-height: 30;
+
+.skip-menu {
+  opacity: 0;
+  position: absolute;
+  right: 84px;
+  top: 10px;
+  z-index: 10;
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.page-menu {
+  font-size: 18px;
+  a {
+    font-family: ZillaSlab-Regular;
+    text-transform: lowercase;
+  }
+  text-align: end;
+  width: 100%;
+  &-link {
+  }
+
+  $margin-top: 15px;
+  margin-top: $margin-top;
+  @media (min-width: $bp-tablet) {
+    $margin-tablet-top: 74px;
+    margin-top: $margin-tablet-top;
+  }
+
+  /* styles for opening/closing menu */
+  .menu-toggle:focus + .menu,
+  .menu:hover {
+    display: block;
+    border: 1px solid var(--color-primary);
+  }
+
+  @media (min-width: $bp-tablet) {
+    .menu:hover {
+      border:0px;
+      display: flex;
+    }
+  }
+  /* end styles */
+
+  .menu {
+    background: var(--color-bg);
+    list-style-type: none;
+    margin: ($svg-height + $margin-top) 20px 10px 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+    overflow: hidden;
+    text-align: start;
+    @media (min-width: $bp-tablet) {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      margin: 1em 0;
+      position: relative;
+      overflow: visible;
+      width: 100%;
+    }
+    &-toggle {
+      position: relative;
+      z-index: 10;
+      display: inline-block;
+      span {
+        display: block;
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+      @media (min-width: $bp-tablet) {
+        display: none;
+      }
+    }
+    &-item {
+      display: block;
+      @media (min-width: $bp-tablet) {
+        &:not(:last-child) {
+          border-right: 1px solid var(--color-primary);
+        }
+      }
+    }
+    &-link {
+      color: var(--color-link);
+      cursor: pointer;
+      display: block;
+      flex: none;
+      min-width: 50px;
+      padding: 10px 20px;
+      text-decoration: none;
+      &:hover,
+      &:focus,
+      &.active {
+        color: var(--color-bg);
+        background-color: var(--color-primary);
+        text-decoration: none;
+      }
+      @media (min-width: $bp-tablet) {
+        padding: 0px 10px;
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 6 (Firefox 80-81)"
+author: SpiderMonkey Team
 date:   2020-08-28 17:00:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 80 and 81 Nightly release cycles. If you like these newsletters, you may also enjoy Yulia's [Compiler Compiler live stream](https://developer.mozilla.com/events/compiler-compiler-yulia-startsev/).

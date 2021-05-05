@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    {%- seo -%}
+    {%- feed_meta -%}
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="/favicon.ico">
+    <link rel=”mask-icon” href=”mask-icon.svg” color=”#000000">
+    <link rel="stylesheet" href="{{ '/assets/css/normalize.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url}}">
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/hybrid.min.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <link rel="preload" href="/assets/fonts/ZillaSlab-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/pt-sans/PTS55F-webfont.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+  </head>
+  <body class="no-js">
+    {% include header.html %}
+    <main class="container">
+    <section class="main-content">
+    <div class="g-row">
+      <div class="g-col-9">
+      {{ content }}
+      </div>
+    </div>
+    </section>
+    </main>
+    {% include footer.html %}
+  </body>
+</html>

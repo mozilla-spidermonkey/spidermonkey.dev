@@ -5,4 +5,5 @@ _site/
 .bundle/
 .ruby-version
 vendor/
+.DS_Store
 *~

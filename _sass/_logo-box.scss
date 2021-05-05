@@ -1,0 +1,59 @@
+.logo-box {
+  $mobile-mt: 1.5em;
+  $small-tab-mt: 4.95em;
+  $large-tab-mt: 4.2em;
+  line-height: 0px;
+  flex-shrink: 0;
+  z-index: 3;
+  padding-top: $mobile-mt;
+  a {
+    text-decoration: none;
+    &:hover {
+      background-color: transparent;
+    }
+  }
+  .large {
+    display: none;
+  }
+  .small {
+    display: block;
+    width: 100px;
+  }
+  @media (min-width: $bp-tablet) {
+    padding-top: $small-tab-mt;
+    .large {
+      display: block;
+      width: 300px;
+    }
+    .small {
+      display: none;
+    }
+  }
+  @media (min-width: $bp-large-tablet) {
+    padding-top: $large-tab-mt;
+    .large {
+      width: 400px;
+    }
+  }
+}
+
+/* Programmable Logo Styles */
+.spidermonkey-circle {
+  fill: var(--color-primary);
+}
+
+.spidermonkey-logo {
+  fill: var(--color-primary);
+  fill-opacity:1;
+  stroke:none
+}
+
+.spidermonkey-text {
+  font-size:17.6389px;
+  font-family: ZillaSlab-regular;
+  fill: var(--color-primary);
+}
+
+.spidermonkey-small {
+  fill: var(--color-bg);
+}

@@ -1,0 +1,59 @@
+// Colors #ffc752 #1b143b;
+
+
+// Dark mode.
+:root {
+  --color-primary: #ffd681;
+  --color-dim-primary: #8f8d8d;
+  --color-dim-bg: #201b37;
+  --color-text: #ffd681;
+  --color-link: #ffd681;
+  --color-bg: #110b2b;
+  --color-logo-full: #ffd681;
+  --color-logo-1: #110b2b;
+  --color-logo-2: #ffd681;
+}
+
+// Light mode
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-primary: black;
+    --color-dim-primary: #696969;
+    --color-dim-bg: #fafafa;
+    --color-link: #444;
+    --color-bg: white;
+    --color-logo-full: black;
+    --color-logo-1: black;
+    --color-logo-2: white;
+  }
+}
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 550;
+
+// Spacing
+$grid-gutter: 40px;
+$spacing-text: 40px;
+
+$footer-line-height: 32px;
+$footer-icon-width: 36px;
+// Breakpoints
+$bp-tablet: 680px;
+$bp-large-tablet: 920px;
+$bp-desktop: 1200px;
+
+// Tags
+$tag-tests: #017e78;
+$tag-spec: #AB6700;
+$tag-presented: #a63446;
+
+@font-face {
+  font-family: ZillaSlab-Regular;
+  src: url("/assets/fonts/ZillaSlab-Regular.ttf");
+}
+@font-face {
+  font-family: PT-Sans-S55;
+  src: url("/assets/fonts/pt-sans/PTS55F-webfont.woff");
+}

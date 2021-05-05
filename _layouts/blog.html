@@ -1,0 +1,64 @@
+---
+layout: default
+---
+
+<div>
+  {%- if page.title -%}
+    <h1 class="blog-heading">Blog</h1>
+  {%- endif -%}
+
+  {{ content }}
+
+
+  {% if site.paginate %}
+    {% assign posts = paginator.posts %}
+  {% else %}
+    {% assign posts = site.posts %}
+  {% endif %}
+
+
+  {%- if posts.size > 0 -%}
+    <ul class="blog-list">
+      {%- assign date_format = "%b %-d, %Y" -%}
+      {%- for post in posts -%}
+      <li class="blog-list__item">
+        <div class="g-row">
+          <h3 class="g-col-8 blog-list__item-title">
+            <a class="blog-list__item-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          <span class="blog-list__item-meta">{{ post.date | date: date_format }}</span>
+        </div>
+        {%- if post.author -%}
+
+          <div class="blog-list__item-author">by {{ post.author }}</div>
+        {%- endif -%}
+        <div class="blog-list__item-excerpt">
+          {{ post.excerpt }}
+        </div>
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    {% if site.paginate %}
+      <div class="pager">
+        <ul class="pagination">
+        {%- if paginator.previous_page %}
+          <li><a href="{{ paginator.previous_page_path | relative_url }}" class="previous-page">{{ paginator.previous_page }}</a></li>
+        {%- else %}
+          <li><div class="pager-edge">•</div></li>
+        {%- endif %}
+          <li><div class="current-page">{{ paginator.page }}</div></li>
+        {%- if paginator.next_page %}
+          <li><a href="{{ paginator.next_page_path | relative_url }}" class="next-page">{{ paginator.next_page }}</a></li>
+        {%- else %}
+          <li><div class="pager-edge">•</div></li>
+        {%- endif %}
+        </ul>
+      </div>
+    {%- endif %}
+
+  {%- endif -%}
+
+</div>

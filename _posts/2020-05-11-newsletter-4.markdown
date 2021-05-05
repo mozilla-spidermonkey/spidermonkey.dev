@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter 4 (Firefox 76-77)"
+author: SpiderMonkey Team
 date:   2020-05-11 18:00:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 76 and 77 Nightly cycles.

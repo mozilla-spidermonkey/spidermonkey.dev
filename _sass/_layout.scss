@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-primary);
+  font-family: PT-Sans-S55;
+  font-size: 16px;
+  font-weight: $font-weight-regular;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: ZillaSlab-Regular;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 0 ($grid-gutter / 2);
+  width: 100%;
+}
+
+.hidden {
+  display:none;
+}
+
+@media (min-width: $bp-tablet) {
+  .container {
+    padding: 0 45px;
+  }
+}
