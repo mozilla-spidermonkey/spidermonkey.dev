@@ -1,6 +1,6 @@
 ---
 layout: default
-title: docs
+title: Docs
 permalink: /docs/
 ---
 

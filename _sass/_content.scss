@@ -8,8 +8,8 @@
   h5,
   h6 {
     color: var(--color-primary);
-    font-weight: $font-weight-semi-bold;
     font-family: ZillaSlab-Regular;
+    font-weight: $font-weight-semi-bold;
   }
   h2 {
     background-color: var(--color-primary);
@@ -26,7 +26,7 @@
   }
   ul,
   p {
-    margin: 0 0 $spacing-paragraph;
+    margin: 0 0 $spacing-text;
   }
   @media (min-width: $bp-tablet) {
     padding: 0px 0;
@@ -49,10 +49,3 @@ a {
   }
 }
 
-.text-end {
-  text-align: end;
-}
-
-.text-center {
-  text-align: center;
-}

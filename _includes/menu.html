@@ -4,7 +4,7 @@
 <a href="#content" class="skip-menu">
   skip menu
 </a>
-<a href="#menu" class="menu-toggle" tabindex="-1">
+<a class="menu-toggle" tabindex="-1">
   <span class="menu-toggle-text">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
       <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -15,11 +15,11 @@
 </a>
 <ul class="menu" id="menu">
   {%- for path in page_paths -%}
-  {%- assign my_page = site.pages | where: "path", path | first -%}
-  {%- if my_page.title -%}
+  {%- assign current_page = site.pages | where: "path", path | first -%}
+  {%- if current_page.title -%}
   <li class="menu-item">
-    <a href="{{ my_page.url | relative_url }}" class="menu-link{% if page.url == my_page.url %} active{% endif %}">
-      {{ my_page.title | escape }}
+    <a href="{{ current_page.url | relative_url }}" class="menu-link{% if page.url == current_page.url %} active{% endif %}">
+      {{ current_page.title | escape }}
     </a>
   </li>
   {%- endif -%}

@@ -30,21 +30,12 @@ h1 {
   width: 100%;
 }
 
-.page-title {
-  font-family: ZillaSlab-regular, sans-serif;
-  font-size: 36px;
-  line-height: 54px;
-  margin: 50px 0 0;
+.hidden {
+  display:none;
 }
 
 @media (min-width: $bp-tablet) {
   .container {
     padding: 0 45px;
-  }
-
-  .page-title {
-    font-size: 54px;
-    line-height: 81px;
-    text-align: end;
   }
 }

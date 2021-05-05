@@ -1,6 +1,6 @@
 ---
 layout: default
-title: contribute
+title: Contribute
 permalink: /contribute/
 ---
 
@@ -32,3 +32,14 @@ Discourse category by email for a similar experience. The archives should
 continue to remain available at:
 * [mozilla.dev.tech.js-engine](https://groups.google.com/g/mozilla.dev.tech.js-engine)
 * [mozilla.dev.tech.js-engine.internals](https://groups.google.com/g/mozilla.dev.tech.js-engine.internals)
+
+## Community Participation Guidelines
+
+---
+
+For more details, please read the
+[Mozilla Community Participation Guidelines](https://www.mozilla.org/about/governance/policies/participation/).
+
+### How to Report
+
+For more information on how to report violations of the Community Participation Guidelines, please read our [How to Report](https://www.mozilla.org/about/governance/policies/participation/reporting/) page.

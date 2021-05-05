@@ -1,8 +1,4 @@
-$svg-height: 24;
-
-@mixin rotateSubmenuToggle() {
-  transform: rotateX(180deg);
-}
+$svg-height: 30;
 
 .skip-menu {
   opacity: 0;
@@ -18,24 +14,40 @@ $svg-height: 24;
 .page-menu {
   font-size: 18px;
   a {
-    font-family: ZillaSlab-regular, sans-serif;
+    font-family: ZillaSlab-Regular;
+    text-transform: lowercase;
   }
   text-align: end;
   width: 100%;
   &-link {
   }
 
-  $mobile-mt: 15px;
-  margin-top: $mobile-mt;
+  $margin-top: 15px;
+  margin-top: $margin-top;
   @media (min-width: $bp-tablet) {
-    $mt: 73.6px;
-    margin-top: $mt;
+    $margin-tablet-top: 74px;
+    margin-top: $margin-tablet-top;
   }
+
+  /* styles for opening/closing menu */
+  .menu-toggle:focus + .menu,
+  .menu:hover {
+    display: block;
+    border: 1px solid var(--color-primary);
+  }
+
+  @media (min-width: $bp-tablet) {
+    .menu:hover {
+      border:0px;
+      display: flex;
+    }
+  }
+  /* end styles */
 
   .menu {
     background: var(--color-bg);
     list-style-type: none;
-    margin: ($svg-height + $mobile-mt) 20px 10px 0;
+    margin: ($svg-height + $margin-top) 20px 10px 0;
     padding: 0;
     position: absolute;
     right: 0;
@@ -43,10 +55,6 @@ $svg-height: 24;
     display: none;
     overflow: hidden;
     text-align: start;
-    &.open {
-      display: block;
-      border: 1px solid var(--color-primary);
-    }
     @media (min-width: $bp-tablet) {
       display: flex;
       flex-direction: row;
@@ -72,14 +80,6 @@ $svg-height: 24;
     &-item {
       display: block;
       @media (min-width: $bp-tablet) {
-        &.has-submenu {
-          display: flex;
-          flex-wrap: wrap;
-        }
-        &:hover .submenu {
-          max-height: none;
-          overflow: visible;
-        }
         &:not(:last-child) {
           border-right: 1px solid var(--color-primary);
         }
@@ -93,21 +93,11 @@ $svg-height: 24;
       min-width: 50px;
       padding: 10px 20px;
       text-decoration: none;
-      &:focus {
-        ~.submenu-toggle {
-          @include rotateSubmenuToggle();
-        }
-        ~.submenu {
-          max-height: none;
-          overflow: visible;
-        }
-      }
       &:hover,
       &:focus,
       &.active {
         color: var(--color-bg);
         background-color: var(--color-primary);
-        font-weight: $font-weight-semi-bold;
         text-decoration: none;
       }
       @media (min-width: $bp-tablet) {

@@ -1,15 +1,17 @@
 .logo-box {
-  a {
-    text-decoration: none;
-    &:hover {
-      background-color: var(--color-bg);
-    }
-  }
+  $mobile-mt: 1.5em;
+  $small-tab-mt: 4.95em;
+  $large-tab-mt: 4.2em;
   line-height: 0px;
   flex-shrink: 0;
   z-index: 3;
-  padding-top: 1.5em;
-  text-decoration: none;
+  padding-top: $mobile-mt;
+  a {
+    text-decoration: none;
+    &:hover {
+      background-color: transparent;
+    }
+  }
   .large {
     display: none;
   }
@@ -18,7 +20,7 @@
     width: 100px;
   }
   @media (min-width: $bp-tablet) {
-    padding-top: 4.85em;
+    padding-top: $small-tab-mt;
     .large {
       display: block;
       width: 300px;
@@ -28,12 +30,18 @@
     }
   }
   @media (min-width: $bp-large-tablet) {
-    padding-top: 4.2em;
+    padding-top: $large-tab-mt;
     .large {
       width: 400px;
     }
   }
 }
+
+/* Programmable Logo Styles */
+.spidermonkey-circle {
+  fill: var(--color-primary);
+}
+
 .spidermonkey-logo {
   fill: var(--color-primary);
   fill-opacity:1;
@@ -46,9 +54,6 @@
   fill: var(--color-primary);
 }
 
-.spidermonkey-circle {
-  fill: var(--color-primary);
-}
 .spidermonkey-small {
   fill: var(--color-bg);
 }
