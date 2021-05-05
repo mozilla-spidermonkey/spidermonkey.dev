@@ -1,11 +1,15 @@
 title: SpiderMonkey JavaScript/WebAssembly Engine
 description: SpiderMonkey is Mozilla's JavaScript and WebAssembly Engine, used in Firefox, Servo and various other projects. It is written in C++ and Rust.
 twitter_username: spidermonkeyjs
+twitter:
+  username: spidermonkeyjs
+  card: summary_large_image
+
 defaults:
   - scope:
       path: ""
     values:
-      image: /assets/img/twitter-dark.png
+      image: /assets/img/twitter-dark-large.png?1
 
 baseurl: "/"
 url: "https://spidermonkey.dev"
