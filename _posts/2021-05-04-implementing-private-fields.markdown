@@ -271,7 +271,7 @@ let proxy = new Proxy(obj3, handler);
 new Stamper(proxy)
 
 Stamper.getX(proxy) // => "stamped"
-Stamper.getX(foo)   // TypeError, private field is stamped
+Stamper.getX(obj3)  // TypeError, private field is stamped
                     // onto the Proxy Not the target!
 ```
 
