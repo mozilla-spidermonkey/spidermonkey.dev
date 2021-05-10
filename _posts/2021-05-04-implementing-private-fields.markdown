@@ -30,20 +30,20 @@ class A {
   #x = 10; // Private field
   y = 12; // Public Field
 }
-sf;
+
 var a = new A();
 a.y; // Accessing public field y: OK
 a.#x; // Syntax error: reference to undeclared private field
 ```
 
-Even various other tools that JavaScript gives you for interrogating objects are prevented from accessing private fields (i.e. `Object.getOwnProperty{Symbols,Names}` don't list private fields; there's no way to use `Reflect.get` to access them).
+Even various other tools that JavaScript gives you for interrogating objects are prevented from accessing private fields (e.g. `Object.getOwnProperty{Symbols,Names}` don't list private fields; there's no way to use `Reflect.get` to access them).
 
 [process]: https://tc39.es/process-document/
 [tc39]: https://tc39.es/
 
 ## A Feature Three Ways
 
-When talking about a feature in JavaScript, there are often three different aspects in play: The mental model, the specification, and the implementation.
+When talking about a feature in JavaScript, there are often three different aspects in play: the mental model, the specification, and the implementation.
 
 The mental model provides the high level thinking that we expect programmers to use mostly. The specification in turn provides the detail of the semantics required by the feature. The implementation can look wildly different from the specification text, so long as the specification semantics are maintained.
 
@@ -55,7 +55,7 @@ We can look at private fields using these three aspects:
 
 The most basic mental model one can have for private fields is what it says on the tin: [fields][fieldsmdn], but private. Now, JS fields become properties on objects, so the mental model is perhaps 'properties that can't be accessed from outside the class'.
 
-However, when we encounter proxies, this mental model breaks down a bit; trying to specify the semantics for 'hidden properties' and proxies [is challenging][weakmapreasoning] (what happens when a Proxy is trying to provide access control to a properties, if you aren't supposed to be able see private fields with Proxies? Can subclasses access private fields? Do private fields participate in prototype inheritance?) . In order to preserve the desired privacy properties an alternative mental model became the way the committee thinks about private fields.
+However, when we encounter proxies, this mental model breaks down a bit; trying to specify the semantics for 'hidden properties' and proxies [is challenging][weakmapreasoning] (what happens when a Proxy is trying to provide access control to properties, if you aren't supposed to be able see private fields with Proxies? Can subclasses access private fields? Do private fields participate in prototype inheritance?) . In order to preserve the desired privacy properties an alternative mental model became the way the committee thinks about private fields.
 
 This alternative model is called the 'WeakMap' model. In this mental model you imagine that each class has a hidden weak map associated with each private field, such that you could hypothetically ['desugar'](https://en.wikipedia.org/wiki/Syntactic_sugar)
 
@@ -250,13 +250,13 @@ Private fields have slightly different semantics than properties however. They a
 
 1. Accessing an a property on an object that doesn't have it returns `undefined`. Private fields are specified to throw a `TypeError`, as a result of the [`PrivateFieldGet` algorithm][privatefieldget].
 2. Setting a property on an object that doesn't have it simply adds the property. Private fields will throw a `TypeError` in [`PrivateFieldSet`][privatefieldset].
-3. Adding a private field to an object that already has that field also throws a `TypeError` in [`PrivateFieldAdd`][privatefieldadd]. See "The Constructor Override Trick" below for how this can happen.
+3. Adding a private field to an object that already has that field also throws a `TypeError` in [`PrivateFieldAdd`][privatefieldadd]. See "The Constructor Override Trick" above for how this can happen.
 
 To handle the different semantics, we modified the bytecode emission for private field accesses. We added a new bytecode op, `CheckPrivateField` which verifies an object has the correct state for a given private field. This means throwing an exception if the property is missing or present, as appropriate for Get/Set or Add. `CheckPrivateField` is emitted just before using the regular 'computed property name' path (the one used for `A[someKey]`).
 
 `CheckPrivateField` is designed such that we can easily implement an [inline cache][ic] using [CacheIR][cacheir]. Since we are storing private fields as properties, we can use the Shape of an object as a guard, and simply return the appropriate boolean value. The Shape of an object in SpiderMonkey determines what properties it has, and where they are located in the storage for that object. Objects that have the same shape are guaranteed to have the same properties, and it's a perfect check for an IC for `CheckPrivateField`.
 
-Other modifications we made to make to the engine include excluding private fields from the property enumeration protocol, and allowing the extension of sealed objects if we are adding private field.
+Other modifications we made to make to the engine include omitting private fields from the property enumeration protocol, and allowing the extension of sealed objects if we are adding private field.
 
 [ic]: https://www.mgaudet.ca/technical/2018/6/5/an-inline-cache-isnt-just-a-cache
 [cacheir]: https://jandemooij.nl/blog/2017/01/25/cacheir/
@@ -275,7 +275,7 @@ Stamper.getX(obj3)  // TypeError, private field is stamped
                     // onto the Proxy Not the target!
 ```
 
-I definitely found this surprising initially. The reason I found this surprising was I had expected that, like other operations, the addition of a private field would tunnel through the proxy to the target. However, once I was able to internalize the WeakMap mental model, I was able to understand this example much better. The trick is that in the WeakMap model, it is the `Proxy`, not the target object used as the key in the `#x` WeakMap.
+I definitely found this surprising initially. The reason I found this surprising was I had expected that, like other operations, the addition of a private field would tunnel through the proxy to the target. However, once I was able to internalize the WeakMap mental model, I was able to understand this example much better. The trick is that in the WeakMap model, it is the `Proxy`, not the target object, used as the key in the `#x` WeakMap.
 
 These semantics presented a challenge to our implementation choice to model private fields as hidden properties however, as SpiderMonkey's Proxies are highly specialized objects that do not have room for arbitrary properties. In order to support this case, we added a new reserved slot for an 'expando' object. The expando is an object allocated lazily that acts as the holder for dynamically added properties on the proxy. This pattern is used already for DOM objects, which are typically implemented as C++ objects with no room for extra properties. So if you write `document.foo = "hi"`, this allocates an expando object for `document`, and puts the `foo` property and value in there instead. Returning to private fields, when `#x` is accessed on a Proxy, the proxy code knows to go and look in the expando object for that property.
 
@@ -287,7 +287,7 @@ At the end, I am fairly happy with the choices made for our implementation of Pr
 
 ## Acknowledgements
 
-I have to thank, again, André Bargull, who provided the first set of patches and laid down an excellent trail for me to follow in. His work made finishing private fields much easier, as he'd already put a lot of thought into decision making.
+I have to thank, again, André Bargull, who provided the first set of patches and laid down an excellent trail for me to follow. His work made finishing private fields much easier, as he'd already put a lot of thought into decision making.
 
 Jason Orendorff has been an excellent and patient mentor as I have worked through this implementation, including two separate implementations of the private field bytecode, as well as two separate implementations of proxy support.
 
