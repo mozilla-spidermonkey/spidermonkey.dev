@@ -18,11 +18,11 @@ class Scalar {
   #length = 0;
 
   add(s) {
-    if (!(#x in s)) {
+    if (!(#length in s)) {
       throw new TypeError("Expected an instance of Scalar");
     }
 
-    this.#x += s.#x;
+    this.#length += s.#length;
   }
 }
 ```
