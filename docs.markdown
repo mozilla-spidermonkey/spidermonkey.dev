@@ -53,7 +53,8 @@ permalink: /docs/
 * [Just-in-Time Value specialization](https://ieeexplore.ieee.org/document/6495006), _Igor Costa, Péricles Alves, Henrique Nazaré Santos, Fernando Magno Quintão Pereira_, CGO (2013) 🎓 [📄](https://homepages.dcc.ufmg.br/~fernando/publications/papers/CGO13_igor.pdf)
 * [Recover Instructions](https://nbp.github.io/slides/RInstruction/), _Nicolas B. Pierron_ (2014)
 * [Optimizing Away](https://blog.mozilla.org/javascript/2014/07/15/ionmonkey-optimizing-away/), _Nicolas B. Pierron_ (2014)
-
+* [Evil on your behalf](https://blog.mozilla.org/javascript/2016/07/05/ionmonkey-evil-on-your-behalf/), _Nicolas B. Pierron_ (2016)
+* [Branch Pruning](https://nbp.github.io/slides/VMM/BranchPruning/), _Nicolas B. Pierron_ (2016)
 
 
 ## JaegerMonkey
