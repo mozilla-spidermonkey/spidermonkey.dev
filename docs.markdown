@@ -31,6 +31,8 @@ permalink: /docs/
 
 # The Monkeys
 
+John Howard created some amazing images for SpiderMonkey.
+
 ## BaldrMonkey
 
 ---
@@ -42,6 +44,7 @@ permalink: /docs/
 * [Calls between JavaScript and WebAssembly are finally fast 🎉](https://hacks.mozilla.org/2018/10/calls-between-javascript-and-webassembly-are-finally-fast-%f0%9f%8e%89/), Lin Clark (2018) (fast calls between JIT and WebAssembly in both ways)
 * [Making WebAssembly even faster: Firefox’s new streaming and tiering compiler](https://hacks.mozilla.org/2018/01/making-webassembly-even-faster-firefoxs-new-streaming-and-tiering-compiler/), _Lin Clark_ (2018)
 * [firefox's low-latency webassembly compiler](https://wingolog.org/archives/2020/03/25/firefoxs-low-latency-webassembly-compiler), _Andy Wingo_ (2020)
+* [John Howard's notes on the image](http://monkeyink.com/ink/blog/archives/2016/08/_this_is_a_fun.php)
 
 ## IonMonkey
 
@@ -55,6 +58,7 @@ permalink: /docs/
 * [Optimizing Away](https://blog.mozilla.org/javascript/2014/07/15/ionmonkey-optimizing-away/), _Nicolas B. Pierron_ (2014)
 * [Evil on your behalf](https://blog.mozilla.org/javascript/2016/07/05/ionmonkey-evil-on-your-behalf/), _Nicolas B. Pierron_ (2016)
 * [Branch Pruning](https://nbp.github.io/slides/VMM/BranchPruning/), _Nicolas B. Pierron_ (2016)
+* [John Howard's posters archive, and a bit about Ion Monkey](http://monkeyink.com/ink/?func=posters&bit=posters5)
 
 
 ## JaegerMonkey
