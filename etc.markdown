@@ -8,6 +8,8 @@ permalink: /etc/
 
 ## Remote Work in Style
 
+Based on the posters by John Howard for SpiderMonkey, you can now Zoom in style.
+
 ---
 
 <a href="/assets/img/baldr-background.png" download>
