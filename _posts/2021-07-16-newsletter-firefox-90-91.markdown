@@ -24,7 +24,7 @@ Firefox/SpiderMonkey 91 will become the next ESR branch and will remain supporte
 
 ### 🌍 Unified Intl implementation 
 
-Work is underway to [unify](https://bugzilla.mozilla.org/show_bug.cgi?id=1686965) the Intl (Internalization) code in SpiderMonkey and the rest of Gecko as a shared `mozilla::intl` component. This results in less code duplication and will make it easier to [migrate](https://bugzilla.mozilla.org/show_bug.cgi?id=1713916) from the ICU library to [ICU4X](https://github.com/unicode-org/icu4x) in the future. The features and behaviour of this code continue to follow the [ECMA-402](https://tc39.es/ecma402/) specification.
+Work is underway to [unify](https://bugzilla.mozilla.org/show_bug.cgi?id=1686965) the Intl (Internationalization) code in SpiderMonkey and the rest of Gecko as a shared `mozilla::intl` component. This results in less code duplication and will make it easier to [migrate](https://bugzilla.mozilla.org/show_bug.cgi?id=1713916) from the ICU library to [ICU4X](https://github.com/unicode-org/icu4x) in the future. The features and behaviour of this code continue to follow the [ECMA-402](https://tc39.es/ecma402/) specification.
 
 The past months [number formatting](https://bugzilla.mozilla.org/show_bug.cgi?id=1701695), [PluralRules](https://bugzilla.mozilla.org/show_bug.cgi?id=1704509) and [DateTimeFormat](https://bugzilla.mozilla.org/show_bug.cgi?id=1711902) have been ported to the new `mozilla::intl` code module.
 
