@@ -41,5 +41,3 @@ title: "My Title"
 date: 2021-05-03 09:30:00 +0700
 ---
 ```
-
-- **Important**: Note if that date is in the future, by default Jekyll will not include the post.
