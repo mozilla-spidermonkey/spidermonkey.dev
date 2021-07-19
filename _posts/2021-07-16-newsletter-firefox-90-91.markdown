@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter (Firefox 90-91)"
-date:   2021-07-16 19:00:00 +0100
+date:   2021-07-19 16:30:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 90 and 91 Nightly release cycles.
 
