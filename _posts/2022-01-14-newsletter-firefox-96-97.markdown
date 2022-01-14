@@ -14,7 +14,6 @@ SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter g
 * Contributor Nicolò Ribaudo [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1730843) the [Records/tuples proposal](https://github.com/tc39/proposal-record-tuple) (disabled by default).
 * Contributor Jake Champion [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1566146) the [New Set methods](https://github.com/tc39/proposal-set-methods) proposal (disabled by default).
 * Contributor Jonatan Klemets [finished](https://bugzilla.mozilla.org/show_bug.cgi?id=1736060) the implementation of [Import Assertions](https://github.com/tc39/proposal-import-assertions).
-* Contributors Rolf Glomsrud and Sigurd Sesta [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1739648) [Array grouping](https://github.com/tc39/proposal-array-grouping) (disabled by default).
 
 
 ### ⚡ WebAssembly
