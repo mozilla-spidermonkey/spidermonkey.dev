@@ -13,7 +13,7 @@ A successful proposal will usually have the following features:
 
 ### Review Process for new Architectures
 
-Once we have your filled out proposal, the SpiderMonkey team will review it for any high level concerns, and consult internally about accepting this architecture. One of two things will happen: we will either give you a “go ahead” to start the work, or we will respond with a conclusion and reason why it would not be accepted. This will save you work and open an early communication channel.
+Once we have your filled out proposal, the SpiderMonkey team will review it for any high level concerns, and consult internally about accepting this architecture. One of two things will happen: we will either give you a “go ahead” to start the work, or we will respond with a negative conclusion and reason why it would not be accepted. This will save you work and open an early communication channel.
 
 If you get the “go ahead”, you will likely start on your patch. You can ask questions in the #spidermonkey channel if you run into trouble. Once your patch is finished, designated reviewers will *lightly* check your work. This will not be a full review, so make sure you have a partner who can fully review your work as well as a designated SpiderMonkey engineer.
 
@@ -34,8 +34,8 @@ Then we will begin a removal process. The process looks like this:
 3. If the bug cannot be resolved, or is not resolved within 3 months (time limit negotiable), the port will be flagged as a candidate for removal.
 4. A patch will be created to remove the port, reviewed, and merged.
 
-To prevent having a port removed, make sure to follow bugzilla and work with SpiderMonkey engineers on any issues, and have a running CI to catch errors early. Sometimes, we will still have to make a decision, but this will hopefully be rare.
+To prevent having a port removed, make sure to follow bugzilla and work with SpiderMonkey engineers on any issues, and have a running CI to catch errors early. Sometimes, we will still have to make a decision to remove a port, but this will hopefully be rare.
 
-Any questions about this process can be asked in the #spidermonkey:mozilla.org matrix channel.
+Any questions about this process can be asked in the [#spidermonkey:mozilla.org](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org) matrix channel.
 
 

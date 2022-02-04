@@ -32,6 +32,7 @@ This could be about data representations, flag bits, atomics, special registers,
 Relevant information may be:
 * A proof of concept / prototype demonstrating the complexity of the port
 * A detailed analysis of the SpiderMonkey codebase and target architecture.
+* Whether the port is similar to existing third-party SpiderMonkey ports.
 
 < your answer here >
 
