@@ -23,7 +23,7 @@ This could be about data representations, flag bits, atomics, special registers,
 
 < your answer here >
 
-### Do you expect that changes will be needed to the JITs to support this architecture?
+### Do you expect that changes will be needed to the design or architecture of the JITs to support this architecture? Or would you be ok without JIT support?
 
 < your answer here >
 
