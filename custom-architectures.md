@@ -4,7 +4,7 @@ SpiderMonkey supports a number of architectures as part of broadly distributing 
 there may be an architecture that is not supported, on which you may wish to run SpiderMonkey.
 
 In some cases, it will be easier to maintain a fork of SpiderMonkey. However if you have a broad use
-case that furthers the mission of SpiderMonkey and Firefox, we have a series of questions for you to read and answer before embarking on the the implementation. The template for proposing a new architecture can be found [here](custom-architecture-questionnaire.md).
+case that furthers the mission of SpiderMonkey and Firefox, we have a series of questions for you to read and answer before embarking on the the implementation. The template for proposing a new architecture can be found [here](./port-proposal-template.md).
 
 A successful proposal will usually have the following features:
 * It will be minimally invasive
