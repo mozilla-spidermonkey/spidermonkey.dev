@@ -21,7 +21,7 @@ Once the review is finished with at least 1 SpiderMonkey engineer, and 1 externa
 
 ### Removal Process of Architectures
 
-In some cases, we need to drop support for an architecture. If you're custom embedding relies on a custom community maintained architecture, it is important to keep an eye on the support of that architecture. If we find that an integrated custom architecture is:
+In some cases, we need to drop support for an architecture. If your custom embedding relies on a custom community maintained architecture, it is important to keep an eye on the support of that architecture. If we find that an integrated custom architecture is:
 
 * unmaintained
 * causing issues with tier-1 support,
