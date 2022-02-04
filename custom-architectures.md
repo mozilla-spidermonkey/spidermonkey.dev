@@ -32,8 +32,6 @@ Then we will begin a removal process. The process looks like this:
 1. A bug will be opened on bugzilla, cc'ing contact persons, if known.
 2. The proposed removal will be announced in the [SpiderMonkey Newsletter](https://spidermonkey.dev/), and on the [SpiderMonkey Discourse](https://discourse.mozilla.org/c/spidermonkey/551).
 3. If the bug cannot be resolved, or is not resolved within 3 months (time limit negotiable), the port will be flagged as a candidate for removal.
-eg an "#error" in the source code that has to be removed to make the port compile, or a MOZ_CRASH on startup, there are probably other solutions
-spidermonkey.dev/comments list the port as "unmaintained”
 4. A patch will be created to remove the port, reviewed, and merged
 
 To prevent having a port removed, make sure to follow bugzilla and work with SpiderMonkey engineers on any issues, and have a running CI to catch errors early. Sometimes, we will still have to make a decision, but this will hopefully be rare.
