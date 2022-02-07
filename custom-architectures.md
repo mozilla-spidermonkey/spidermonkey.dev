@@ -4,7 +4,7 @@ SpiderMonkey supports a number of architectures as part of broadly distributing 
 there may be an architecture that is not supported, on which you may wish to run SpiderMonkey.
 
 In some cases, it will be easier to maintain a fork of SpiderMonkey. However if you have a broad use
-case that furthers the mission of SpiderMonkey and Firefox, we have a series of questions for you to read and answer before embarking on the the implementation. The template for proposing a new architecture can be found [here](./port-proposal-template.md).
+case that furthers the mission of SpiderMonkey and Firefox, we have a series of questions for you to read and answer before embarking on the implementation. The template for proposing a new architecture can be found [here](./port-proposal-template.md).
 
 A successful proposal will usually have the following features:
 * It will be minimally invasive
@@ -30,8 +30,8 @@ In some cases, we need to drop support for an architecture. If your custom embed
 Then we will begin a removal process. The process looks like this:
 
 1. A bug will be opened on bugzilla, cc'ing contact persons, if known.
-2. The proposed removal will be announced in the [SpiderMonkey Newsletter](https://spidermonkey.dev/), and on the [SpiderMonkey Discourse](https://discourse.mozilla.org/c/spidermonkey/551).
-3. If the bug cannot be resolved, or is not resolved within 3 months (time limit negotiable), the port will be flagged as a candidate for removal.
+2. If the bug cannot be resolved, or is not resolved within 3 months (time limit negotiable), the port will be flagged as a candidate for removal.
+3. The proposed removal will be announced in the [SpiderMonkey Newsletter](https://spidermonkey.dev/), and on the [SpiderMonkey Discourse](https://discourse.mozilla.org/c/spidermonkey/551).
 4. A patch will be created to remove the port, reviewed, and merged.
 
 To prevent having a port removed, make sure to follow bugzilla and work with SpiderMonkey engineers on any issues, and have a running CI to catch errors early. Sometimes, we will still have to make a decision to remove a port, but this will hopefully be rare.
