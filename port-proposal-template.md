@@ -2,7 +2,7 @@
 
 This is a template for you to fill out **before** writing a port. If you write a port without filling out this form, please do not be surprised if we reject it.
 
-Once this form is filled, post it on the [spidermonkey discourse](https://discourse.mozilla.org/c/spidermonkey/551) for discussion, or email your contacts on the SpiderMonkey team. 
+Once this form is filled, post it on the [spidermonkey discourse](https://discourse.mozilla.org/c/spidermonkey/551) for discussion, or email it to your contacts on the SpiderMonkey team. 
 
 ## Overall impact of the Port
 
