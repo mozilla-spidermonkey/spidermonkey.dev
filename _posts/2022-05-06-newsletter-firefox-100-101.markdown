@@ -10,7 +10,7 @@ SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter g
 * Wasm [exception handling](https://github.com/WebAssembly/exception-handling/blob/main/proposals/exception-handling/Exceptions.md) has been [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1759217) by default (Firefox 100)
 
 
-### ⚙️Modernizing JS modules
+### ⚙️ Modernizing JS modules
 We're working on improving our implementation of modules. This includes supporting modules in Workers, adding support for Import Maps, and ESM-ification (replacing the JSM module system for Firefox internal JS code with standard ECMAScript modules).
 
 * We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1436400) support for caching module scripts in the bytecode cache.
