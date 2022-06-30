@@ -73,7 +73,7 @@ We've collaborated with the performance team to improve support for external pro
 * We've [imported](https://bugzilla.mozilla.org/show_bug.cgi?id=1769093) the latest version of Test262.
 * We've [improved](https://bugzilla.mozilla.org/show_bug.cgi?id=1771747) tracking and assertions for the GC retained heap size.
 * We've [migrated](https://bugzilla.mozilla.org/show_bug.cgi?id=1770158) our string-to-double code to use the modern double-conversion library instead of our old dtoa.c fork.
-* We've [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1769518) support for `Rooted&lt;Result&lt;V,E>>`.
+* We've [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1769518) support for `Rooted<Result<V,E>>`.
 * We've [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1771315) a command-line argument to the JS shell for setting GC parameters.
-* We've [started](https://bugzilla.mozilla.org/show_bug.cgi?id=1773368) to [remove](https://bugzilla.mozilla.org/show_bug.cgi?id=1773778) typedefs for various GC types. For example, we now use `Rooted&lt;Shape*>` instead of the old `RootedShape` typedef.
+* We've [started](https://bugzilla.mozilla.org/show_bug.cgi?id=1773368) to [remove](https://bugzilla.mozilla.org/show_bug.cgi?id=1773778) typedefs for various GC types. For example, we now use `Rooted<Shape*>` instead of the old `RootedShape` typedef.
 * We've [improved](https://bugzilla.mozilla.org/show_bug.cgi?id=1772894) telemetry for full GCs to be more useful.
