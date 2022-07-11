@@ -93,7 +93,7 @@ function drawChartForPath(logData, pathComponents) {
   drawChart(dates, jsmCount, esmCount);
 }
 
-function drawTableForPath(logData, pathComponents) {
+function drawTable(data) {
   const history = document.getElementById("history");
 
   const table = document.createElement("table");
@@ -137,7 +137,7 @@ function drawTableForPath(logData, pathComponents) {
   thead.append(tr);
 
   let prev = null;
-  for (const item of logData) {
+  for (const item of data) {
     tr = document.createElement("tr");
 
     td = document.createElement("td");
@@ -160,22 +160,19 @@ function drawTableForPath(logData, pathComponents) {
     }
     tr.append(td);
 
-    const jsm = getDataForPath(pathComponents, item, "jsm");
-    const esm = getDataForPath(pathComponents, item, "esm");
-
     td = document.createElement("td");
     td.className = "number";
-    td.append(jsm);
+    td.append(item.jsm);
     tr.append(td);
 
     td = document.createElement("td");
     td.className = "number";
-    td.append(esm);
+    td.append(item.esm);
     tr.append(td);
 
     td = document.createElement("td");
     td.className = "number";
-    td.append(ratio(esm, jsm));
+    td.append(item.ratio);
     tr.append(td);
 
     prev = item.hash;
@@ -184,6 +181,25 @@ function drawTableForPath(logData, pathComponents) {
   }
 
   history.replaceChildren(table);
+}
+
+function drawTableForPath(logData, pathComponents) {
+  const data = [];
+
+  for (const item of logData) {
+    const jsm = getDataForPath(pathComponents, item, "jsm");
+    const esm = getDataForPath(pathComponents, item, "esm");
+
+    data.push({
+      date: item.date,
+      hash: item.hash,
+      jsm,
+      esm,
+      ratio: ratio(esm, jsm)
+    });
+  }
+
+  drawTable(data);
 }
 
 function ratio(esm, jsm) {
