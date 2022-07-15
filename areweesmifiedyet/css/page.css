@@ -108,7 +108,7 @@ h2 + hr {
   margin: 0 10px;
   border: none;
   border-bottom: 1px solid var(--color-primary);
-  width: 100%;
+  width: calc(100% - 20px);
 }
 
 #logo {
