@@ -242,3 +242,22 @@ tbody tr:nth-child(odd) {
   display: block;
   text-align: end;
 }
+
+.c3-line-esmCount, .c3-line-jsmCount {
+  opacity: 0 !important;
+}
+
+.c3-area-esmCount, .c3-area-jsmCount {
+  opacity: 0.5 !important;
+  stroke-width: 1 !important;
+}
+
+.c3-tooltip th {
+  background-color: var(--color-primary) !important;
+  color: var(--color-bg) !important;
+}
+
+.c3-tooltip td {
+  background-color: var(--color-bg) !important;
+  color: var(--color-primary) !important;
+}
