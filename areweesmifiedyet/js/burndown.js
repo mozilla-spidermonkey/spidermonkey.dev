@@ -33,6 +33,38 @@ function drawChart(dates, jsmCount, esmCount) {
       groups: [["jsmCount", "esmCount"]],
       order: null,
     },
+    point: {
+      show: false,
+    },
+    tooltip: {
+      contents: function(d, defaultTitleFormat, defaultValueFormat, color) {
+        return `
+<table class="c3-tooltip">
+  <tbody>
+    <tr>
+      <th colspan="2">${defaultTitleFormat(d[0].x)}</th>
+    </tr>
+    <tr class="c3-tooltip-name--esmCount">
+      <td class="name">
+        <span style="background-color:${color(d[1])}"></span>JSM files
+      </td>
+      <td class="value">${d[1].value}</td>
+    </tr>
+    <tr class="c3-tooltip-name--jsmCount">
+      <td class="name">
+        <span style="background-color:${color(d[0])}"></span>ESM files
+      </td>
+      <td class="value">${d[0].value}</td>
+    </tr>
+    <tr class="c3-tooltip-name--total">
+      <td class="name">Total</td>
+      <td class="value">${d[0].value + d[1].value}</td>
+    </tr>
+  </tbody>
+</table>
+`;
+      },
+    },
     axis: {
       x: {
         type: "timeseries",
@@ -40,6 +72,12 @@ function drawChart(dates, jsmCount, esmCount) {
       }
     },
   });
+
+  // Move the grid for the focused date to the front, to make it rendered
+  // over the graph.
+  const focus = document.querySelector("g.c3-xgrid-focus");
+  console.log(focus);
+  focus.parentNode.parentNode.append(focus.parentNode);
 }
 
 function getNodeForPath(pathComponents, node) {
