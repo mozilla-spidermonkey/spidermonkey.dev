@@ -22,7 +22,6 @@ We're working on improving our implementation of modules. This includes supporti
 * See the AreWeESMifiedYet [website](https://spidermonkey.dev/areweesmifiedyet/) for the status of ESMification.
 * We [modernized](https://bugzilla.mozilla.org/show_bug.cgi?id=1804254) the module implementation to use more native C++ data structures instead of JS objects.
 
-
 ### 💾 Robust Caching
 
 We're working on better (in-memory) caching of JS scripts based on the new Stencil format. This will let us integrate better with other resource caches used in Gecko and might also allow us to potentially cache JIT-related hints.
