@@ -61,4 +61,3 @@ We continue to look for performance wins in a variety of areas to improve Speedo
 * The fuzzing team [landed](https://bugzilla.mozilla.org/show_bug.cgi?id=1794784) some code to improve differential testing with the Fuzzilli JS fuzzer.
 * We [simplified](https://bugzilla.mozilla.org/show_bug.cgi?id=1801875) the profiler's global JIT code table by reusing our `AvlTree` data structure instead of using a custom skip list implementation.
 * We [improved](https://bugzilla.mozilla.org/show_bug.cgi?id=1804253) our `Shape` data structures to [use](https://bugzilla.mozilla.org/show_bug.cgi?id=1804394) derived classes more to improve type safety and to simplify future changes.
-* We [updated](https://bugzilla.mozilla.org/show_bug.cgi?id=1792775) ICU to version 72.
