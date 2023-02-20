@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "JavaScript Import maps, Part 2: In-Depth Exploration"
-date:   2023-02-23 10:00:00 +0100
+date:   2023-03-02 10:00:00 +0100
+published: false
 ---
 We recently shipped import maps in Firefox 108. you might be wondering what
 this new feature is and what problems it solves. In the [previous post](javascript-import-maps-part-1-introduction.html)
