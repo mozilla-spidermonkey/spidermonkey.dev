@@ -166,7 +166,7 @@ the same name so your websites will load faster. But what if we update our
 module? In this case, we would have to do “cache busting”. That is, we rename
 the file we are loading. The name will be appended with the hash of the file’s
 content. In the above example, `lodash.js` could become `lodash-1234abcd.js`,
-where the `"1234abcd"` is the hash of the content of moment.js.
+where the `"1234abcd"` is the hash of the content of lodash.js.
 
 
 ```
