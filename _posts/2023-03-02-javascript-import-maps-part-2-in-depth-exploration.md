@@ -5,7 +5,7 @@ date:   2023-03-02 10:00:00 +0100
 author: Yoshi Huang
 ---
 We recently shipped import maps in Firefox 108. you might be wondering what
-this new feature is and what problems it solves. In the [previous post](javascript-import-maps-part-1-introduction.html)
+this new feature is and what problems it solves. In the [previous post](/blog/02/23/javascript-import-maps-part-1-introduction.html)
 we introduced what import maps are and how they work, in this article we are
 going to explore the feature in depth.
 
