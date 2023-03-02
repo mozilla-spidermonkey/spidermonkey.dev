@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "JavaScript Import maps, Part 1: Introduction"
+author: Yoshi Huang
 date:   2023-02-23 09:00:00 +0100
 ---
 We recently shipped import maps in Firefox 108 and this article is the first in
