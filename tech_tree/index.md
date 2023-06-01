@@ -108,54 +108,6 @@ We also could investigate macro ops, which encapsulate sequences that have compl
 Right now the Parser as designed must see the whole source text before it can parse. It may be beneficial for us to support incremental parsing of a text stream, as we could then parse incoming chunks off the network.
 
 <script type="module">
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10.2/dist/mermaid.esm.mjs";
-let config = {
-    // If you have any issues be sure to set log level to at least 3.
-    // Lower is more verbose than higher.
-    logLevel: 1, // 5 is default.
-    flowcharts: {
-    useMaxWidth: true,
-    htmlLabels: true,
-    },
-    // Requried for callbacks
-    securityLevel: "loose",
-};
-mermaid.initialize(config);
-window.mermaid = mermaid;
-
-// Cache bust for local development of the diagram.
-const url = "./diagram.mmd";
-const timestamp = new Date().getTime();
-const cacheBustingUrl = `${url}?t=${timestamp}`;
-
-fetch(cacheBustingUrl)
-    .then((response) => {
-    if (!response.ok) {
-        throw new Error(
-        `Failed to load file (status code: ${response.status})`
-        );
-    }
-    let diagram_source = response.text();
-    return diagram_source;
-    })
-    .then(async (diagram_source) => {
-    let element = document.querySelector("#tree");
-    const { svg, bindFunctions } = await mermaid.render(
-        "renderedTree",
-        diagram_source
-    );
-    element.innerHTML = svg;
-    if (bindFunctions) {
-        bindFunctions(element);
-    }
-    });
-
-// Note: Because of how Mermaid works, callbacks need to be referenced relative to
-// window.
-window.callbacks = {
-    // Callbacks are invoked with the nodeId as the parameter.
-    exampleCallback: function (x) {
-    alert("called Callback for " + x);
-    },
-};
+import draw_diagram from "./diagram.mjs"
+draw_diagram("./diagram.mmd","#tree");
 </script>
