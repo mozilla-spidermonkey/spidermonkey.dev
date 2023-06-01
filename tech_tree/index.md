@@ -2,58 +2,21 @@
 layout: default
 ---
 
-<style>
-.tree {
-    width: 140%;
-    text-align: center;
-    font-size: 300%; /* This only applies to the placeholder text while render
-                        happens */
-}
-
-.text {
-    width: 60%;
-    margin-left: 10%;
-}
-
-/* Diagram consumed CSS classes */
-.clickable {
-    font-style: italic;
-    font-size: 98%; /* Adjust for larger space required by italics */
-}
-
-.done > * {
-    fill: #ceebcf !important;
-}
-
-.GC > * {
-    fill: #faf3c2 !important;
-}
-
-.JIT > * {
-    fill: #ffca61 !important;
-}
-
-emph {
-    font-style: italic;
-}
-
-#updated {
-    margin-right: 10%;
-    text-align: right;
-}
-
-</style>
+<link rel="stylesheet" href="./tech_tree_style.css"/>
 
 # SpiderMonkey Tech Tree
 
 **Last Updated:** {{site.time | date_to_string }}
+
+## What is this?
+
+The below is a tool for thought created by the SpiderMonkey Team to plan out a series of possible futures. **These are not plans**, so much as they are potential routes the project _could_ take.
 
 ## The Tech Tree
 
 <div id="tree" class="tree">Generating SVG</div>
 [(Take a peek at the diagram source)](./diagram.mmd)
 
-**What is this?** The above diagram is a thinking tool created by the SpiderMonkey Team to plan out a series of possible futures. **These are not plans**, so much as they are potential routes the project could take.
 
 # Details {#details}
 
