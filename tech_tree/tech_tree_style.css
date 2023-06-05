@@ -1,0 +1,38 @@
+.tree {
+    width: 140%;
+    text-align: center;
+    font-size: 300%; /* This only applies to the placeholder text while render
+                        happens */
+}
+
+.text {
+    width: 60%;
+    margin-left: 10%;
+}
+
+/* Diagram consumed CSS classes */
+.clickable {
+    font-style: italic;
+    font-size: 98%; /* Adjust for larger space required by italics */
+}
+
+.done > * {
+    fill: #ceebcf !important;
+}
+
+.GC > * {
+    fill: #faf3c2 !important;
+}
+
+.JIT > * {
+    fill: #ffca61 !important;
+}
+
+emph {
+    font-style: italic;
+}
+
+#updated {
+    margin-right: 10%;
+    text-align: right;
+}
