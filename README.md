@@ -41,3 +41,10 @@ title: "My Title"
 date: 2021-05-03 09:30:00 +0700
 ---
 ```
+
+## Contributing to this site
+
+To contribute changes to https://spidermonkey.dev/, submit a pull request. It will be reviewed by someone in the "Website Reviewers Group". There isn't a formal policy for what is needed for a review, but we do want to second set of eyes checking for typos, phrasing, and other editorial things.
+
+Material for the website is focused around communication between the SpiderMonkey team and community (such as "What chat service can the team be found on this year?"). Low-level technical details on using SpiderMonkey usually is best documented in the source as `[SMDOC]` comments, and version-specific information (such as build, debug, and testing information) is best documented on https://firefox-source-docs.mozilla.org/.
+
