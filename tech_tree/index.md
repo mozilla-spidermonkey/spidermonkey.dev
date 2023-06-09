@@ -6,8 +6,6 @@ layout: default
 
 # SpiderMonkey Tech Tree
 
-**Last Updated:** {{site.time | date_to_string }}
-
 ## What is this?
 
 The below is a tool for thought created by the SpiderMonkey Team to plan out a
@@ -99,4 +97,17 @@ stream, as we could then parse incoming chunks off the network.
 <script type="module">
 import draw_diagram from "./diagram.mjs"
 draw_diagram("./diagram.mmd","#tree");
+</script>
+
+### Last Updated
+<div id="lastUpdated">Fetching</div>
+<script>
+  // Technique stolen from https://cogitorium.info/2021/02/jekyll-github-revision
+  fetch("https://api.github.com/repos/{{ site.github.repository_nwo }}/commits?path={{ page.path }}&page=1&per_page=2")
+  .then(response => response.json())
+  .then(json => {
+    if (json.length > 1) {
+      const d = new Date(json[0].commit.author.date);
+      document.getElementById("lastUpdated").innerText = d.toLocaleDateString() + " (" + d.toLocaleTimeString() + ")"
+    }});
 </script>
