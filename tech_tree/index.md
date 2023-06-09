@@ -96,6 +96,38 @@ Right now the Parser as designed must see the whole source text before it can
 parse. It may be beneficial for us to support incremental parsing of a text
 stream, as we could then parse incoming chunks off the network.
 
+## Fast Ion Tier {#fastIonTier}
+
+We have some evidence that getting into Ion faster would be better; however Ion
+compilations are costly. This suggests there may be room here for a tier of ion that
+would slot in between our current Ion tier and baseline.
+
+This version of Ion compilation would optimize for compile time; one could imagine
+for example having no method inlining, limited optimization, and minimal CacheIR
+transpilation in order to reduce the amount of MIR generated and keep compilation and
+register allocation time fast.
+
+This improvement could be deployed in a few ways:
+
+* We could reduce Ion thresholds, allowing methods into ion earlier
+* We could consider more costly analyses in the top tier ion, as longer compile times
+  might be more tenable if we have a mid-tier.
+
+## Share Ion ICs {#shareIonICs}
+
+Currently Ion ICs are specialized to a particular callsite, and thus we don't
+currently share Ion IC code. We could implement a stub sharing policy
+akin to Baseline IC stubs.
+
+[(Tracked in Bugzilla here)](https://bugzilla.mozilla.org/show_bug.cgi?id=1817277)
+
+## Prepopulate Ion IC Chains {#prepopulateIonIcs}
+
+When doing off-thread compilation, we could fill in the stub chains for Ion ICs we
+generate.
+
+[(Tracked in Bugzilla here)](https://bugzilla.mozilla.org/show_bug.cgi?id=1817277)
+
 <script type="module">
 import draw_diagram from "./diagram.mjs"
 draw_diagram("./diagram.mmd","#tree");

@@ -63,6 +63,18 @@ flowchart LR
     streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
 
     root --> improvedBytecode[/"Improved Bytecode"/]
+
+
+    root --> shareIonICs[/"Share Ion ICs"/]
+    root --> prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
+    root --> fastIonTier[/"A Fast Ion Tier"/]
+
+    subgraph "Ion Improvements"
+        shareIonICs
+        prepopulateIonIcs
+        fastIonTier
+    end
+
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
     %% is accessed relative to `window`.
@@ -90,3 +102,7 @@ flowchart LR
     click improvedBytecode "#improvedBytecode"
     click streamingParsing "#streamingParsing"
     click inBinaryCode "#inBinaryCode"
+
+    click shareIonICs "#shareIonICs"
+    click prepopulateIonIcs "#prepopulateIonIcs"
+    click fastIonTier "#fastIonTier"
