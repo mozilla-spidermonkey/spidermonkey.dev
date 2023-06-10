@@ -27,7 +27,7 @@ We're working on improving performance for popular web frameworks such as React.
 
 
 * We're [shipping](https://bugzilla.mozilla.org/show_bug.cgi?id=1795816) `Array.fromAsync` in Firefox 115.
-* We're also [shipping](https://bugzilla.mozilla.org/show_bug.cgi?id=1811057) the 'change array by copy' [proposal](https://github.com/tc39/proposal-change-array-by-copy) in Firefox 115.
+* We're also [shipping](https://bugzilla.mozilla.org/show_bug.cgi?id=1811057) the ['Change Array By Copy proposal'](https://github.com/tc39/proposal-change-array-by-copy) in Firefox 115.
 * We've [implemented](https://bugzilla.mozilla.org/show_bug.cgi?id=1825005) the `isWellFormed` and `toWellFormed` [functions](https://github.com/tc39/proposal-is-usv-string) for strings (disabled by default).
 
 
