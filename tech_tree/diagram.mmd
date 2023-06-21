@@ -76,6 +76,10 @@ flowchart LR
         shareIonICs[/"Share Ion ICs"/]
         prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
         fastIonTier[/"A Fast Ion Tier"/]
+
+        class shareIonICs JIT
+        class prepopulateIonIcs JIT
+        class fastIonTier JIT
     end
     root --> ionImprovements
 
