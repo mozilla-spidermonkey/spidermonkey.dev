@@ -62,18 +62,22 @@ flowchart LR
     contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
     streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
 
-    root --> improvedBytecode[/"Improved Bytecode"/]
 
 
-    root --> shareIonICs[/"Share Ion ICs"/]
-    root --> prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
-    root --> fastIonTier[/"A Fast Ion Tier"/]
-
-    subgraph "Ion Improvements"
-        shareIonICs
-        prepopulateIonIcs
-        fastIonTier
+    subgraph improvedBytecode [Bytecode Improvements]
+        destructuringBytecode[/"Better Bytecode for Destructuring"/]
+        generatorBytecodeTransforms[/"Easier to optimize generator bytecode"/]
     end
+    root --> improvedBytecode
+
+
+
+    subgraph ionImprovements [Ion Improvements]
+        shareIonICs[/"Share Ion ICs"/]
+        prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
+        fastIonTier[/"A Fast Ion Tier"/]
+    end
+    root --> ionImprovements
 
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
@@ -99,10 +103,13 @@ flowchart LR
     click ric href "#ric"
     click smRelocations href "#smRelocations"
     click inMemoryJITHints href "https://bugzilla.mozilla.org/show_bug.cgi?id=1824772"
-    click improvedBytecode "#improvedBytecode"
+
     click streamingParsing "#streamingParsing"
     click inBinaryCode "#inBinaryCode"
 
     click shareIonICs "#shareIonICs"
     click prepopulateIonIcs "#prepopulateIonIcs"
     click fastIonTier "#fastIonTier"
+
+    click destructuringBytecode "#destructuringBytecode"
+    click generatorBytecodeTransforms "#generatorBytecodeTransforms"

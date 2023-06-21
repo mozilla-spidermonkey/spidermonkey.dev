@@ -72,7 +72,7 @@ either need to generate Position/Context/Runtime independent code, or we need to
 support our own form of
 [Relocations](<https://en.wikipedia.org/wiki/Relocation_(computing)>).
 
-## Improved Bytecode {#improvedBytecode}
+## Improved Bytecode
 
 There is potentially room to improve the performance of our interpreter if we
 were to invest in improving our bytecode. Some techniques to investigate woudl
@@ -83,10 +83,31 @@ identified ahead of time (for example `GetAliasedVar` becoming `GetAliasedVar0`,
 We also could investigate macro ops, which encapsulate sequences that have
 complicated semantics.
 
-### References
+[__Efficient Interpretation with Quickening__ Stefan Brunthaler DLS 2010](https://dl.acm.org/doi/10.1145/1899661.1869633)
+  and [followup](https://arxiv.org/pdf/2109.02958.pdf) would be effective background reading.
 
-- [**Efficient Interpretation with Quickening** Stefan Brunthaler DLS 2010](https://dl.acm.org/doi/10.1145/1899661.1869633)
-  and [followup](https://arxiv.org/pdf/2109.02958.pdf).
+### Better Bytecode for Destructuring {#destructuringBytecode}
+
+SpiderMonkey generates a lot of bytecode for destructuring. For example,
+
+```JS
+function f(x) { let [a,b,c] = x; return a+b+c;}  
+```
+
+generates 301 ops today. On the other hand, we know other engines do better. JSC for example uses only 36 ops for the above function[^jsc-invocation].
+
+[^jsc-invocation]: `jsc -d -e "function f(x) { let [a,b,c] = x; return a+b+c;}  f([1,2,3])`
+
+### Easier to optimize generator bytecode {#generatorBytecodeTransforms}
+
+Right now [we don't have full JIT support for generators nor async functions][1681338]. Full support with our current design is challenging.
+
+[Quoting Jan](https://bugzilla.mozilla.org/show_bug.cgi?id=1839078)
+
+> Longer-term we should redo our implementation to support resuming in Ion code. Other engines transform generators to look more like a normal function with a switch-statement to make JIT support easier.
+
+[1681338]:https://bugzilla.mozilla.org/show_bug.cgi?id=1681338
+
 
 ## Streaming Parsing {#streamingParsing}
 
