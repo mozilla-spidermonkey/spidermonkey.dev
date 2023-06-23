@@ -147,6 +147,14 @@ generate.
 
 [(Tracked in Bugzilla here)](https://bugzilla.mozilla.org/show_bug.cgi?id=1817277)
 
+## A Mid-Tier JIT {#midTier}
+
+We have some evidence that faster JIT compilation would be valuable; one potential
+route forward would be [a faster Ion tier](#fastIonTier). However, another route
+would be the creation of mid-tier optimizing compiler that's more of a divergence
+from Ion.
+
+
 <script type="module">
 import draw_diagram from "./diagram.mjs"
 draw_diagram("./diagram.mmd","#tree");
