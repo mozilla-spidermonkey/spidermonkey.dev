@@ -3,35 +3,47 @@
 %% -- However, using elk as our renderer does have downsides. Elk doesn't
 %%    support dotted lines.
 flowchart LR
-
     subgraph Legend
         Done
-        GC["GC/CC"]
-        JIT
-
         class Done done
+
+        GC["GC/CC"]
         class GC GC
+
+        JIT
         class JIT JIT
+
 
         perf[/"A performance item"/]
     end
 
     root[SpiderMonkey Tech Tree] --> shapeIndexes[Shape Indexes]
     shapeIndexes --> taggedShapeIndexes[Tagged Shape Indexes]
-    root --> inMemoryJITHints[/"In Memory JIT Hints"/] --> onDiskJITHints[/"On  Disk JIT Hints"/] --> ric[/"Reusable Inline Caches"/]
+    click shapeIndexes href "#shapeIndexes"
+    click taggedShapeIndexes href "#taggedShapeIndexes"
 
-    %% Mark In Memory JIT hints as done -- CSS class is in index.html
+    root --> inMemoryJITHints[/"In Memory JIT Hints"/] --> onDiskJITHints[/"On  Disk JIT Hints"/] --> ric[/"Reusable Inline Caches"/]
     class inMemoryJITHints done;
+    click inMemoryJITHints href "https://bugzilla.mozilla.org/show_bug.cgi?id=1824772"
+
     class onDiskJITHints JIT;
     class ric JIT;
+
+    click ric href "#ric"
 
     root --> webIDL["WebIDL For SpiderMonkey"] --> ecmaIDL["ECMA-IDL (an IDL for ECMAScript)"]
     root --> scheduling["Thread Scheduling and Integration"] --> offThreadDelazification[/"Off-Thread Delazification"/]
     root --> offThreadDelazification
     root --> nonGCScopes["Convert Scopes from GC to non-GC things"] --> universalRelazification["Universal Relazification"]
+    click universalRelazification href "#universalRelazification"
+
     universalRelazification --> tossBytecode["Regenerate Bytecode For Correctness"]
     root --> tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
+    click tossBytecode href "#tossBytecode"
+
     root --> immutableFlag["Immutable Object Detection at Parse Time"] --> optimizedImmutableLookups[/"Optimized Immutable Lookups"/]
+    click immutableFlag href "#immutableFlag"
+
     root --> evalCache["Redoing the Eval Cache"] --> precompiledEval[/"Precompiled Evals"/]
     root --> pointerCompression["Pointer Compression"] --> compressedDOM["Compressed DOM Heap"]
     class pointerCompression GC
@@ -46,6 +58,8 @@ flowchart LR
 
     root --> inBinaryStubs[/"In-Binary CacheIR Stubs"/]
     root --> smRelocations["SpiderMonkey Relocations"]
+    click smRelocations href "#smRelocations"
+
     frozenRuntime[/"In Binary Frozen Runtime"/]
     frozenRuntime --> bakedFirefox[/"'Instant Startup' Firefox Binaries"/]
 
@@ -54,19 +68,26 @@ flowchart LR
     smRelocations --> inBinaryBaseline[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
 
     root --> inBinaryCode["Embed Generated Code in Binary"] --> inBinaryStubs & inBinaryTrampolines & inBinaryBaseline
+    click inBinaryCode "#inBinaryCode"
+
 
     root --> stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
     stencilNav --> onDiskStencil[/"On-Disk Stencil Caches"/]
     root --> contextFreeParsing["JSContext Free Parsing"]
     stencilNav --> contextFreeParsing
     contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
+    click streamingParsing "#streamingParsing"
+
     streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
 
 
 
     subgraph improvedBytecode [Bytecode Improvements]
         destructuringBytecode[/"Better Bytecode for Destructuring"/]
+        click destructuringBytecode "#destructuringBytecode"
+
         generatorBytecodeTransforms[/"Easier to optimize generator bytecode"/]
+        click generatorBytecodeTransforms "#generatorBytecodeTransforms"
     end
     root --> improvedBytecode
 
@@ -75,15 +96,21 @@ flowchart LR
 
     subgraph ionImprovements [Ion Improvements]
         shareIonICs[/"Share Ion ICs"/]
+        class shareIonICs JIT
+        click shareIonICs "#shareIonICs"
+
         prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
+        class prepopulateIonIcs JIT
+        click prepopulateIonIcs "#prepopulateIonIcs"
+
+
         fastIonTier[/"A Fast Ion Tier"/]
+        class fastIonTier JIT
+        click fastIonTier "#fastIonTier"
 
         resumeInWarp[/"Resume In Warp"/]
-
-        class shareIonICs JIT
-        class prepopulateIonIcs JIT
-        class fastIonTier JIT
         class resumeInWarp JIT
+        click resumeInWarp href "https://bugzilla.mozilla.org/show_bug.cgi?id=1681338"
     end
     root --> ionImprovements
 
@@ -100,26 +127,3 @@ flowchart LR
     %%     webIDL
     %%     ecmaIDL
     %% end
-
-    %% Detail links
-    click shapeIndexes href "#shapeIndexes"
-    click taggedShapeIndexes href "#taggedShapeIndexes"
-    click universalRelazification href "#universalRelazification"
-    click tossBytecode href "#tossBytecode"
-    click immutableFlag href "#immutableFlag"
-
-    click ric href "#ric"
-    click smRelocations href "#smRelocations"
-    click inMemoryJITHints href "https://bugzilla.mozilla.org/show_bug.cgi?id=1824772"
-
-    click streamingParsing "#streamingParsing"
-    click inBinaryCode "#inBinaryCode"
-
-    click shareIonICs "#shareIonICs"
-    click prepopulateIonIcs "#prepopulateIonIcs"
-    click fastIonTier "#fastIonTier"
-
-    click destructuringBytecode "#destructuringBytecode"
-    click generatorBytecodeTransforms "#generatorBytecodeTransforms"
-
-    click resumeInWarp href "https://bugzilla.mozilla.org/show_bug.cgi?id=1681338"
