@@ -37,7 +37,14 @@ emph {
     text-align: right;
 }
 
-/* Manually make the edge dotted line */
+/* Manually make edges dotted lines
+ * This is a workaround for the Elk renderer not supporting dotted lines
+ *
+ * The produced CSS classes are easy enough: LS-<startNode>.LE-<endNode>
+ */
 .path.flowchart-link.LS-generatorBytecodeTransforms.LE-resumeInWarp {
     stroke-dasharray: 4;
-  }
+}
+.path.flowchart-link.LS-smRelocations.LE-inBinaryStubs {
+    stroke-dasharray: 4;
+}

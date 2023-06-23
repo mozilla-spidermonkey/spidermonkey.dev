@@ -63,7 +63,7 @@ flowchart LR
     frozenRuntime[/"In Binary Frozen Runtime"/]
     frozenRuntime --> bakedFirefox[/"'Instant Startup' Firefox Binaries"/]
 
-    smRelocations -.-> inBinaryStubs --> frozenRuntime
+    smRelocations --> inBinaryStubs --> frozenRuntime
     smRelocations --> inBinaryTrampolines[/"In-Binary Trampolines"/] --> frozenRuntime
     smRelocations --> inBinaryBaseline[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
 
@@ -92,7 +92,7 @@ flowchart LR
     root --> improvedBytecode
 
 
-    generatorBytecodeTransforms -.-> resumeInWarp
+    generatorBytecodeTransforms --> resumeInWarp
 
     subgraph ionImprovements [Ion Improvements]
         shareIonICs[/"Share Ion ICs"/]
