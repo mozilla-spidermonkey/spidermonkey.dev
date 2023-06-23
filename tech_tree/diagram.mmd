@@ -71,15 +71,19 @@ flowchart LR
     root --> improvedBytecode
 
 
+    generatorBytecodeTransforms -.-> resumeInWarp
 
     subgraph ionImprovements [Ion Improvements]
         shareIonICs[/"Share Ion ICs"/]
         prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
         fastIonTier[/"A Fast Ion Tier"/]
 
+        resumeInWarp[/"Resume In Warp"/]
+
         class shareIonICs JIT
         class prepopulateIonIcs JIT
         class fastIonTier JIT
+        class resumeInWarp JIT
     end
     root --> ionImprovements
 
@@ -117,3 +121,5 @@ flowchart LR
 
     click destructuringBytecode "#destructuringBytecode"
     click generatorBytecodeTransforms "#generatorBytecodeTransforms"
+
+    click resumeInWarp href "https://bugzilla.mozilla.org/show_bug.cgi?id=1681338"
