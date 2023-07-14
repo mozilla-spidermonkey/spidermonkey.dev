@@ -65,9 +65,9 @@ flowchart LR
 
     smRelocations --> inBinaryStubs --> frozenRuntime
     smRelocations --> inBinaryTrampolines[/"In-Binary Trampolines"/] --> frozenRuntime
-    smRelocations --> inBinaryBaseline[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
+    smRelocations --> inBinaryBaselineInterpreter[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
 
-    root --> inBinaryCode["Embed Generated Code in Binary"] --> inBinaryStubs & inBinaryTrampolines & inBinaryBaseline
+    root --> inBinaryCode["Embed Generated Code in Binary"] --> inBinaryStubs & inBinaryTrampolines & inBinaryBaselineInterpreter
     click inBinaryCode "#inBinaryCode"
 
 
@@ -88,9 +88,38 @@ flowchart LR
 
         generatorBytecodeTransforms[/"Easier to optimize generator bytecode"/]
         click generatorBytecodeTransforms "#generatorBytecodeTransforms"
+
+
+
+        selfHostedCacheIROps["CacheIR ops backed by self-hosted code"]
+        class selfHostedCacheIROps JIT
+
+
+        iteratorsWithICs[/"Implement Iterator Protocol with ICs"/]
+        class iteratorsWithICs JIT
+
+        selfHostedCacheIROps --> iteratorsWithICs
+
+        fasterForOf["Faster implementation of `for-of` "]
+        class fasterForOf JIT
+
+        fasterArrayDestructuring["Faster implementation of array destructuring "]
+        class fasterArrayDestructuring JIT
+
+        iteratorsWithICs --> fasterForOf
+        iteratorsWithICs --> destructuringBytecode
+
+        fasterArrayDestructuring["Faster implementation of array destructuring "]
+        class fasterArrayDestructuring JIT
+
+        destructuringBytecode --> fasterArrayDestructuring
     end
     root --> improvedBytecode
 
+    lowerOverheadSelfHostedCacheIR["Lower-overhead calls for CacheIR ops backed by self-hosted code"]
+    class lowerOverheadSelfHostedCacheIR JIT
+
+    selfHostedCacheIROps --> lowerOverheadSelfHostedCacheIR
 
     generatorBytecodeTransforms --> resumeInWarp
 
@@ -117,6 +146,34 @@ flowchart LR
     root --> midTier[/"A Mid-Tier JIT"/]
     click midTier "#midTier"
 
+    cacheSelfHostedJitCode["Cache self-hosted baseline JIT code per-runtime"]
+    class cacheSelfHostedJitCode JIT
+
+    cacheRegularJitCode["Cache non-self-hosted baseline JIT code per-runtime"]
+    class cacheRegularJitCode JIT
+
+    precompileBaselineICs["Precompile Baseline ICs"]
+    class precompileBaselineICs JIT
+    click precompileBaselineICs href "https://bugzilla.mozilla.org/show_bug.cgi?id=1357884"
+
+    shareBaselineICs["Share precompiled baseline ICs across processes"]
+
+    root --> cacheSelfHostedJitCode --> cacheRegularJitCode
+    root --> precompileBaselineICs -->  shareBaselineICs
+
+    shareBaselineICs --> inBinaryStubs
+
+    sharePrecompiledBaselineAcrossProcesses[/"Share Precompiled Baseline JIT Code Across Processes"/]
+    cacheSelfHostedJitCode --> sharePrecompiledBaselineAcrossProcesses
+    shareBaselineICs --> sharePrecompiledBaselineAcrossProcesses
+
+    inBinaryBaseline["In-Binary Self-hosted Baseline Code"]
+    inBinaryStubs --> inBinaryBaseline
+
+    root --> selfHostedCacheIROps
+
+
+    root --> selfHostedReplacement["Replace self-hosted code with a new DSL"]
 
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
