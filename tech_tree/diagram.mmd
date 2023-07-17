@@ -35,13 +35,12 @@ flowchart LR
     click ric href "#ric"
 
     root --> webIDL["WebIDL For SpiderMonkey"] --> ecmaIDL["ECMA-IDL (an IDL for ECMAScript)"]
-    root --> scheduling["Thread Scheduling and Integration"] --> offThreadDelazification[/"Off-Thread Delazification"/]
-    root --> offThreadDelazification
+    root --> scheduling["Thread Scheduling and Integration"] -.-> offThreadDelazification[/"Off-Thread Delazification"/]
     root --> nonGCScopes["Convert Scopes from GC to non-GC things"] --> universalRelazification["Universal Relazification"]
     click universalRelazification href "#universalRelazification"
 
     universalRelazification --> tossBytecode["Regenerate Bytecode For Correctness"]
-    root --> tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
+    tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
     click tossBytecode href "#tossBytecode"
 
     root --> immutableFlag["Immutable Object Detection at Parse Time"] --> optimizedImmutableLookups[/"Optimized Immutable Lookups"/]
@@ -66,13 +65,13 @@ flowchart LR
     frozenRuntime[/"In Binary Frozen Runtime"/]
     frozenRuntime --> bakedFirefox[/"'Instant Startup' Firefox Binaries"/]
 
-    smRelocations --> inBinaryStubs --> frozenRuntime
-    smRelocations --> inBinaryTrampolines[/"In-Binary Trampolines"/] --> frozenRuntime
-    smRelocations --> inBinaryBaselineInterpreter[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
+    inBinaryStubs --> frozenRuntime
+    inBinaryTrampolines[/"In-Binary Trampolines"/] --> frozenRuntime
+    inBinaryBaselineInterpreter[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
 
     root --> inBinaryCode["Embed Generated Code in Binary"] --> inBinaryStubs & inBinaryTrampolines & inBinaryBaselineInterpreter
     click inBinaryCode "#inBinaryCode"
-
+    smRelocations -.-> inBinaryCode
 
     root --> stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
     stencilNav --> onDiskStencil[/"On-Disk Stencil Caches"/]
@@ -170,8 +169,8 @@ flowchart LR
     cacheSelfHostedJitCode --> sharePrecompiledBaselineAcrossProcesses
     shareBaselineICs --> sharePrecompiledBaselineAcrossProcesses
 
-    inBinaryBaseline["In-Binary Self-hosted Baseline Code"]
-    inBinaryStubs --> inBinaryBaseline
+    inBinarySelfHostedBaseline["In-Binary Self-hosted Baseline Code"]
+    inBinaryStubs --> inBinarySelfHostedBaseline --> frozenRuntime
 
     root --> selfHostedCacheIROps
 
