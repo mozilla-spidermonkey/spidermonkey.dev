@@ -155,6 +155,25 @@ would be the creation of mid-tier optimizing compiler that's more of a divergenc
 from Ion.
 
 
+## Self-Hosted CacheIR Ops {#selfHostedCacheIROps}
+
+Create CacheIR ops that are backed by self-hosted code, as a way of handling
+complicated scenarios in bytecode while allowing fast-path generation in the common
+case.
+
+## A Replacement DSL for Self-Hosted code {#selfHostedReplacement}
+
+Iain's wishlist:
+
+>  ergonomic to write, generates efficient code, can be inlined, multiple return values, a pony
+>
+> Most interesting syntax idea: `specialize (condition)` statement:
+> - generate two copies of the rest of the block
+>   - one specialized for the fast path
+>   - one fallback path
+>
+> lets us write out the required semantics, then eg optimize for packed arrays
+
 <script type="module">
 import draw_diagram from "./diagram.mjs"
 draw_diagram("./diagram.mmd","#tree");
