@@ -181,6 +181,10 @@ flowchart LR
 
     root --> selfHostedReplacement["Replace self-hosted code with a new DSL"]
 
+    root --> crashOnOOM["Crash on OOM"]
+    crashOnOOM --> simplifiedExceptions["Simplified Exceptions"]
+    click simplifiedExceptions "#simplifiedExceptions"
+
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
     %% is accessed relative to `window`.

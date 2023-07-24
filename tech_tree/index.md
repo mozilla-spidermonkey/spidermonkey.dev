@@ -174,6 +174,12 @@ Iain's wishlist:
 >
 > lets us write out the required semantics, then eg optimize for packed arrays
 
+## Simplified Exceptions {#simplifiedExceptions}
+
+There are a bunch of paths in SpiderMonkey that throw only because they could OOM. It
+would be interesting to see what fraction of exception handling could be removed if
+we chose to OOM on exceptions.
+
 <script type="module">
 import draw_diagram from "./diagram.mjs"
 draw_diagram("./diagram.mmd","#tree");
