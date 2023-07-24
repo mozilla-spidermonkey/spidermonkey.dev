@@ -1,4 +1,4 @@
-%%{init: {"flowchart": {"defaultRenderer": "default"}} }%%
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
 %% Ideally we would use the elk renderer: Much better for this diagram.
 %% -- However, using elk as our renderer does have downsides. Elk doesn't
 %%    support dotted lines.
@@ -85,13 +85,13 @@ flowchart LR
 
 
 
-    subgraph improvedBytecode [Bytecode Improvements]
+    %% subgraph improvedBytecode [Bytecode Improvements]
         destructuringBytecode[/"Better Bytecode for Destructuring"/]
         click destructuringBytecode "#destructuringBytecode"
 
         generatorBytecodeTransforms[/"Easier to optimize generator bytecode"/]
         click generatorBytecodeTransforms "#generatorBytecodeTransforms"
-
+        root --> generatorBytecodeTransforms
 
 
         selfHostedCacheIROps["CacheIR ops backed by self-hosted code"]
@@ -116,8 +116,8 @@ flowchart LR
         class fasterArrayDestructuring JIT
 
         destructuringBytecode --> fasterArrayDestructuring
-    end
-    root --> improvedBytecode
+    %%end
+    %%root --> improvedBytecode
 
     lowerOverheadSelfHostedCacheIR["Lower-overhead calls for CacheIR ops backed by self-hosted code"]
     class lowerOverheadSelfHostedCacheIR JIT
@@ -126,25 +126,28 @@ flowchart LR
 
     generatorBytecodeTransforms --> resumeInWarp
 
-    subgraph ionImprovements [Ion Improvements]
+
+    %%subgraph ionImprovements [Ion Improvements]
         shareIonICs[/"Share Ion ICs"/]
         class shareIonICs JIT
         click shareIonICs "#shareIonICs"
+        root --> shareIonICs
 
         prepopulateIonIcs[/"Pre-populate Ion ICs offthread"/]
         class prepopulateIonIcs JIT
         click prepopulateIonIcs "#prepopulateIonIcs"
-
+        root --> prepopulateIonIcs
 
         fastIonTier[/"A Fast Ion Tier"/]
         class fastIonTier JIT
         click fastIonTier "#fastIonTier"
+        root --> fastIonTier
 
         resumeInWarp[/"Resume In Warp"/]
         class resumeInWarp JIT
         click resumeInWarp href "https://bugzilla.mozilla.org/show_bug.cgi?id=1681338"
-    end
-    root --> ionImprovements
+    %%end
+    %% root --> ionImprovements
 
     root --> midTier[/"A Mid-Tier JIT"/]
     click midTier "#midTier"
