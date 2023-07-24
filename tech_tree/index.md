@@ -83,31 +83,36 @@ identified ahead of time (for example `GetAliasedVar` becoming `GetAliasedVar0`,
 We also could investigate macro ops, which encapsulate sequences that have
 complicated semantics.
 
-[__Efficient Interpretation with Quickening__ Stefan Brunthaler DLS 2010](https://dl.acm.org/doi/10.1145/1899661.1869633)
-  and [followup](https://arxiv.org/pdf/2109.02958.pdf) would be effective background reading.
+[**Efficient Interpretation with Quickening** Stefan Brunthaler DLS 2010](https://dl.acm.org/doi/10.1145/1899661.1869633)
+and [followup](https://arxiv.org/pdf/2109.02958.pdf) would be effective
+background reading.
 
 ### Better Bytecode for Destructuring {#destructuringBytecode}
 
 SpiderMonkey generates a lot of bytecode for destructuring. For example,
 
 ```JS
-function f(x) { let [a,b,c] = x; return a+b+c;}  
+function f(x) { let [a,b,c] = x; return a+b+c;}
 ```
 
-generates 301 ops today. On the other hand, we know other engines do better. JSC for example uses only 36 ops for the above function[^jsc-invocation].
+generates 301 ops today. On the other hand, we know other engines do better. JSC
+for example uses only 36 ops for the above function[^jsc-invocation].
 
-[^jsc-invocation]: `jsc -d -e "function f(x) { let [a,b,c] = x; return a+b+c;}  f([1,2,3])`
+[^jsc-invocation]:
+    `jsc -d -e "function f(x) { let [a,b,c] = x; return a+b+c;} f([1,2,3])`
 
 ### Easier to optimize generator bytecode {#generatorBytecodeTransforms}
 
-Right now [we don't have full JIT support for generators nor async functions][1681338]. Full support with our current design is challenging.
+Right now [we don't have full JIT support for generators nor async
+functions][1681338]. Full support with our current design is challenging.
 
 [Quoting Jan](https://bugzilla.mozilla.org/show_bug.cgi?id=1839078)
 
-> Longer-term we should redo our implementation to support resuming in Ion code. Other engines transform generators to look more like a normal function with a switch-statement to make JIT support easier.
+> Longer-term we should redo our implementation to support resuming in Ion code.
+> Other engines transform generators to look more like a normal function with a
+> switch-statement to make JIT support easier.
 
-[1681338]:https://bugzilla.mozilla.org/show_bug.cgi?id=1681338
-
+[1681338]: https://bugzilla.mozilla.org/show_bug.cgi?id=1681338
 
 ## Streaming Parsing {#streamingParsing}
 
@@ -118,56 +123,57 @@ stream, as we could then parse incoming chunks off the network.
 ## Fast Ion Tier {#fastIonTier}
 
 We have some evidence that getting into Ion faster would be better; however Ion
-compilations are costly. This suggests there may be room here for a tier of ion that
-would slot in between our current Ion tier and baseline.
+compilations are costly. This suggests there may be room here for a tier of ion
+that would slot in between our current Ion tier and baseline.
 
-This version of Ion compilation would optimize for compile time; one could imagine
-for example having no method inlining, limited optimization, and minimal CacheIR
-transpilation in order to reduce the amount of MIR generated and keep compilation and
-register allocation time fast.
+This version of Ion compilation would optimize for compile time; one could
+imagine for example having no method inlining, limited optimization, and minimal
+CacheIR transpilation in order to reduce the amount of MIR generated and keep
+compilation and register allocation time fast.
 
 This improvement could be deployed in a few ways:
 
-* We could reduce Ion thresholds, allowing methods into ion earlier
-* We could consider more costly analyses in the top tier ion, as longer compile times
-  might be more tenable if we have a mid-tier.
+- We could reduce Ion thresholds, allowing methods into ion earlier
+- We could consider more costly analyses in the top tier ion, as longer compile
+  times might be more tenable if we have a mid-tier.
 
 ## Share Ion ICs {#shareIonICs}
 
 Currently Ion ICs are specialized to a particular callsite, and thus we don't
-currently share Ion IC code. We could implement a stub sharing policy
-akin to Baseline IC stubs.
+currently share Ion IC code. We could implement a stub sharing policy akin to
+Baseline IC stubs.
 
 [(Tracked in Bugzilla here)](https://bugzilla.mozilla.org/show_bug.cgi?id=1817277)
 
 ## Prepopulate Ion IC Chains {#prepopulateIonIcs}
 
-When doing off-thread compilation, we could fill in the stub chains for Ion ICs we
-generate.
+When doing off-thread compilation, we could fill in the stub chains for Ion ICs
+we generate.
 
 [(Tracked in Bugzilla here)](https://bugzilla.mozilla.org/show_bug.cgi?id=1817277)
 
 ## A Mid-Tier JIT {#midTier}
 
-We have some evidence that faster JIT compilation would be valuable; one potential
-route forward would be [a faster Ion tier](#fastIonTier). However, another route
-would be the creation of mid-tier optimizing compiler that's more of a divergence
-from Ion.
-
+We have some evidence that faster JIT compilation would be valuable; one
+potential route forward would be [a faster Ion tier](#fastIonTier). However,
+another route would be the creation of mid-tier optimizing compiler that's more
+of a divergence from Ion.
 
 ## Self-Hosted CacheIR Ops {#selfHostedCacheIROps}
 
 Create CacheIR ops that are backed by self-hosted code, as a way of handling
-complicated scenarios in bytecode while allowing fast-path generation in the common
-case.
+complicated scenarios in bytecode while allowing fast-path generation in the
+common case.
 
 ## A Replacement DSL for Self-Hosted code {#selfHostedReplacement}
 
 Iain's wishlist:
 
->  ergonomic to write, generates efficient code, can be inlined, multiple return values, a pony
+> ergonomic to write, generates efficient code, can be inlined, multiple return
+> values, a pony
 >
 > Most interesting syntax idea: `specialize (condition)` statement:
+>
 > - generate two copies of the rest of the block
 >   - one specialized for the fast path
 >   - one fallback path
@@ -176,9 +182,9 @@ Iain's wishlist:
 
 ## Simplified Exceptions {#simplifiedExceptions}
 
-There are a bunch of paths in SpiderMonkey that throw only because they could OOM. It
-would be interesting to see what fraction of exception handling could be removed if
-we chose to OOM on exceptions.
+There are a bunch of paths in SpiderMonkey that throw only because they could
+OOM. It would be interesting to see what fraction of exception handling could be
+removed if we chose to OOM on exceptions.
 
 <script type="module">
 import draw_diagram from "./diagram.mjs"
@@ -186,6 +192,7 @@ draw_diagram("./diagram.mmd","#tree");
 </script>
 
 ### Last Updated
+
 <div id="lastUpdated">Fetching</div>
 <script>
   // Technique stolen from https://cogitorium.info/2021/02/jekyll-github-revision
