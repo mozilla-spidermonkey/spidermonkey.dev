@@ -38,6 +38,9 @@ For example, Frozen could be inlined into the tag, removing a dereference
 This would be the ability to relazify _any_ script. Currently we can only
 relazify leaf scripts.
 
+This has been previously discussed
+[on bugzilla](https://bugzilla.mozilla.org/show_bug.cgi?id=1162497).
+
 ## Regenerate Bytecode For Correctness {#tossBytecode}
 
 The ability to relazifiy anything would allow us to start optimizing _bytecode_,
