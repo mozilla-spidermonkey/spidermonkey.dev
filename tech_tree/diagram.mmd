@@ -44,6 +44,10 @@ flowchart LR
     tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
     click tossBytecode href "#tossBytecode"
 
+    progressiveStencil[/"Progressive Stencil"/]
+    click progressiveStencil "#progressiveStencil"
+    nonGCScopes --> progressiveStencil
+
     root --> immutableFlag["Immutable Object Detection at Parse Time"] --> optimizedImmutableLookups[/"Optimized Immutable Lookups"/]
     click immutableFlag href "#immutableFlag"
 
@@ -98,15 +102,32 @@ flowchart LR
     click inBinaryCode "#inBinaryCode"
     smRelocations -.-> inBinaryCode
 
-    root --> stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
-    stencilNav --> onDiskStencil[/"On-Disk Stencil Caches"/]
+
+    stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
+    click stencilNav "#stencilNav"
+    stencilNav --> decoupledCaching[/"Decoupled Script Caching"/]
+    click decoupledCaching "#decoupledCaching"
+    stencilNav --> stencilNavScheduling[/"Stencil Navigation Scheduling"/]
+    click stencilNavScheduling "#stencilNavScheduling"
+    stencilNavScheduling --> compressDiskCache[/"Compressed On-Disk Caching"/]
+    click compressDiskCache "#compressDiskCache"
+    stencilNav --> unifiedSubresourceApi["Unified Subresource API"]
+    click unifiedSubresourceApi "#unifiedSubresourceApi"
+    offThreadNeckoAPI[/"Off-thread Necko API"/]
+    click offThreadNeckoAPI "#offThreadNeckoAPI"
+    offThreadNeckoAPI --> stencilNavScheduling
+
     root --> contextFreeParsing["JSContext Free Parsing"]
-    stencilNav --> contextFreeParsing
+    contextFreeParsing -.-> stencilNav
+    contextFreeParsing --> stencilNavScheduling
     contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
     click streamingParsing "#streamingParsing"
-
     streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
 
+    onDiskBaselineCode[/"On-Disk Baseline Code"/]
+    click onDiskBaselineCode "#onDiskBaselineCode"
+    stencilNav --> onDiskBaselineCode
+    inBinarySelfHostedBaseline --> onDiskBaselineCode
 
 
     %% subgraph improvedBytecode [Bytecode Improvements]
