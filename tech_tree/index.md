@@ -33,6 +33,12 @@ index.
 
 For example, Frozen could be inlined into the tag, removing a dereference
 
+## Progressive Stencil {#progressiveStencil}
+
+Once we can share scopes alongside Stencils, the cost of instantiating a Stencil should be significantly reduced, and we can more easily only allocate BaseScripts as needed, instead of all of them at the start. This could lead to a performance benefit when we want a script quickly because we can load and parse more of it lazily.
+
+See [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=progressive-stencil).
+
 ## Universal Relazification {#universalRelazification}
 
 This would be the ability to relazify _any_ script. Currently we can only
@@ -116,6 +122,38 @@ functions][1681338]. Full support with our current design is challenging.
 > switch-statement to make JIT support easier.
 
 [1681338]: https://bugzilla.mozilla.org/show_bug.cgi?id=1681338
+
+## On-Disk Baseline Code {#onDiskBaselineCode}
+
+Storing Baseline-compiled code on disk could speed up loading built-in code, like the Dev Tools.
+
+## In-Memory Stencil Caching (stencil-nav) {#stencilNav}
+
+When caching JS bytecode through Necko, we can miss opportunities to reuse data due to how the cache policy for disk caching is set up. If we create a separate container for caching Stencils across navigations, we can potentially reduce bandwidth and load overhead when a subresource is reused. This also allows us to coalesce loading so that multiple requests for the same script will only need to fetch the data once.
+
+## Compressed On-Disk Caching {#compressDiskCache}
+
+By compressing the JIT code that is stored in the Necko on-disk cache, we might be able to reduce the bandwidth needed to save and restore the cache, and reduce size on disk.
+
+To get the necessary performance improvements of this feature, we will want to do the compression in a prioritized background thread.
+
+## Stencil Navigation Scheduling {#stencilNavScheduling}
+
+Once we can parse without a JSContext, we can provide richer information for scheduling tasks via Firefox's Task Controller. We can convert the state machine for loading a script into tasks that are scheduled individually with proper dependencies and priorities, and we can use priority to affect which subresources are loaded first.
+
+## Unified Subresource API {#unifiedSubresourceApi}
+
+The current caches are based around the Necko alternate-datastream API and some use-cases may be better served by an in memory cache similar to used for CSS and images. An in-memory cache could be used to store JIT code, CSS, and Images instead of having a separate cache for each type of data.
+
+We hope to make policies consistent across resources and gather the eviction and insertion policies into a single API.
+
+## Off-thread Necko API {#offThreadNeckoAPI}
+
+A lot of work we do with the Necko API is work that happens on the main thread. We could avoid a lot of thread hopping if we refactored Necko API so it didn't require work on the main-thread.
+
+## Decoupled Script Caching {#decoupledCaching}
+
+Decoupling `ScriptLoader` from script speculative loading and caching would simplify the state machine used there. Cache loads and stores could happen asynchronously from page loading. This benefit comes from breaking apart the script loading into more "primitive" operations like load, parse, and cache.
 
 ## Streaming Parsing {#streamingParsing}
 
