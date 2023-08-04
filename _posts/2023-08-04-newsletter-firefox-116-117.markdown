@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "SpiderMonkey Newsletter (Firefox 114-115)"
+title:  "SpiderMonkey Newsletter (Firefox 116-117)"
 date:   2023-08-04 18:00:00 +0100
 ---
 SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter gives an overview of the JavaScript and WebAssembly work we’ve done as part of the Firefox 116 and 117 Nightly release cycles.
