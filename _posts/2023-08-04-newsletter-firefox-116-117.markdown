@@ -7,9 +7,8 @@ SpiderMonkey is the JavaScript engine used in Mozilla Firefox. This newsletter g
 
 ### 🚀 Performance
 
-We're working on improving performance for popular web frameworks such as React. We're making good progress, here's a Speedometer 2 graph:
-
-<iframe src="https://mozilla.social/@stevetex/110696689018983577/embed" width="400" allowfullscreen="allowfullscreen" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
+We're working on improving performance for popular web frameworks such as React. We continue to make good progress, as you can see on this Speedometer 2 graph:
+<iframe src="https://mozilla.social/@stevetex/110696689018983577/embed" width="500" height="330" style="border:0" allowfullscreen="allowfullscreen" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-forms"></iframe>
 
 * We [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1837410) a fast path for `JSON.stringify`.
 * We've [added](https://bugzilla.mozilla.org/show_bug.cgi?id=1838629) a fast path for allocating from the nursery in C++ code.
