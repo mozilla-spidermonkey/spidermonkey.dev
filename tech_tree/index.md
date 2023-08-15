@@ -33,11 +33,11 @@ index.
 
 For example, Frozen could be inlined into the tag, removing a dereference
 
-## Progressive Stencil {#progressiveStencil}
+## Run From Stencil {#runFromStencil}
 
 Once we can share scopes alongside Stencils, the cost of instantiating a Stencil should be significantly reduced, and we can more easily only allocate BaseScripts as needed, instead of all of them at the start. This could lead to a performance benefit when we want a script quickly because we can load and parse more of it lazily.
 
-See [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=progressive-stencil).
+See [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=run-from-stencil).
 
 ## Universal Relazification {#universalRelazification}
 
@@ -125,27 +125,31 @@ functions][1681338]. Full support with our current design is challenging.
 
 ## On-Disk Baseline Code {#onDiskBaselineCode}
 
-Storing Baseline-compiled code on disk could speed up loading built-in code, like the Dev Tools.
+Storing Baseline-compiled code on disk could allow us to execute baseline code immediately instead of warming up (when cached), and we can potentially skip baseline compilation when transitioning from interpreter execution and baseline execution. In particular, built-in code like the Web Developer Tools could benefit from this.
+
+We can distinguish between storing Baseline-compiled code just for builtins and storing for all content. There are different security considerations for them.
 
 ## In-Memory Stencil Caching (stencil-nav) {#stencilNav}
 
-When caching JS bytecode through Necko, we can miss opportunities to reuse data due to how the cache policy for disk caching is set up. If we create a separate container for caching Stencils across navigations, we can potentially reduce bandwidth and load overhead when a subresource is reused. This also allows us to coalesce loading so that multiple requests for the same script will only need to fetch the data once.
+When caching JS bytecode through Necko, we can miss opportunities to reuse data because the cache doesn't allow us to benefit from caching that is in-progress, and we wait until idle time before saving to the cache. An in-memory cache can be used ahead of saving content to disk, which would allow us to coalesce loading so that multiple requests for the same script will only need to parse the data once.
 
-## Compressed On-Disk Caching {#compressDiskCache}
+If the in-memory cache also caches Stencils across across same-origin Documents, we can potentially reduce bandwidth and load overhead when a subresource is reused. This is based on the expectation that subresources, such as script libraries, are often shared between Documents on the same website.
+
+## Practical Compressed On-Disk Caching {#compressDiskCache}
 
 By compressing the JIT code that is stored in the Necko on-disk cache, we might be able to reduce the bandwidth needed to save and restore the cache, and reduce size on disk.
 
-To get the necessary performance improvements of this feature, we will want to do the compression in a prioritized background thread.
+To make this feature practical, we need to avoid dispatching back and forth between Necko and Parsing on the main thread.
 
-## Stencil Navigation Scheduling {#stencilNavScheduling}
+## Adaptable JS Loading {#adaptableJSLoading}
 
-Once we can parse without a JSContext, we can provide richer information for scheduling tasks via Firefox's Task Controller. We can convert the state machine for loading a script into tasks that are scheduled individually with proper dependencies and priorities, and we can use priority to affect which subresources are loaded first.
+Once we can parse without a JSContext, we can break up "load a JS resource" into subtasks like fetching bytes, parsing, and instantiation. Expressing these subtasks in Firefox's Task Controller will help Firefox manage task priorities better, and will give us additional adaptability when priorities change.
 
 ## Unified Subresource API {#unifiedSubresourceApi}
 
-The current caches are based around the Necko alternate-datastream API and some use-cases may be better served by an in memory cache similar to used for CSS and images. An in-memory cache could be used to store JIT code, CSS, and Images instead of having a separate cache for each type of data.
+The current CSS and image caches are in-memory but have their own implementations and policies. Once we have an in-memory cache for JIT code, all these subresources may be better served by a single cache instead of having a separate cache for each type of data.
 
-We hope to make policies consistent across resources and gather the eviction and insertion policies into a single API.
+We hope to make policies consistent across resources and gather the eviction and insertion policies into a single API. We also hope to share code that decides when it is appropriate to even use cached data for a given request.
 
 ## Off-thread Necko API {#offThreadNeckoAPI}
 

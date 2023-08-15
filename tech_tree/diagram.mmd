@@ -44,9 +44,9 @@ flowchart LR
     tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
     click tossBytecode href "#tossBytecode"
 
-    progressiveStencil[/"Progressive Stencil"/]
-    click progressiveStencil "#progressiveStencil"
-    nonGCScopes --> progressiveStencil
+    runFromStencil[/"Run From Stencil"/]
+    click runFromStencil "#runFromStencil"
+    nonGCScopes --> runFromStencil
 
     root --> immutableFlag["Immutable Object Detection at Parse Time"] --> optimizedImmutableLookups[/"Optimized Immutable Lookups"/]
     click immutableFlag href "#immutableFlag"
@@ -105,21 +105,24 @@ flowchart LR
 
     stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
     click stencilNav "#stencilNav"
-    stencilNav --> decoupledCaching[/"Decoupled Script Caching"/]
-    click decoupledCaching "#decoupledCaching"
-    stencilNav --> stencilNavScheduling[/"Stencil Navigation Scheduling"/]
-    click stencilNavScheduling "#stencilNavScheduling"
-    stencilNavScheduling --> compressDiskCache[/"Compressed On-Disk Caching"/]
+    root --> stencilNav
+    adaptableJSLoading[/"Adaptable JS Loading"/]
+    click adaptableJSLoading "#adaptableJSLoading"
+    adaptableJSLoading --> compressDiskCache[/"Practical Compressed On-Disk Caching"/]
     click compressDiskCache "#compressDiskCache"
+    offThreadNeckoAPI --> decoupledCaching[/"Decoupled Script Caching"/]
+    click decoupledCaching "#decoupledCaching"
+    stencilNav --> decoupledCaching
     stencilNav --> unifiedSubresourceApi["Unified Subresource API"]
     click unifiedSubresourceApi "#unifiedSubresourceApi"
     offThreadNeckoAPI[/"Off-thread Necko API"/]
     click offThreadNeckoAPI "#offThreadNeckoAPI"
-    offThreadNeckoAPI --> stencilNavScheduling
+    offThreadNeckoAPI --> adaptableJSLoading
 
     root --> contextFreeParsing["JSContext Free Parsing"]
-    contextFreeParsing -.-> stencilNav
-    contextFreeParsing --> stencilNavScheduling
+    %% This is a "nice to have" dependency, but the renderer doesn't support dashed lines yet, so leave it out for now
+    %%contextFreeParsing -.-> stencilNav
+    contextFreeParsing --> adaptableJSLoading
     contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
     click streamingParsing "#streamingParsing"
     streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
