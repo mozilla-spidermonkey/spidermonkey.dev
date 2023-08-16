@@ -120,8 +120,7 @@ flowchart LR
     offThreadNeckoAPI --> adaptableJSLoading
 
     root --> contextFreeParsing["JSContext Free Parsing"]
-    %% This is a "nice to have" dependency, but the renderer doesn't support dashed lines yet, so leave it out for now
-    %%contextFreeParsing -.-> stencilNav
+    contextFreeParsing -.-> stencilNav
     contextFreeParsing --> adaptableJSLoading
     contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
     click streamingParsing "#streamingParsing"
@@ -172,7 +171,7 @@ flowchart LR
 
     selfHostedCacheIROps --> lowerOverheadSelfHostedCacheIR
 
-    generatorBytecodeTransforms --> resumeInWarp
+    generatorBytecodeTransforms -.-> resumeInWarp
 
 
     %%subgraph ionImprovements [Ion Improvements]

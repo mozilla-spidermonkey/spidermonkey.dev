@@ -42,9 +42,18 @@ emph {
  *
  * The produced CSS classes are easy enough: LS-<startNode>.LE-<endNode>
  */
+.path.flowchart-link.LS-scheduling.LE-offThreadDelazification {
+    stroke-dasharray: 4;
+}
+.path.flowchart-link.LS-smRelocations.LE-inBinaryCode {
+    stroke-dasharray: 4;
+}
+.path.flowchart-link.LS-contextFreeParsing.LE-stencilNav {
+    stroke-dasharray: 4;
+}
 .path.flowchart-link.LS-generatorBytecodeTransforms.LE-resumeInWarp {
     stroke-dasharray: 4;
 }
-.path.flowchart-link.LS-smRelocations.LE-inBinaryStubs {
+.path.flowchart-link.LS-shareBaselineICs.LE-inBinaryStubs {
     stroke-dasharray: 4;
 }
