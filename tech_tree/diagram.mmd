@@ -48,9 +48,33 @@ flowchart LR
     click immutableFlag href "#immutableFlag"
 
     root --> evalCache["Redoing the Eval Cache"] --> precompiledEval[/"Precompiled Evals"/]
-    root --> pointerCompression["Pointer Compression"] --> compressedDOM["Compressed DOM Heap"]
+
+    root --> parallelMarking["Parallel marking"] --> concurrentMarking["Concurrent marking"]
+    class parallelMarking GC
+    class concurrentMarking GC
+
+    root --> contiguousNursery["Contiguous nursery region"] --> contiguousTenuredHeap["Contiguous tenured heap region"] --> pointerCompression["Pointer Compression"] --> compressedDOM["Compressed DOM Heap"]
+    class contiguousNursery GC
+    class contiguousTenuredHeap GC
     class pointerCompression GC
     class compressedDOM GC
+
+    root --> slotsAlloc["Custom slots/elements allocator"] --> dynamicGCThings["Dynamically sized GC things"]
+    class slotsAlloc GC
+    class dynamicGCThings GC
+
+    root --> partialNurseryCollection["Partial nursery collection"]
+    class partialNurseryCollection GC
+
+    root --> stringPretenuring["String pretenuring"] --> stringPreAtomization["String pre-atomization"]
+    class stringPretenuring GC
+    class stringPreAtomization GC
+
+    root --> weakPtrsInOptimizedCode["Use weak pointers for guards in optimized JIT code"]
+    class weakPtrsInOptimizedCode GC
+
+    root --> gcScheduling["Improve GC/CC scheduling"]
+    class gcScheduling GC
 
     root --> cc["Cycle Collection in SpiderMonkey"] --> refCount["RefCountable Objects in SpiderMonkey"]
     class cc GC
