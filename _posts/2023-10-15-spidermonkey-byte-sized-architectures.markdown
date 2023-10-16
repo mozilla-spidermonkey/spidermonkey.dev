@@ -12,5 +12,5 @@ JavaScript engine is put together. In the second part, I talk about
 [bytesize architectures](https://bytesizearchitecturesessions.com/) a
 way for teams to build a shared understanding of complicated systems.
 
-The [slides](https://github.com/dminor/jsconf-jp-tc39-collab-2023/blob/main/SpiderMonkey%20Byte-sized%20Architectures.pdf)
+The [slides](/assets/pdf/SpiderMonkey%20Byte-sized%20Architectures.pdf)
 and a [recording](https://www.youtube.com/watch?v=K4lp1sirkJg&t=1426s) are available.
