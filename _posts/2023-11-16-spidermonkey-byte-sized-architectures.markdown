@@ -2,7 +2,7 @@
 layout: post
 title: "SpiderMonkey Byte-Sized Architectures"
 author: Daniel Minor
-date: 2023-10-16 10:23:00 +0400
+date: 2023-11-16 10:23:00 +0400
 ---
 I recently presented on SpiderMonkey and Byte-Sized Architectures at a
 JSConf.jp/TC39 collaborative meeting the evening before the TC39 plenary
