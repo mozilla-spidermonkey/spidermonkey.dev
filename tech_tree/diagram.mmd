@@ -239,6 +239,11 @@ flowchart LR
     guardFuses --> invalidatingFuses[/"Fuses (Invalidating)"/]
     guardFuses --> dependentFuses[/"Dependent Fuses"/]
 
+    root --> mozLog["MozLog integration"]
+    root --> telemetry["Improved Telemetry and Telemetry Integration"]
+
+    root --> cacheStatistics["Performance metrics for SM caches"]
+
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
     %% is accessed relative to `window`.
