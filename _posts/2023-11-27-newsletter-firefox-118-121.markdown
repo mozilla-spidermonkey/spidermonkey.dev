@@ -37,7 +37,7 @@ We're also [shipping](https://bugzilla.mozilla.org/show_bug.cgi?id=1846789) Wasm
 We also shipped some new JS features in Firefox 119:
 
 * We [enabled](https://bugzilla.mozilla.org/show_bug.cgi?id=1850755) the well-formed Unicode Strings [proposal](https://github.com/tc39/proposal-is-usv-string). This adds `isWellFormed` and `toWellFormed` methods on `String.prototype`.
-* We also [shipped](https://bugzilla.mozilla.org/show_bug.cgi?id=1792650) `[Object.groupBy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy)` and `[Map.groupBy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/groupBy)`.
+* We also [shipped](https://bugzilla.mozilla.org/show_bug.cgi?id=1792650) [`Object.groupBy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy) and [`Map.groupBy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/groupBy).
 
 Additionally we will be [shipping](https://bugzilla.mozilla.org/show_bug.cgi?id=1845586) the `Promise.withResolvers` [proposal](https://github.com/tc39/proposal-promise-with-resolvers) in Firefox 121.
 
