@@ -29,6 +29,9 @@ for example:
 $ gem install bundler:2.0.2
 ```
 
+If you get `Error:  undefined method `[]' for nil` make sure you are using ruby <= 3.2.2(jekyll >= 4.3.2 requires ruby >= 3.3.0)
+
+
 ## Adding a new post
 
 - Create an entry in `_posts`, with title layout of `YYYY-MM-DD-title.markdown`
