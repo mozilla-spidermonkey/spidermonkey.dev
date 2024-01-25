@@ -1,5 +1,5 @@
 .main-content {
-  font-size: 1rem;
+  font-size: $font-size;
   padding: 0px 0;
   h1,
   h2,
@@ -10,6 +10,11 @@
     color: var(--color-primary);
     font-family: ZillaSlab-Regular;
     font-weight: $font-weight-semi-bold;
+    margin-top: $text-spacing;
+    margin-bottom: $text-spacing;
+    &:not(:first-child) {
+      margin-top: $heading-spacing;
+    }
   }
   h2 {
     background-color: var(--color-primary);
@@ -18,15 +23,16 @@
     font-size: 1.5em;
     padding: 0 10px 0 10px;
   }
+  ul,
+  p {
+    // margin-top: 0;
+    margin-bottom: $text-spacing;
+  }
   hr {
     border: none;
     border-bottom: 1px solid var(--color-primary);
     margin-top: -21px;
     width: 100%;
-  }
-  ul,
-  p {
-    margin: 0 0 $spacing-text;
   }
   @media (min-width: $bp-tablet) {
     padding: 0px 0;
