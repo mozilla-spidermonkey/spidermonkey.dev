@@ -7,9 +7,8 @@
     }
     &-title {
       display: block;
-      margin: 0px;
-      a,
-      h3 {
+      margin: 0!important;
+      a {
         background-color: var(--color-bg);
         color: var(--color-primary);
         padding: 5px 10px 5px 10px;
@@ -46,10 +45,8 @@
     clear: both;
     &-title {
       display: inline-block;
-      a,
-      h4 {
+      a {
         padding: inherit;
-        margin-left: 0;
         font-family: PT-Sans-S55;
       }
     }

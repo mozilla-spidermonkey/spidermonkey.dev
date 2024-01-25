@@ -27,6 +27,8 @@
     --color-logo-2: white;
   }
 }
+// Font size
+$font-size: 1rem;
 
 // Font weights
 $font-weight-light: 300;
@@ -35,7 +37,8 @@ $font-weight-semi-bold: 550;
 
 // Spacing
 $grid-gutter: 40px;
-$spacing-text: 32px;
+$heading-spacing: $font-size * 3;
+$text-spacing: $font-size;
 
 $footer-line-height: 32px;
 $footer-icon-width: 36px;
