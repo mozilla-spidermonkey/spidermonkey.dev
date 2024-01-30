@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "SpiderMonkey Newsletter (Firefox 122-123)"
-date:   2024-01-22 18:00:00 +0100
+date:   2024-01-30 18:00:00 +0100
 ---
 Hello everyone!
 
