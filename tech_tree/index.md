@@ -236,6 +236,26 @@ import draw_diagram from "./diagram.mjs"
 draw_diagram("./diagram.mmd","#tree");
 </script>
 
+## Shared WebIDL {#sharedWebIDL}
+
+Move WebIDL bindings generation into a layer which could be used by embedders to ease
+their ability to connect SpiderMonkey and their embeddings.
+
+## Unified GC Heap {#unifiedGCHeap}
+
+This would be pursuing the unification of the CC and GC, in a similar fashion to
+[Blink's unified GC](https://docs.google.com/document/d/1Hs60Zx1WPJ_LUjGvgzt1OQ5Cthu-fG-zif-vquUH_8c/edit#heading=h.nh3gzht95k4n)
+
+## Smart Pointers Unification {#smartPointerUnification}
+
+Make SpiderMonkey and Gecko use interoperable smart pointers
+
+## GC Library {#gcLibrary}
+
+Expose our GC as a library so that embedders can have C++ objects be collected;
+V8 has a sample of what that looks like [here](https://github.com/v8/v8/blob/main/samples/cppgc/hello-world.cc)
+
+
 ### Last Updated
 
 <div id="lastUpdated">Fetching</div>
