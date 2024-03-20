@@ -32,7 +32,7 @@ Sometimes a contributor comes along who decides that one of the ways they can he
 
 Vinny has been working on improving this, and has made enormous strides in helping to push this challenging area forward. In his own words: 
 
-> [Vinny Diehl]([https://github.com/vinnydiehl](https://github.com/vinnydiehl)) is a helicopter pilot who dabbles in software development and reverse engineering in his spare time. He has worked on flight simulators, game engines, and Nintendo decompilation projects, among other things. With a growing interest in browser work, he has made it his mission to perfect SpiderMonkey's date parsing compatibility. You can view some of his work in [the meta bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1274354).
+> [Vinny Diehl](https://github.com/vinnydiehl) is a helicopter pilot who dabbles in software development and reverse engineering in his spare time. He has worked on flight simulators, game engines, and Nintendo decompilation projects, among other things. With a growing interest in browser work, he has made it his mission to perfect SpiderMonkey's date parsing compatibility. You can view some of his work in [the meta bug](https://bugzilla.mozilla.org/show_bug.cgi?id=1274354).
 
 Huge amounts of gratitude to Vinny for tackling this and making Firefox more compatible for everyone. 
 
