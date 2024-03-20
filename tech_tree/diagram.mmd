@@ -250,6 +250,20 @@ flowchart LR
 
     root --> cacheStatistics["Performance metrics for SM caches"]
 
+
+        unifiedGcHeap["Unified GC Heap"]
+        click unifiedGcHeap "#unifiedGcHeap"
+        class unifiedGcHeap GC
+
+        smartPointerUnification["Smart Pointer Unification"]
+
+        unifiedGcHeap --> gcLibrary["GC Library"]
+        click gcLibrary "#gcLibrary"
+        class gcLibrary GC
+
+
+    root -->unifiedGcHeap
+    root --> smartPointerUnification
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
     %% is accessed relative to `window`.
