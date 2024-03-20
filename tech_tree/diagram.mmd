@@ -168,9 +168,6 @@ flowchart LR
         iteratorsWithICs --> fasterForOf
         iteratorsWithICs --> destructuringBytecode
 
-        fasterArrayDestructuring["Faster implementation of array destructuring "]
-        class fasterArrayDestructuring JIT
-
         destructuringBytecode --> fasterArrayDestructuring
     %%end
     %%root --> improvedBytecode
