@@ -53,36 +53,36 @@ flowchart LR
 
     root --> evalCache["Redoing the Eval Cache"] --> precompiledEval[/"Precompiled Evals"/]
 
-    root --> parallelMarking["Parallel marking"] --> androidParallelMarking["Parallel marking on Android"]
+    root --> parallelMarking[/"Parallel marking"/] --> androidParallelMarking[/"Parallel marking on Android"/]
     class parallelMarking GC
     class androidParallelMarking GC
 
-    parallelMarking --> moreParallelMarking["Parallel marking with >2 threads"]
+    parallelMarking --> moreParallelMarking[/"Parallel marking with >2 threads"/]
     class moreParallelMarking GC
     root --> contiguousGCHeap["Contiguous GC heap region"] --> pointerCompression["Pointer Compression"] --> compressedDOM["Compressed DOM Heap"]
     class contiguousGCHeap GC
     class pointerCompression GC
     class compressedDOM GC
 
-    root --> slotsAlloc["Custom slots/elements allocator"] --> dynamicGCThings["Dynamically sized GC things"] --> concurrentMarking["Concurrent marking"] --> sharedStructs["Shared structs"]
+    root --> slotsAlloc["Custom slots/elements allocator"] --> dynamicGCThings["Dynamically sized GC things"] --> concurrentMarking[/"Concurrent marking"/] --> sharedStructs["Shared structs"]
     class slotsAlloc GC
     class dynamicGCThings GC
     class concurrentMarking GC
     class sharedStructs GC
 
-    root --> partialNurseryCollection["Partial nursery collection"]
+    root --> partialNurseryCollection[/"Partial nursery collection"/]
     class partialNurseryCollection GC
 
-    root --> parallelNurseryEviction["Parallel nursery eviction"]
+    root --> parallelNurseryEviction[/"Parallel nursery eviction"/]
     class parallelNurseryEviction GC
-    root --> stringPretenuring["String pretenuring"] --> stringPreAtomization["String pre-atomization"]
+    root --> stringPretenuring[/"String pretenuring"/] --> stringPreAtomization["String pre-atomization"]
     class stringPretenuring GC
     class stringPreAtomization GC
 
     root --> weakPtrsInOptimizedCode["Use weak pointers for guards in optimized JIT code"]
     class weakPtrsInOptimizedCode GC
 
-    root --> gcScheduling["Improve browser GC/CC scheduling"]
+    root --> gcScheduling[/"Improve browser GC/CC scheduling"/]
     root --> fullHeapScheduling["Improve GC scheduling when heap fills up"]
     class gcScheduling GC
     class fullHeapScheduling GC
@@ -93,7 +93,7 @@ flowchart LR
 
     cc --> smHeap["SpiderMonkey Owns the Firefox Heap"] --> compressedDOM
     class smHeap GC
-    root --> incrementalWorkerGC["Incremental GC on workers"]
+    root --> incrementalWorkerGC[/"Incremental GC on workers"/]
     class incrementalWorkerGC GC
 
     inBinaryStubs[/"In-Binary CacheIR Stubs"/]
