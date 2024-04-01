@@ -242,9 +242,12 @@ flowchart LR
     click simplifiedExceptions "#simplifiedExceptions"
 
     root --> guardFuses[/"Fuses (Guarding)"/]
+    class guardFuses Done
     guardFuses --> invalidatingFuses[/"Fuses (Invalidating)"/]
+    class invalidatingFuses Done
     guardFuses --> dependentFuses[/"Dependent Fuses"/]
-
+    class dependentFuses Done
+    
     root --> mozLog["MozLog integration"]
     root --> telemetry["Improved Telemetry and Telemetry Integration"]
 
