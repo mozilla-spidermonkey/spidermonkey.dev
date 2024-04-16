@@ -159,6 +159,11 @@ flowchart LR
 
         selfHostedCacheIROps --> iteratorsWithICs
 
+        fasterProxyTraps["CallScriptedProxyFoo ops backed by self-hosted code"]
+        class fasterProxyTraps JIT
+
+        selfHostedCacheIROps --> fasterProxyTraps
+
         fasterForOf["Faster implementation of `for-of` "]
         class fasterForOf JIT
 
