@@ -1,3 +1,26 @@
+:root {
+  --color-tech-tree-text: #ffd681;
+  --color-tech-tree-link: #807030;
+  --color-tech-tree-frame: #ffd681;
+  --color-tech-tree-node: #203040;
+  --color-tech-tree-done: #304030;
+  --color-tech-tree-gc: #404010;
+  --color-tech-tree-jit: #402010;
+  --color-tech-tree-legend: #201020;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-tech-tree-text: #333333;
+    --color-tech-tree-link: #333333;
+    --color-tech-tree-frame: #9370db;
+    --color-tech-tree-node: #ececff;
+    --color-tech-tree-done: #ceebcf;
+    --color-tech-tree-gc: #faf3c2;
+    --color-tech-tree-jit: #ffca61;
+    --color-tech-tree-legend: #e9d3ff;
+  }
+}
+
 .tree {
     width: 140%;
     text-align: center;
@@ -16,16 +39,42 @@
     font-size: 98%; /* Adjust for larger space required by italics */
 }
 
-.done > * {
-    fill: #ceebcf !important;
+#renderedTree span.nodeLabel {
+    color: var(--color-tech-tree-text) !important;
 }
 
-.GC > * {
-    fill: #faf3c2 !important;
+#renderedTree .flowchart-link {
+    stroke: var(--color-tech-tree-link) !important;
 }
 
-.JIT > * {
-    fill: #ffca61 !important;
+#renderedTree .marker {
+    fill: var(--color-tech-tree-link) !important;
+    stroke: var(--color-tech-tree-link) !important;
+}
+
+#renderedTree .subgraph-lvl-0 {
+    fill: var(--color-tech-tree-legend) !important;
+    stroke: none !important;
+}
+
+#renderedTree .node > * {
+    fill: var(--color-tech-tree-node) !important;
+    stroke: var(--color-tech-tree-frame) !important;
+}
+
+#renderedTree .node.done > * {
+    fill: var(--color-tech-tree-done) !important;
+    stroke: var(--color-tech-tree-frame) !important;
+}
+
+#renderedTree .node.GC > * {
+    fill: var(--color-tech-tree-gc) !important;
+    stroke: var(--color-tech-tree-frame) !important;
+}
+
+#renderedTree .node.JIT > * {
+    fill: var(--color-tech-tree-jit) !important;
+    stroke: var(--color-tech-tree-frame) !important;
 }
 
 emph {
