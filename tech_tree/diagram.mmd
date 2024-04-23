@@ -21,10 +21,6 @@ flowchart LR
         perf[/"A performance item"/]
     end
 
-    shapeIndexes[Shape Indexes]
-    shapeIndexes --> taggedShapeIndexes[Tagged Shape Indexes]
-    click shapeIndexes href "#shapeIndexes"
-    click taggedShapeIndexes href "#taggedShapeIndexes"
 
     inMemoryJITHints[/"In Memory JIT Hints"/] --> onDiskJITHints[/"On  Disk JIT Hints"/] --> ric[/"Reusable Inline Caches"/]
     class inMemoryJITHints done;
@@ -35,113 +31,111 @@ flowchart LR
 
     click ric href "#ric"
 
-    webIDL["WebIDL For SpiderMonkey"] --> ecmaIDL["ECMA-IDL (an IDL for ECMAScript)"]
-    scheduling["Thread Scheduling and Integration"] -.-> offThreadDelazification[/"Off-Thread Delazification"/]
-    nonGCScopes["Convert Scopes from GC to non-GC things"] --> universalRelazification["Universal Relazification"]
-    click universalRelazification href "#universalRelazification"
+    subgraph Bindings
+      webIDL["WebIDL For SpiderMonkey"] --> ecmaIDL["ECMA-IDL (an IDL for ECMAScript)"]
+    end
 
-    universalRelazification --> tossBytecode["Regenerate Bytecode For Correctness"]
-    tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
-    click tossBytecode href "#tossBytecode"
+    subgraph threadsAndScheduling[Threads and Scheduling]
+        scheduling["Thread Scheduling and Integration"] -.-> offThreadDelazification[/"Off-Thread Delazification"/]
+    end
 
-    runFromStencil[/"Run From Stencil"/]
-    click runFromStencil "#runFromStencil"
-    nonGCScopes --> runFromStencil
+    subgraph loadingAndProgramRepresentation[Loaders and Program Representation]
+        nonGCScopes["Convert Scopes from GC to non-GC things"] --> universalRelazification["Universal Relazification"]
+        click universalRelazification href "#universalRelazification"
 
-    immutableFlag["Immutable Object Detection at Parse Time"] --> optimizedImmutableLookups[/"Optimized Immutable Lookups"/]
-    click immutableFlag href "#immutableFlag"
+        universalRelazification --> tossBytecode["Regenerate Bytecode For Correctness"]
+        tossBytecode --> optimizedBytecode["Optimized Bytecode Emission"]
+        click tossBytecode href "#tossBytecode"
 
-    evalCache["Redoing the Eval Cache"] --> precompiledEval[/"Precompiled Evals"/]
+        runFromStencil[/"Run From Stencil"/]
+        click runFromStencil "#runFromStencil"
+        nonGCScopes --> runFromStencil
 
-    parallelMarking[/"Parallel marking"/] --> androidParallelMarking[/"Parallel marking on Android"/]
-    class parallelMarking GC
-    class androidParallelMarking GC
+        immutableFlag["Immutable Object Detection at Parse Time"] --> optimizedImmutableLookups[/"Optimized Immutable Lookups"/]
+        click immutableFlag href "#immutableFlag"
 
-    parallelMarking --> moreParallelMarking[/"Parallel marking with >2 threads"/]
-    class moreParallelMarking GC
-    contiguousGCHeap["Contiguous GC heap region"] --> pointerCompression["Pointer Compression"] --> compressedDOM["Compressed DOM Heap"]
-    class contiguousGCHeap GC
-    class pointerCompression GC
-    class compressedDOM GC
-
-    slotsAlloc["Custom slots/elements allocator"] --> dynamicGCThings["Dynamically sized GC things"] --> concurrentMarking[/"Concurrent marking"/] --> sharedStructs["Shared structs"]
-    class slotsAlloc GC
-    class dynamicGCThings GC
-    class concurrentMarking GC
-    class sharedStructs GC
-
-    partialNurseryCollection[/"Partial nursery collection"/]
-    class partialNurseryCollection GC
-
-    parallelNurseryEviction[/"Parallel nursery eviction"/]
-    class parallelNurseryEviction GC
-    stringPretenuring[/"String pretenuring"/] --> stringPreAtomization["String pre-atomization"]
-    class stringPretenuring GC
-    class stringPreAtomization GC
-
-    weakPtrsInOptimizedCode["Use weak pointers for guards in optimized JIT code"]
-    class weakPtrsInOptimizedCode GC
-
-    gcScheduling[/"Improve browser GC/CC scheduling"/]
-    fullHeapScheduling["Improve GC scheduling when heap fills up"]
-    class gcScheduling GC
-    class fullHeapScheduling GC
-
-    cc["Cycle Collection in SpiderMonkey"] --> refCount["RefCountable Objects in SpiderMonkey"]
-    class cc GC
-    class refCount GC
-
-    cc --> smHeap["SpiderMonkey Owns the Firefox Heap"] --> compressedDOM
-    class smHeap GC
-    incrementalWorkerGC[/"Incremental GC on workers"/]
-    class incrementalWorkerGC GC
-
-    inBinaryStubs[/"In-Binary CacheIR Stubs"/]
-    smRelocations["SpiderMonkey Relocations"]
-    click smRelocations href "#smRelocations"
-
-    frozenRuntime[/"In Binary Frozen Runtime"/]
-    frozenRuntime --> bakedFirefox[/"'Instant Startup' Firefox Binaries"/]
-
-    inBinaryStubs --> frozenRuntime
-    inBinaryTrampolines[/"In-Binary Trampolines"/] --> frozenRuntime
-    inBinaryBaselineInterpreter[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
-
-    inBinaryCode["Embed Generated Code in Binary"] --> inBinaryStubs & inBinaryTrampolines & inBinaryBaselineInterpreter
-    click inBinaryCode "#inBinaryCode"
-    smRelocations -.-> inBinaryCode
+        evalCache["Redoing the Eval Cache"] --> precompiledEval[/"Precompiled Evals"/]
 
 
-    stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
-    click stencilNav "#stencilNav"
-    stencilNav
-    adaptableJSLoading[/"Adaptable JS Loading"/]
-    click adaptableJSLoading "#adaptableJSLoading"
-    adaptableJSLoading --> compressDiskCache[/"Practical Compressed On-Disk Caching"/]
-    click compressDiskCache "#compressDiskCache"
-    offThreadNeckoAPI --> decoupledCaching[/"Decoupled Script Caching"/]
-    click decoupledCaching "#decoupledCaching"
-    stencilNav --> decoupledCaching
-    stencilNav --> unifiedSubresourceApi["Unified Subresource API"]
-    click unifiedSubresourceApi "#unifiedSubresourceApi"
-    offThreadNeckoAPI[/"Off-thread Necko API"/]
-    click offThreadNeckoAPI "#offThreadNeckoAPI"
-    offThreadNeckoAPI --> adaptableJSLoading
 
-    contextFreeParsing["JSContext Free Parsing"]
-    contextFreeParsing -.-> stencilNav
-    contextFreeParsing --> adaptableJSLoading
-    contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
-    click streamingParsing "#streamingParsing"
-    streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
+        inBinaryStubs[/"In-Binary CacheIR Stubs"/]
+        smRelocations["SpiderMonkey Relocations"]
+        click smRelocations href "#smRelocations"
 
-    onDiskBaselineCode[/"On-Disk Baseline Code"/]
-    click onDiskBaselineCode "#onDiskBaselineCode"
-    stencilNav --> onDiskBaselineCode
-    inBinarySelfHostedBaseline --> onDiskBaselineCode
+        frozenRuntime[/"In Binary Frozen Runtime"/]
+        frozenRuntime --> bakedFirefox[/"'Instant Startup' Firefox Binaries"/]
+
+        inBinaryStubs --> frozenRuntime
+        inBinaryTrampolines[/"In-Binary Trampolines"/] --> frozenRuntime
+        inBinaryBaselineInterpreter[/"In-Binary Baseline Interpreter"/] --> frozenRuntime
+
+        inBinaryCode["Embed Generated Code in Binary"] --> inBinaryStubs & inBinaryTrampolines & inBinaryBaselineInterpreter
+        click inBinaryCode "#inBinaryCode"
+        smRelocations -.-> inBinaryCode
 
 
-    %% subgraph improvedBytecode [Bytecode Improvements]
+        stencilNav[/"In-Memory Stencil Caching (stencil-nav)"/]
+        click stencilNav "#stencilNav"
+        stencilNav
+        adaptableJSLoading[/"Adaptable JS Loading"/]
+        click adaptableJSLoading "#adaptableJSLoading"
+        adaptableJSLoading --> compressDiskCache[/"Practical Compressed On-Disk Caching"/]
+        click compressDiskCache "#compressDiskCache"
+        offThreadNeckoAPI --> decoupledCaching[/"Decoupled Script Caching"/]
+        click decoupledCaching "#decoupledCaching"
+        stencilNav --> decoupledCaching
+        stencilNav --> unifiedSubresourceApi["Unified Subresource API"]
+        click unifiedSubresourceApi "#unifiedSubresourceApi"
+        offThreadNeckoAPI[/"Off-thread Necko API"/]
+        click offThreadNeckoAPI "#offThreadNeckoAPI"
+        offThreadNeckoAPI --> adaptableJSLoading
+
+        contextFreeParsing["JSContext Free Parsing"]
+        contextFreeParsing -.-> stencilNav
+        contextFreeParsing --> adaptableJSLoading
+        contextFreeParsing --> streamingParsing[/"Streaming Parsing"/]
+        click streamingParsing "#streamingParsing"
+        streamingParsing --> networkParsing[/"Incremental Parsing of Network Chunks"/]
+
+        onDiskBaselineCode[/"On-Disk Baseline Code"/]
+        click onDiskBaselineCode "#onDiskBaselineCode"
+        stencilNav --> onDiskBaselineCode
+        inBinarySelfHostedBaseline --> onDiskBaselineCode
+
+        cacheSelfHostedJitCode["Cache self-hosted baseline JIT code per-runtime"]
+        class cacheSelfHostedJitCode JIT
+
+        cacheRegularJitCode["Cache non-self-hosted baseline JIT code per-runtime"]
+        class cacheRegularJitCode JIT
+
+        precompileBaselineICs["Precompile Baseline ICs"]
+        class precompileBaselineICs JIT
+        click precompileBaselineICs href "https://bugzilla.mozilla.org/show_bug.cgi?id=1357884"
+
+        shareBaselineICs["Share precompiled baseline ICs across processes"]
+
+        cacheSelfHostedJitCode --> cacheRegularJitCode
+        precompileBaselineICs -->  shareBaselineICs
+
+        shareBaselineICs -.-> inBinaryStubs
+
+        sharePrecompiledBaselineAcrossProcesses[/"Share Precompiled Baseline JIT Code Across Processes"/]
+        cacheSelfHostedJitCode --> sharePrecompiledBaselineAcrossProcesses
+        shareBaselineICs --> sharePrecompiledBaselineAcrossProcesses
+
+        inBinarySelfHostedBaseline["In-Binary Self-hosted Baseline Code"]
+        inBinarySelfHostedBaseline --> frozenRuntime
+        inBinaryCode --> inBinarySelfHostedBaseline
+        cacheSelfHostedJitCode --> inBinarySelfHostedBaseline
+
+
+        shapeIndexes[Shape Indexes]
+        shapeIndexes --> taggedShapeIndexes[Tagged Shape Indexes]
+        click shapeIndexes href "#shapeIndexes"
+        click taggedShapeIndexes href "#taggedShapeIndexes"
+    end
+
+    subgraph improvedBytecode [Bytecode Improvements]
         destructuringBytecode[/"Better Bytecode for Destructuring"/]
         click destructuringBytecode "#destructuringBytecode"
 
@@ -174,18 +168,17 @@ flowchart LR
         iteratorsWithICs --> destructuringBytecode
 
         destructuringBytecode --> fasterArrayDestructuring
-    %%end
-    %%improvedBytecode
 
-    lowerOverheadSelfHostedCacheIR["Lower-overhead calls for CacheIR ops backed by self-hosted code"]
-    class lowerOverheadSelfHostedCacheIR JIT
+        lowerOverheadSelfHostedCacheIR["Lower-overhead calls for CacheIR ops backed by self-hosted code"]
+        class lowerOverheadSelfHostedCacheIR JIT
 
-    selfHostedCacheIROps --> lowerOverheadSelfHostedCacheIR
+        selfHostedCacheIROps --> lowerOverheadSelfHostedCacheIR
+    end
 
     generatorBytecodeTransforms -.-> resumeInWarp
 
 
-    %%subgraph ionImprovements [Ion Improvements]
+    subgraph ionImprovements[JIT Developments]
         shareIonICs[/"Share Ion ICs"/]
         class shareIonICs JIT
         click shareIonICs "#shareIonICs"
@@ -204,40 +197,15 @@ flowchart LR
         resumeInWarp[/"Resume In Warp"/]
         class resumeInWarp JIT
         click resumeInWarp href "https://bugzilla.mozilla.org/show_bug.cgi?id=1681338"
-    %%end
-    %% ionImprovements
 
-    midTier[/"A Mid-Tier JIT"/]
-    click midTier "#midTier"
-    class midTier JIT
+        midTier[/"A Mid-Tier JIT"/]
+        click midTier "#midTier"
+        class midTier JIT
+    end
 
-    cacheSelfHostedJitCode["Cache self-hosted baseline JIT code per-runtime"]
-    class cacheSelfHostedJitCode JIT
 
-    cacheRegularJitCode["Cache non-self-hosted baseline JIT code per-runtime"]
-    class cacheRegularJitCode JIT
 
-    precompileBaselineICs["Precompile Baseline ICs"]
-    class precompileBaselineICs JIT
-    click precompileBaselineICs href "https://bugzilla.mozilla.org/show_bug.cgi?id=1357884"
 
-    shareBaselineICs["Share precompiled baseline ICs across processes"]
-
-    cacheSelfHostedJitCode --> cacheRegularJitCode
-    precompileBaselineICs -->  shareBaselineICs
-
-    shareBaselineICs -.-> inBinaryStubs
-
-    sharePrecompiledBaselineAcrossProcesses[/"Share Precompiled Baseline JIT Code Across Processes"/]
-    cacheSelfHostedJitCode --> sharePrecompiledBaselineAcrossProcesses
-    shareBaselineICs --> sharePrecompiledBaselineAcrossProcesses
-
-    inBinarySelfHostedBaseline["In-Binary Self-hosted Baseline Code"]
-    inBinarySelfHostedBaseline --> frozenRuntime
-    inBinaryCode --> inBinarySelfHostedBaseline
-    cacheSelfHostedJitCode --> inBinarySelfHostedBaseline
-
-    selfHostedCacheIROps
 
 
     selfHostedReplacement["Replace self-hosted code with a new DSL"]
@@ -252,12 +220,58 @@ flowchart LR
     class invalidatingFuses Done
     guardFuses --> dependentFuses[/"Dependent Fuses"/]
     class dependentFuses Done
-    
-    mozLog["MozLog integration"]
-    telemetry["Improved Telemetry and Telemetry Integration"]
 
-    cacheStatistics["Performance metrics for SM caches"]
+    subgraph betterInformation["Better Information"]
+        mozLog["MozLog integration"]
+        telemetry["Improved Telemetry and Telemetry Integration"]
+        cacheStatistics[/"Performance metrics for SM caches"/]
+    end
 
+
+    subgraph memoryManagement["Memory Management"]
+        parallelMarking[/"Parallel marking"/] --> androidParallelMarking[/"Parallel marking on Android"/]
+        class parallelMarking GC
+        class androidParallelMarking GC
+
+        parallelMarking --> moreParallelMarking[/"Parallel marking with >2 threads"/]
+        class moreParallelMarking GC
+        contiguousGCHeap["Contiguous GC heap region"] --> pointerCompression["Pointer Compression"] --> compressedDOM["Compressed DOM Heap"]
+        class contiguousGCHeap GC
+        class pointerCompression GC
+        class compressedDOM GC
+
+        slotsAlloc["Custom slots/elements allocator"] --> dynamicGCThings["Dynamically sized GC things"] --> concurrentMarking[/"Concurrent marking"/] --> sharedStructs["Shared structs"]
+        class slotsAlloc GC
+        class dynamicGCThings GC
+        class concurrentMarking GC
+        class sharedStructs GC
+
+        partialNurseryCollection[/"Partial nursery collection"/]
+        class partialNurseryCollection GC
+
+        parallelNurseryEviction[/"Parallel nursery eviction"/]
+        class parallelNurseryEviction GC
+        stringPretenuring[/"String pretenuring"/] --> stringPreAtomization["String pre-atomization"]
+        class stringPretenuring GC
+        class stringPreAtomization GC
+
+        weakPtrsInOptimizedCode["Use weak pointers for guards in optimized JIT code"]
+        class weakPtrsInOptimizedCode GC
+
+        gcScheduling[/"Improve browser GC/CC scheduling"/]
+        fullHeapScheduling["Improve GC scheduling when heap fills up"]
+        class gcScheduling GC
+        class fullHeapScheduling GC
+
+        cc["Cycle Collection in SpiderMonkey"] --> refCount["RefCountable Objects in SpiderMonkey"]
+        class cc GC
+        class refCount GC
+
+        cc --> smHeap["SpiderMonkey Owns the Firefox Heap"] --> compressedDOM
+        class smHeap GC
+
+        incrementalWorkerGC[/"Incremental GC on workers"/]
+        class incrementalWorkerGC GC
 
         unifiedGcHeap["Unified GC Heap"]
         click unifiedGcHeap "#unifiedGcHeap"
@@ -268,22 +282,12 @@ flowchart LR
         unifiedGcHeap --> gcLibrary["GC Library"]
         click gcLibrary "#gcLibrary"
         class gcLibrary GC
+    end
 
     Sharks --> laserSharks["Laser Sharks"]
     Lasers --> laserSharks
 
-    unifiedGcHeap
-    smartPointerUnification
     %% Click Handlers
     %% Example of a programatic click handler for giggles. Notice that the callback
     %% is accessed relative to `window`.
     %% click webIDL callbacks.exampleCallback
-
-    %% As an example of how we could group projects together.
-    %% Commented out for now.
-    %% subgraph "Gecko Managed Runtime"
-    %%     cc
-    %%     smHeap
-    %%     webIDL
-    %%     ecmaIDL
-    %% end
