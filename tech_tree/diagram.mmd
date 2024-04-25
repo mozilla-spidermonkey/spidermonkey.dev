@@ -215,11 +215,11 @@ flowchart LR
     click simplifiedExceptions "#simplifiedExceptions"
 
     guardFuses[/"Fuses (Guarding)"/]
-    class guardFuses Done
+    class guardFuses done
     guardFuses --> invalidatingFuses[/"Fuses (Invalidating)"/]
-    class invalidatingFuses Done
+    class invalidatingFuses done
     guardFuses --> dependentFuses[/"Dependent Fuses"/]
-    class dependentFuses Done
+    class dependentFuses done
 
     subgraph betterInformation["Better Information"]
         mozLog["MozLog integration"]
