@@ -223,6 +223,7 @@ flowchart LR
     invalidatingFuses --> denseElements[/"Optimize denseElement checks on Array.prototype and Object.prototype"/]
     guardFuses --> denseElements
     click denseElements "https://bugzilla.mozilla.org/show_bug.cgi?id=1805709#c1"
+    invalidatingFuses --> speciesFuses[/"Avoid species overhead when unused"/]
 
     subgraph betterInformation["Better Information"]
         mozLog["MozLog integration"]
