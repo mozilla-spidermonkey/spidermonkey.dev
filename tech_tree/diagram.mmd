@@ -6,6 +6,11 @@
 %% -- As well, it becomes very very wide as there's more complexity added to the
 %%    diagram.
 
+%% Click Handlers
+%% Example of a programatic click handler for giggles. Notice that the callback
+%% is accessed relative to `window`.
+%% click webIDL callbacks.exampleCallback
+
 flowchart LR
     subgraph Legend
         Done
@@ -21,15 +26,36 @@ flowchart LR
         perf[/"A performance item"/]
     end
 
+    subgraph Unsorted
+        Sharks --> laserSharks["Laser Sharks"]
+        Lasers --> laserSharks
 
-    inMemoryJITHints[/"In Memory JIT Hints"/] --> onDiskJITHints[/"On  Disk JIT Hints"/] --> ric[/"Reusable Inline Caches"/]
-    class inMemoryJITHints done;
-    click inMemoryJITHints href "https://bugzilla.mozilla.org/show_bug.cgi?id=1824772"
+        inMemoryJITHints[/"In Memory JIT Hints"/] --> onDiskJITHints[/"On  Disk JIT Hints"/] --> ric[/"Reusable Inline Caches"/]
+        class inMemoryJITHints done;
+        click inMemoryJITHints href "https://bugzilla.mozilla.org/show_bug.cgi?id=1824772"
 
-    class onDiskJITHints JIT;
-    class ric JIT;
+        class onDiskJITHints JIT;
+        class ric JIT;
 
-    click ric href "#ric"
+        click ric href "#ric"
+
+        selfHostedReplacement["Replace self-hosted code with a new DSL"]
+
+        crashOnOOM["Crash on OOM"]
+        crashOnOOM --> simplifiedExceptions["Simplified Exceptions"]
+        click simplifiedExceptions "#simplifiedExceptions"
+
+        guardFuses[/"Fuses (Guarding)"/]
+        class guardFuses done
+        guardFuses --> invalidatingFuses[/"Fuses (Invalidating)"/]
+        class invalidatingFuses done
+        guardFuses --> dependentFuses[/"Dependent Fuses"/]
+        class dependentFuses done
+        invalidatingFuses --> denseElements[/"Optimize denseElement checks on Array.prototype and Object.prototype"/]
+        guardFuses --> denseElements
+        click denseElements "https://bugzilla.mozilla.org/show_bug.cgi?id=1805709#c1"
+        invalidatingFuses --> speciesFuses[/"Avoid species overhead when unused"/]
+    end
 
     subgraph Bindings
       webIDL["WebIDL For SpiderMonkey"] --> ecmaIDL["ECMA-IDL (an IDL for ECMAScript)"]
@@ -135,7 +161,7 @@ flowchart LR
         click taggedShapeIndexes href "#taggedShapeIndexes"
     end
 
-    subgraph improvedBytecode [Bytecode Improvements]
+    subgraph improvedBytecode[Bytecode Improvements]
         destructuringBytecode[/"Better Bytecode for Destructuring"/]
         click destructuringBytecode "#destructuringBytecode"
 
@@ -175,9 +201,6 @@ flowchart LR
         selfHostedCacheIROps --> lowerOverheadSelfHostedCacheIR
     end
 
-    generatorBytecodeTransforms -.-> resumeInWarp
-
-
     subgraph ionImprovements[JIT Developments]
         shareIonICs[/"Share Ion ICs"/]
         class shareIonICs JIT
@@ -197,40 +220,18 @@ flowchart LR
         resumeInWarp[/"Resume In Warp"/]
         class resumeInWarp JIT
         click resumeInWarp href "https://bugzilla.mozilla.org/show_bug.cgi?id=1681338"
+        generatorBytecodeTransforms -.-> resumeInWarp
 
         midTier[/"A Mid-Tier JIT"/]
         click midTier "#midTier"
         class midTier JIT
     end
 
-
-
-
-
-
-    selfHostedReplacement["Replace self-hosted code with a new DSL"]
-
-    crashOnOOM["Crash on OOM"]
-    crashOnOOM --> simplifiedExceptions["Simplified Exceptions"]
-    click simplifiedExceptions "#simplifiedExceptions"
-
-    guardFuses[/"Fuses (Guarding)"/]
-    class guardFuses done
-    guardFuses --> invalidatingFuses[/"Fuses (Invalidating)"/]
-    class invalidatingFuses done
-    guardFuses --> dependentFuses[/"Dependent Fuses"/]
-    class dependentFuses done
-    invalidatingFuses --> denseElements[/"Optimize denseElement checks on Array.prototype and Object.prototype"/]
-    guardFuses --> denseElements
-    click denseElements "https://bugzilla.mozilla.org/show_bug.cgi?id=1805709#c1"
-    invalidatingFuses --> speciesFuses[/"Avoid species overhead when unused"/]
-
     subgraph betterInformation["Better Information"]
         mozLog["MozLog integration"]
         telemetry["Improved Telemetry and Telemetry Integration"]
         cacheStatistics[/"Performance metrics for SM caches"/]
     end
-
 
     subgraph memoryManagement["Memory Management"]
         parallelMarking[/"Parallel marking"/] --> androidParallelMarking[/"Parallel marking on Android"/]
@@ -287,11 +288,3 @@ flowchart LR
         click gcLibrary "#gcLibrary"
         class gcLibrary GC
     end
-
-    Sharks --> laserSharks["Laser Sharks"]
-    Lasers --> laserSharks
-
-    %% Click Handlers
-    %% Example of a programatic click handler for giggles. Notice that the callback
-    %% is accessed relative to `window`.
-    %% click webIDL callbacks.exampleCallback
