@@ -4,8 +4,6 @@ title: "SpiderMonkey Newsletter (Firefox 130-131)"
 date: 2024-09-12 15:33:08 -0500
 ---
 
-# SpiderMonkey Newsletter 130-131
-
 Hello everyone\!
 
 I’m Bryan Thrall, just passing two and a half years on the SpiderMonkey team, and taking a try at newsletter writing.
