@@ -2,6 +2,7 @@
 layout: post
 title:  "75x faster: optimizing the Ion compiler backend"
 date:   2024-10-16 18:00:00 +0100
+author: Jan de Mooij
 ---
 
 In September, machine learning engineers at Mozilla filed [a bug report](https://bugzilla.mozilla.org/show_bug.cgi?id=1916442) indicating that Firefox was consuming excessive memory and CPU resources while running Microsoft's [ONNX Runtime](https://github.com/microsoft/onnxruntime) (a machine learning library) compiled to WebAssembly.
