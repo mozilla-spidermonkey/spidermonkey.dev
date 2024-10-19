@@ -37,7 +37,7 @@ This change from sorted linked lists to optionally-sorted vectors made Ion compi
 
 ### Semi-NCA
 
-The next problem that stood out in performance profiles was the Dominator Tree Building compiler pass, in particular a function called `ComputeImmediateDominators`. This function determines the [immediate dominator](https://en.wikipedia.org/wiki/Dominator_\(graph_theory\)) block for each basic block in the MIR graph.
+The next problem that stood out in performance profiles was the Dominator Tree Building compiler pass, in particular a function called `ComputeImmediateDominators`. This function determines the [immediate dominator](https://en.wikipedia.org/wiki/Dominator_(graph_theory)) block for each basic block in the MIR graph.
 
 The algorithm we used for this (based on *A Simple, Fast Dominance Algorithm* by Cooper et al) is relatively simple but didn't scale well to very large graphs.
 
