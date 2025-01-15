@@ -9,14 +9,14 @@ After many long years, the [Memory64 proposal](https://github.com/WebAssembly/me
 
 If you are like most readers, you may be wondering: "Why wasn't WebAssembly 64-bit to begin with?" Yes, it's the year 2025 and WebAssembly has only just added 64-bit pointers. Why did it take so long, when 64-bit devices are the majority and 8GB of RAM is considered the bare minimum?
 
-It's easy to think that 64-bit WebAssembly would run better on 64-bit hardware, but unfortunately that's simply not the case. WebAssembly apps tend to run slower in 64-bit mode than they do in 32-bit mode. This is not due to a lack of optimization; instead, the performance of Memory64 is restricted by hardware, operating systems, and the design of WebAssembly itself.
+It's easy to think that 64-bit WebAssembly would run better on 64-bit hardware, but unfortunately that's simply not the case. WebAssembly apps tend to run slower in 64-bit mode than they do in 32-bit mode. This performance penalty depends on the workload, but a 20% slowdown is not uncommon, and we've seen code run over 2x slower under Memory64.
 
-**TL;DR:** 32-bit WebAssembly can take advantage of an optimization that speeds up all memory accesses, while 64-bit cannot.
+This is not simply due to a lack of optimization. Instead, the performance of Memory64 is restricted by hardware, operating systems, and the design of WebAssembly itself.
 
 
 ## What is Memory64, actually?
 
-To understand why Memory64 is slow, we first must understand how WebAssembly represents memory.
+To understand why Memory64 is slower, we first must understand how WebAssembly represents memory.
 
 When you compile a program to WebAssembly, the result is a WebAssembly module. A module is analogous to an executable file, and contains all the information needed to bootstrap and run a program, including:
 
@@ -24,7 +24,7 @@ When you compile a program to WebAssembly, the result is a WebAssembly module. A
 - Static data to be copied into memory (the _data section_)
 - The actual WebAssembly bytecode to execute (the _code section_)
 
-These are encoded in an efficient binary format, but WebAssembly also has an official text syntax used for debugging and authoring directly. This article will use the text syntax. You can convert any WebAssembly module to the text syntax using tools like [WABT](https://github.com/WebAssembly/wabt) (wasm2wat) or [wasm-tools](https://github.com/bytecodealliance/wasm-tools/) (wasm-tools print).
+These are encoded in an efficient binary format, but WebAssembly also has an official text syntax used for debugging and direct authoring. This article will use the text syntax. You can convert any WebAssembly module to the text syntax using tools like [WABT](https://github.com/WebAssembly/wabt) (wasm2wat) or [wasm-tools](https://github.com/bytecodealliance/wasm-tools/) (wasm-tools print).
 
 Here's a simple but complete WebAssembly module that allows you to store and load an `i32` at address 16 of its memory.
 
@@ -72,7 +72,7 @@ Now let's modify the program to use Memory64:
 
 You can see that our memory declaration now includes `i64`, indicating that it uses 64-bit addresses. We therefore also change `i32.const 16` to `i64.const 16`. That's it. This is pretty much the entirety of the Memory64 proposal[^1].
 
-[^1]: The proposal also adds an `i64` mode to _tables_. Tables in WebAssembly are the primary mechanism used for function pointers and indirect calls, but for simplicity they are omitted from this post. The rest of the proposal fleshes out these new `i64` modes, such as by modifying instructions like `memory.fill` to accept either `i32` or `i64` depending on the memory's address type.
+[^1]: The rest of the proposal fleshes out the `i64` mode, for example by modifying instructions like `memory.fill` to accept either `i32` or `i64` depending on the memory's address type. The proposal also adds an `i64` mode to _tables_, which are the primary mechanism used for function pointers and indirect calls. For simplicity, they are omitted from this post.
 
 ## How is memory implemented?
 
@@ -86,7 +86,6 @@ However, WebAssembly has an important constraint: accessing memory out of bounds
   movq 0x08(%r14), %rax       ;; load the size of memory from the instance (%r14)
   cmp %rax, %rdi              ;; compare the address (%rdi) to the limit
   jb .load                    ;; if the address is ok, jump to the load
-  cmovb %rax, %rdi            ;; spectre mitigation
   ud2                         ;; trap
 .load:
   movl (%r15,%rdi,1), %eax    ;; load an i32 from memory (%r15 + %rdi)
@@ -107,25 +106,25 @@ The maximum possible value for a 32-bit integer is about 4 billion. 32-bit point
 
 [^4]: Some hardware now also supports addresses larger than 48 bits, such as Intel processors with 57-bit addresses and [5-level paging](https://en.wikipedia.org/wiki/Intel_5-level_paging), but this is not yet commonplace.
 
-Even a 48-bit memory is enormous: 65,000 times larger than the largest possible 32-bit memory. This gives every process 281 terabytes of _address space_ to work with, even if the device has only a few gigabytes of physical memory.
+Even a 48-bit memory is enormous: 65,536 times larger than the largest possible 32-bit memory. This gives every process 281 terabytes of _address space_ to work with, even if the device has only a few gigabytes of physical memory.
 
-This means that address space is cheap. If you like, you can _reserve_ 4GB of address space from the operating system to ensure that it remains free for later use. Even if most of that memory is never used, this will have little to no impact on most systems.
+This means that address space is cheap on 64-bit devices. If you like, you can _reserve_ 4GB of address space from the operating system to ensure that it remains free for later use. Even if most of that memory is never used, this will have little to no impact on most systems.
 
 How do browsers take advantage of this fact? **By reserving 4GB of memory for every single WebAssembly module.**
 
-In our first example, we declared a 32-bit memory with a size of 64KB. But if you run this example on a 64-bit operating system, the browser will actually reserve 4GB of memory. The first 64KB of this 4GB block will be read-write, and the remaining 3.9999GB will be reserved.
+In our first example, we declared a 32-bit memory with a size of 64KB. But if you run this example on a 64-bit operating system, the browser will actually reserve 4GB of memory. The first 64KB of this 4GB block will be read-write, and the remaining 3.9999GB will be reserved but inaccessible.
 
 By reserving 4GB of memory for all 32-bit WebAssembly modules, **it is impossible to go out of bounds.** The largest possible pointer value, 2^32-1, will simply land inside the reserved region of memory and trap. This means that, when running 32-bit wasm on a 64-bit system, **we can omit all bounds checks entirely[^5].**
 
-[^5]: In practice, a few extra pages beyond 4GB will be reserved to account for `offset` and `align`, called "guard pages". We could reserve another 4GB of memory (8GB in total) to account for every possible offset on every possible pointer, but in SpiderMonkey we instead choose to reserve just 32MiB + 64KiB for guard pages and fall back to explicit bounds checks for any offsets larger than this. (In practice, large offsets are very uncommon.) For more information about how we handle bounds checks on each supported platform, see [this SMDOC comment](https://searchfox.org/mozilla-central/rev/d788991012a1a8ec862787f9799db4954a33045f/js/src/wasm/WasmMemory.cpp#70) (which seems to be slightly out of date), [these constants](https://searchfox.org/mozilla-central/rev/d788991012a1a8ec862787f9799db4954a33045f/js/src/wasm/WasmMemory.h#198), and [this Ion code](https://searchfox.org/mozilla-central/rev/d788991012a1a8ec862787f9799db4954a33045f/js/src/wasm/WasmIonCompile.cpp#1581-1590).
+[^5]: In practice, a few extra pages beyond 4GB will be reserved to account for `offset` and `align`, called "guard pages". We could reserve another 4GB of memory (8GB in total) to account for every possible offset on every possible pointer, but in SpiderMonkey we instead choose to reserve just 32MiB + 64KiB for guard pages and fall back to explicit bounds checks for any offsets larger than this. (In practice, large offsets are very uncommon.) For more information about how we handle bounds checks on each supported platform, see [this SMDOC comment](https://searchfox.org/mozilla-central/rev/d788991012a1a8ec862787f9799db4954a33045f/js/src/wasm/WasmMemory.cpp#70) (which seems to be slightly out of date), [these constants](https://searchfox.org/mozilla-central/rev/d788991012a1a8ec862787f9799db4954a33045f/js/src/wasm/WasmMemory.h#198), and [this Ion code](https://searchfox.org/mozilla-central/rev/d788991012a1a8ec862787f9799db4954a33045f/js/src/wasm/WasmIonCompile.cpp#1581-1590). It is also worth noting that we fall back to explicit bounds checks whenever we cannot use this allocation scheme, such as on 32-bit devices or resource-constrained mobile phones.
 
 This optimization is impossible for Memory64. The size of the WebAssembly address space is the same as the size of the host address space. Therefore, we must pay the cost of bounds checks on every access, and as a result, Memory64 is slower.
 
 ## So why use Memory64?
 
-The only reason to use Memory64 is if you need more than 4GB of memory.
+The only reason to use Memory64 is if you actually need more than 4GB of memory.
 
-It may seem disappointing, but it's true: 64-bit pointers allow you to address more memory, at the cost of slower loads and stores. Engines can attempt to improve performance by eliminating some bounds checks when compiling, but this is not always possible, and you can’t beat the absolute removal of bounds checks found in 32-bit WebAssembly.
+Memory64 won't make your code any faster or more "modern". 64-bit pointers in WebAssembly simply allow you to address more memory, at the cost of slower loads and stores. Engines can attempt to improve performance by improving their bounds checks, and by eliminating some bounds checks when compiling, but this is not always possible and you can’t beat the absolute removal of bounds checks found in 32-bit WebAssembly.
 
 Furthermore, the WebAssembly JS API constrains memories to a maximum size of 16GB. This may be quite disappointing for developers used to native memory limits. Unfortunately, because WebAssembly makes no distinction between “reserved” and “committed” memory, engines cannot freely allocate large quantities of memory without running into system commit limits.
 
