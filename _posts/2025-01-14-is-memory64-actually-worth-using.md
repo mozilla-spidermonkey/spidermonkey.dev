@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Is Memory64 actually worth using?"
-date:   2025-01-14 18:00:00 -0600
+date:   2025-01-15 12:00:00 -0600
 author: Ben Visness
 ---
 
