@@ -9,7 +9,7 @@ After many long years, the [Memory64 proposal](https://github.com/WebAssembly/me
 
 If you are like most readers, you may be wondering: "Why wasn't WebAssembly 64-bit to begin with?" Yes, it's the year 2025 and WebAssembly has only just added 64-bit pointers. Why did it take so long, when 64-bit devices are the majority and 8GB of RAM is considered the bare minimum?
 
-It's easy to think that 64-bit WebAssembly would run better on 64-bit hardware, but unfortunately that's simply not the case. WebAssembly apps tend to run slower in 64-bit mode than they do in 32-bit mode. This performance penalty depends on the workload, but a 20% slowdown is not uncommon, and we've seen code run over 2x slower under Memory64.
+It's easy to think that 64-bit WebAssembly would run better on 64-bit hardware, but unfortunately that's simply not the case. WebAssembly apps tend to run slower in 64-bit mode than they do in 32-bit mode. This performance penalty depends on the workload, but it can range from just 10% to over 100%—a 2x slowdown just from changing your pointer size.
 
 This is not simply due to a lack of optimization. Instead, the performance of Memory64 is restricted by hardware, operating systems, and the design of WebAssembly itself.
 
@@ -124,15 +124,17 @@ This optimization is impossible for Memory64. The size of the WebAssembly addres
 
 The only reason to use Memory64 is if you actually need more than 4GB of memory.
 
-Memory64 won't make your code any faster or more "modern". 64-bit pointers in WebAssembly simply allow you to address more memory, at the cost of slower loads and stores. Engines can attempt to improve performance by improving their bounds checks, and by eliminating some bounds checks when compiling, but this is not always possible and you can’t beat the absolute removal of bounds checks found in 32-bit WebAssembly.
+Memory64 won't make your code faster or more "modern". 64-bit pointers in WebAssembly simply allow you to address more memory, at the cost of slower loads and stores.
 
-Furthermore, the WebAssembly JS API constrains memories to a maximum size of 16GB. This may be quite disappointing for developers used to native memory limits. Unfortunately, because WebAssembly makes no distinction between “reserved” and “committed” memory, engines cannot freely allocate large quantities of memory without running into system commit limits.
+The performance penalty may diminish over time as engines make optimizations. Bounds checking strategies can be improved, and WebAssembly compilers may be able to [eliminate](https://en.wikipedia.org/wiki/Bounds-checking_elimination) some bounds checks at compile time. But it is impossible to beat the absolute removal of all bounds checks found in 32-bit WebAssembly.
+
+Furthermore, the WebAssembly JS API constrains memories to a maximum size of 16GB. This may be quite disappointing for developers used to native memory limits. Unfortunately, because WebAssembly makes no distinction between “reserved” and “committed” memory, browsers cannot freely allocate large quantities of memory without running into system commit limits.
 
 Still, being able to access 16GB is very useful for some applications. If you need more memory, and can tolerate worse performance, then Memory64 might be the right choice for you.
 
 Where can WebAssembly go from here? Memory64 may be of limited use today, but there are some exciting possibilities for the future:
 
-- Bounds checks could be supported in hardware in the future. There has already been some research in this direction—for example, see [this 2023 paper](https://dl.acm.org/doi/10.1145/3582016.3582023) by Narayan et. al. With the growing popularity of WebAssembly and other sandboxed VMs, this could be a very impactful change that improves performance while also eliminating the wasted address space from large reservations. (Not all WebAssembly hosts can spend their address space as freely as browsers.)
+- Bounds checks could be better supported in hardware in the future. There has already been some research in this direction—for example, see [this 2023 paper](https://dl.acm.org/doi/10.1145/3582016.3582023) by Narayan et. al. With the growing popularity of WebAssembly and other sandboxed VMs, this could be a very impactful change that improves performance while also eliminating the wasted address space from large reservations. (Not all WebAssembly hosts can spend their address space as freely as browsers.)
 
 - The [memory control proposal](https://github.com/WebAssembly/memory-control/) for WebAssembly, which I co-champion, is exploring new features for WebAssembly memory. While none of the current ideas would remove the need for bounds checks, they could take advantage of virtual memory hardware to enable larger memories, more efficient use of large address spaces (such as reduced fragmentation for memory allocators), or alternative memory allocation techniques.
 
