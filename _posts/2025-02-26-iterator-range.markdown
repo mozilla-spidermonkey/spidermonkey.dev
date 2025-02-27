@@ -136,3 +136,9 @@ Working on the `Iterator.range` implementation in SpiderMonkey has been a deeply
 Beyond technical skills, I gained a deeper appreciation for the standardization process in JavaScript. The experience highlighted how proposals evolve through real-world feedback, and how early-stage implementations help shape their final form.
 
 As `Iterator.range` continues its journey through the TC39 proposal stages, I look forward to seeing its adoption in JavaScript engines and the impact it will have on developers. I hope this post provides useful insights into SpiderMonkey development and encourages others to contribute to open-source projects and JavaScript standardization efforts.
+
+If you'd like to read more, here are my blog posts that I made during the project:
+
+- [Decoding Open Source: Vocabulary I've Learned on My Outreachy Journey](https://dev.to/mundianderi/decoding-open-source-vocabulary-ive-learned-on-my-outreachy-journey-34o4)
+- [Mid-Internship Progress Report: Achievements and Goals Ahead](https://dev.to/mundianderi/mid-internship-progress-report-achievements-and-goals-ahead-4jif)
+- [Navigating TC39 Proposals: From Error Handling to Iterator.range](https://dev.to/mundianderi/navigating-tc39-proposals-from-error-handling-to-iteratorrange-306a)
