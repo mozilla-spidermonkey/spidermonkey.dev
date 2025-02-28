@@ -127,7 +127,7 @@ This function ensures that minor precision errors do not cause test failures, im
 
 There are different stages a TC39 proposal goes through before it can be shipped. This [document](https://tc39.es/process-document/) shows the different stages that a proposal goes through from ideation to consumption. The Iterator.range proposal is currently at stage 1 which is the Draft stage. Ideally, the proposal should advance to stage 3 which means that the specification is stable and no changes to the proposal are expected, but some necessary changes may still occur due to web incompatibilities or feedback from production-grade implementations.
 
-Currently, this implementation is in it's early stages of implementation, only built in Nightly and disabled by default until such a time the proposal is in stage 3 or 4 and no further revision to the specification can be made.
+Currently, this implementation is in it's early stages of implementation. It's only built in Nightly and disabled by default until such a time the proposal is in stage 3 or 4 and no further revision to the specification can be made.
 
 ## Final Thoughts
 
