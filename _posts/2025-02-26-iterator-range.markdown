@@ -5,7 +5,7 @@ date: 2025-02-26 10:00:00 +0300
 author: "Serah Nderi"
 ---
 
-In October 2024, I joined Outreachy as an Open Source contributor and in December 2024, I joined Outreachy as an intern working with Mozilla. My role was to implement the [Tc39 Range Proposal](https://tc39.es/proposal-iterator.range/#sec-iteration) in the SpiderMonkey JavaScript engine.
+In October 2024, I joined Outreachy as an Open Source contributor and in December 2024, I joined Outreachy as an intern working with Mozilla. My role was to implement the [TC39 Range Proposal](https://tc39.es/proposal-iterator.range/#sec-iteration) in the SpiderMonkey JavaScript engine.
 `Iterator.range `is a new built-in method proposed for JavaScript iterators that allows generating a sequence of numbers within a specified range. It functions similarly to Python's range, providing an easy and efficient way to iterate over a series of values:
 
 ```javascript
@@ -28,7 +28,7 @@ When I started working on `Iterator.range`, the initial implementation had been 
 
 The `Iterator.range` simply returned `false`, a stub indicating that the actual implementation of `Iterator.range` was under development or not fully implemented, which is where I came in. As a start, I created a `CreateNumericRangeIterator` function that delegates to the `Iterator.range` function. Following that, I implemented the first three steps within the Iterator.range function. Next, I initialised variables and parameters for the `NUMBER-RANGE` data type in the `CreateNumericRangeIteratorfunction`.
 
-I focused on implementing sequences that increase by one, such as `Iterator.range(0, 10)`.Next, I created an `IteratorRangeGenerator\*` function (ie, step 18 of the Range proposal), that when called doesn't execute immediately, but returns a generator object which follows the iterator protocol. Inside the generator function you have `yield` statements which represents where the function suspends its execution and provides value back to the caller. Additionaly, I updated the `CreateNumericRangeIterator` function to invoke `IteratorRangeGenerator*` with the appropriate arguments, aligning with Step 19 of the specification, and added tests to verify its functionality.
+I focused on implementing sequences that increase by one, such as `Iterator.range(0, 10)`.Next, I created an `IteratorRangeGenerator*` function (ie, step 18 of the Range proposal), that when called doesn't execute immediately, but returns a generator object which follows the iterator protocol. Inside the generator function you have `yield` statements which represents where the function suspends its execution and provides value back to the caller. Additionaly, I updated the `CreateNumericRangeIterator` function to invoke `IteratorRangeGenerator*` with the appropriate arguments, aligning with Step 19 of the specification, and added tests to verify its functionality.
 
 The generator will pause at each `yield`, and will not continue until the `next` method is called on the generator object that is created.
 The `NumericRangeIteratorPrototype` (Step 27.1.4.2 of the proposal) is the object that holds the `iterator prototype` for the Numeric range iterator. The `next()` method is added to the `NumericRangeIteratorPrototype`, when you call the `next()` method on an object created from `NumericRangeIteratorPrototype`, it doesn't directly return a value, but it makes the generator `yield` the `next` value in the series, effectively resuming the suspended generator.
@@ -87,7 +87,7 @@ The slot-based implementation completed the benchmark in just 2.7 seconds compar
 
 Implementing BigInt support was straightforward from a specification perspective, but I encountered two blockers:
 
-1. Handling Infinity Checks Correctly
+### 1. Handling Infinity Checks Correctly
 
 The specification ensures that start is either a Number or a BigInt in steps 3.a and 4.a. However, step 5 states:
 
@@ -108,7 +108,7 @@ if (typeof start === "number" && !Number_isFinite(start)) {
 }
 ```
 
-2 . Floating Point Precision Errors
+### 2. Floating Point Precision Errors
 
 When testing floating-point sequences, I encountered an issue where some decimal values were not represented exactly due to JavaScript's floating-point precision limitations. This caused incorrect test results.
 
@@ -125,9 +125,9 @@ This function ensures that minor precision errors do not cause test failures, im
 
 ## Next Steps and Future Improvements
 
-There are different stages a Tc39 proposal goes through before it can be shipped. This [document](https://tc39.es/process-document/) shows the different stages that a proposal goes through from ideation to consumption. The Iterator.range proposal is currently at stage 1 which is the Draft stage. Ideally, the proposal should advance to stage 3 which means that the specification is stable and no changes to the proposal are expected, but some necessary changes may still occur due to web incompatibilities or feedback from production-grade implementations.
+There are different stages a TC39 proposal goes through before it can be shipped. This [document](https://tc39.es/process-document/) shows the different stages that a proposal goes through from ideation to consumption. The Iterator.range proposal is currently at stage 1 which is the Draft stage. Ideally, the proposal should advance to stage 3 which means that the specification is stable and no changes to the proposal are expected, but some necessary changes may still occur due to web incompatibilities or feedback from production-grade implementations.
 
-Currently, this implementation is in it's early stages of implementation and nested within Nightly builds until such a time the proposal is in stage 3 or 4 and no further revision to the specification can be made.
+Currently, this implementation is in it's early stages of implementation, only built in Nightly and disabled by default until such a time the proposal is in stage 3 or 4 and no further revision to the specification can be made.
 
 ## Final Thoughts
 
