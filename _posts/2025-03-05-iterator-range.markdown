@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Implementing Iterator.range in SpiderMonkey"
-date: 2025-02-26 10:00:00 +0300
+date: 2025-03-05 10:00:00 +0300
 author: "Serah Nderi"
 ---
 
