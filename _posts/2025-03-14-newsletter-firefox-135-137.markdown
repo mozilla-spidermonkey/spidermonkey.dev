@@ -65,7 +65,7 @@ and [Atomics.pause](https://bugzilla.mozilla.org/show_bug.cgi?id=1937805).
   where possible.   
 * Jan continued work on register allocation tuning, continuing on from where [we left
   it last with Jan’s blog
-  post](https://spidermonkey.dev/blog/2024/10/16/75x-faster-optimizing-the-ion-compiler-backend.html%20).   
+  post](https://spidermonkey.dev/blog/2024/10/16/75x-faster-optimizing-the-ion-compiler-backend.html).   
 * Jan’s been [doing some work with
   fuses](https://bugzilla.mozilla.org/show_bug.cgi?id=1947767) to take advantage of
   knowing the state of the VM more. 
@@ -75,7 +75,7 @@ and [Atomics.pause](https://bugzilla.mozilla.org/show_bug.cgi?id=1937805).
 
 * Iain landed the infrastructure for [off-thread baseline
   compilation](https://bugzilla.mozilla.org/show_bug.cgi?id=1935289) and [batched
-  baseline compilation](https://bugzilla.mozilla.org/show_bug.cgi?id=1935289). The
+  baseline compilation](https://bugzilla.mozilla.org/show_bug.cgi?id=1822650). The
   hope is that this will eventually lead to some performance improvements but it’s
   disabled while it is tuned for now.   
 * We now [share the parsed version of our self-hosted code from parent process to
