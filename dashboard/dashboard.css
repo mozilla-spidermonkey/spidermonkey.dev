@@ -1,0 +1,256 @@
+/* SpiderMonkey Dashboard Styles */
+
+/* Import site fonts and variables */
+@font-face {
+    font-family: ZillaSlab-Regular;
+    src: url("/assets/fonts/ZillaSlab-Regular.ttf");
+}
+
+@font-face {
+    font-family: PT-Sans-S55;
+    src: url("/assets/fonts/pt-sans/PTS55F-webfont.woff");
+}
+
+/* Override styles to match site theme */
+.main-content {
+    font-family: PT-Sans-S55;
+    font-size: 1rem;
+}
+
+h1 {
+    font-family: ZillaSlab-Regular;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    display: inline-block;
+    font-size: 1.5em;
+    padding: 0 10px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-family: ZillaSlab-Regular;
+}
+
+h2 a {
+    color: var(--color-bg);
+    text-decoration: none;
+}
+
+h2 a:hover {
+    color: var(--color-bg);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+/* Quick Links Section */
+.quick-links {
+    background-color: var(--color-dim-bg);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.link-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+.link-group strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-primary);
+    font-family: ZillaSlab-Regular;
+    font-size: 1rem;
+}
+
+.link-group ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.link-group li {
+    margin-bottom: 4px;
+}
+
+.link-group a {
+    color: var(--color-primary);
+    font-weight: 550;
+    padding: 2px;
+    font-size: 0.85rem;
+}
+
+.link-group a:hover {
+    color: var(--color-bg);
+    background-color: var(--color-primary);
+    text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .quick-links {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Bug Tables */
+.bug-table-container {
+    margin-bottom: 20px;
+    min-height: auto;
+}
+
+.bug-table-container p {
+    margin: 10px 0;
+    color: var(--color-dim-primary);
+}
+
+.bug-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: PT-Sans-S55;
+    font-size: 0.85rem;
+}
+
+.bug-table thead {
+    background-color: var(--color-primary);
+}
+
+.bug-table thead th {
+    color: var(--color-bg);
+    font-family: ZillaSlab-Regular;
+    font-weight: 550;
+    font-size: 0.9rem;
+}
+
+.bug-table thead th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.bug-table thead th.sortable:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.bug-table th,
+.bug-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+.bug-table tbody tr {
+    cursor: pointer;
+}
+
+.bug-table tbody tr:hover {
+    background-color: var(--color-dim-bg);
+}
+
+.bug-table a {
+    color: var(--color-primary);
+    font-weight: 550;
+    padding: 2px;
+}
+
+.bug-table a:hover {
+    color: var(--color-bg);
+    background-color: var(--color-primary);
+    text-decoration: none;
+}
+
+.summary {
+    max-width: 500px;
+}
+
+/* Priority Styling - removed coloring */
+
+/* Severity Styling */
+.severity-s1 {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.severity-s2 {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.severity-s3 {
+    color: var(--color-primary);
+}
+
+.severity-s4 {
+    color: var(--color-dim-primary);
+}
+
+/* Loading and Error States */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--color-dim-primary);
+    font-style: italic;
+    font-family: PT-Sans-S55;
+}
+
+.error {
+    color: #ff4444;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-radius: 4px;
+    font-family: PT-Sans-S55;
+}
+
+/* Last Updated */
+.last-updated {
+    text-align: right;
+    color: var(--color-dim-primary);
+    font-size: 0.85rem;
+    margin-top: 20px;
+    font-style: italic;
+    font-family: PT-Sans-S55;
+}
+
+/* View More Button */
+.view-more-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.view-more-button {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    border: none;
+    padding: 10px 20px;
+    font-family: ZillaSlab-Regular;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.view-more-button:hover {
+    background-color: var(--color-dim-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bug-table {
+        font-size: 14px;
+    }
+    
+    .bug-table th,
+    .bug-table td {
+        padding: 8px;
+    }
+    
+    .summary {
+        max-width: 300px;
+    }
+}
