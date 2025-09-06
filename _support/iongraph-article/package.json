@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch"
+  },
+  "dependencies": {
+    "@bytecodealliance/preview2-shim": "^0.17.4",
+    "iongraph-web": "0.1.16",
+    "prism-code-editor": "^4.1.0"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.15.0",
+    "esbuild": "^0.25.9",
+    "esbuild-plugin-polyfill-node": "^0.3.0"
+  }
+}
