@@ -20,6 +20,8 @@ This is a non-exhaustive list of people involved in SpiderMonkey who have volunt
 | Promises | Promises, async functions, and the job queue | [arai](https://matrix.to/#/@arai:mozilla.org) ([bugzilla](https://bugzilla.mozilla.org/user_profile?login=arai.unmht%40gmail.com)) |
 | Proxies, Wrappers | CCW, ES proxies | [Jan de Mooij](https://matrix.to/#/@jandem:mozilla.org) ([bugzilla](https://bugzilla.mozilla.org/user_profile?login=jdemooij%40mozilla.com)) |
 | Regular Expression Engine | Our import of V8's RegExp JIT | [Iain Ireland](https://matrix.to/#/@iain:mozilla.org) ([bugzilla](https://bugzilla.mozilla.org/user_profile?login=iireland%40mozilla.com)) |
+| Structured Cloning | HTML spec compactible serialization, deserialization | [Steve Fink](https://matrix.to/#/@sfink:mozilla.org) ([bugzilla](https://bugzilla.mozilla.org/user_profile?login=sphink%40gmail.com))
 | Test suites |
+| TypedArrays, ArrayBuffers | | [Steve Fink](https://matrix.to/#/@sfink:mozilla.org) ([bugzilla](https://bugzilla.mozilla.org/user_profile?login=sphink%40gmail.com))
 | WebAssembly |
 | WebIDL | WebIDL bindings | [arai](https://matrix.to/#/@arai:mozilla.org) ([bugzilla](https://bugzilla.mozilla.org/user_profile?login=arai.unmht%40gmail.com)) |
