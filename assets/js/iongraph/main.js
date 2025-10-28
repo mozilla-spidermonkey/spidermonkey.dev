@@ -6767,7 +6767,7 @@ for (let i = 0; i < 30; i++) {
   let graph;
   let passes = [];
   function updateGraph(pass) {
-    passNameEl.innerText = `After ${pass.name}`;
+    passNameEl.innerText = `After pass: ${pass.name}`;
     const previousState = graph?.exportState();
     containerEl.innerHTML = "";
     graph = new Graph(containerEl, pass);

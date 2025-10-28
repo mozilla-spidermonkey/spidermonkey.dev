@@ -205,7 +205,7 @@ We recently overhauled our internal tools for visualizing the compilation of Jav
   });
 </script>
 
-We are not the first to visualize our compiler's internal graphs, of course, nor the first to make them interactive. But we were not satisfied with the output of common tools like [Graphviz](https://graphviz.org/) or [Mermaid](https://mermaid.js.org/), so we decided to create our own layout algorithm specifically tailored to our needs. The resulting algorithm is simple, fast, produces surprisingly high-quality output, and can be implemented in less than a thousand lines of code. The purpose of this article is to walk you through this algorithm and the design concepts behind it.
+We are not the first to visualize our compiler's internal graphs, of course, nor the first to make them interactive. But I was not satisfied with the output of common tools like [Graphviz](https://graphviz.org/) or [Mermaid](https://mermaid.js.org/), so I decided to create a layout algorithm specifically tailored to our needs. The resulting algorithm is simple, fast, produces surprisingly high-quality output, and can be implemented in less than a thousand lines of code. The purpose of this article is to walk you through this algorithm and the design concepts behind it.
 
 <div id="livegraph-unavailable">
   <p><i>Read this post on desktop to see an interactive demo of iongraph.</i></p>
@@ -251,15 +251,15 @@ The second, related problem is that Graphviz's output is unstable. Small changes
   </div>
 </div>
 
-None of this felt right. Control flow graphs naturally follow the structure of the program that produced them, so why couldn't they look more like a program? After all, a control flow graph has many restrictions that a general-purpose tool would not be aware of. They have very few cycles, all of which are well-defined because they come from loops; furthermore, both JavaScript and WebAssembly have reducible control flow, meaning all loops have only one entry, and it is not possible to jump directly into the middle of a loop. This information could be used to our advantage.
+None of this felt right to me. Control flow graphs should be able to follow the structure of the program that produced them. After all, a control flow graph has many restrictions that a general-purpose tool would not be aware of: they have very few cycles, all of which are well-defined because they come from loops; furthermore, both JavaScript and WebAssembly have reducible control flow, meaning all loops have only one entry, and it is not possible to jump directly into the middle of a loop. This information could be used to our advantage.
 
-Beyond that, a static PDF is far from ideal when exploring complicated graphs. Finding the inputs or uses of a given instruction is a tedious and frustrating exercise, as is following arrows from block to block. Even just zooming in and out is difficult. We eventually concluded that we ought to just build an interactive tool to overcome these limitations.
+Beyond that, a static PDF is far from ideal when exploring complicated graphs. Finding the inputs or uses of a given instruction is a tedious and frustrating exercise, as is following arrows from block to block. Even just zooming in and out is difficult. I eventually concluded that we ought to just build an interactive tool to overcome these limitations.
 
 ## How hard could layout be?
 
-We had one false start with graph layout, with an algorithm that attempted to sort blocks into vertical "tracks". This broke down quickly on a variety of programs and we were forced to go back to the drawing board—in fact, back to the source of the very tool we were trying to replace.
+I had one false start with graph layout, with an algorithm that attempted to sort blocks into vertical "tracks". This broke down quickly on a variety of programs and I was forced to go back to the drawing board—in fact, back to the source of the very tool I was trying to replace.
 
-The algorithm used by `dot`, the typical hierarchical layout mode for Graphviz, is known as the Sugiyama layout algorithm, from a 1981 paper by Sugiyama et al. As introduction, we found a short series of [lectures](https://www.youtube.com/watch?v=3_FbSCWLC3A&list=PLubYOWSl9mIvoXDwf_Wqcrvlg15N_AWQE&index=38) that broke down the Sugiyama algorithm into 5 steps:
+The algorithm used by `dot`, the typical hierarchical layout mode for Graphviz, is known as the Sugiyama layout algorithm, from a 1981 paper by Sugiyama et al. As introduction, I found a short series of [lectures](https://www.youtube.com/watch?v=3_FbSCWLC3A&list=PLubYOWSl9mIvoXDwf_Wqcrvlg15N_AWQE&index=38) that broke down the Sugiyama algorithm into 5 steps:
 
 1. **Cycle breaking**, where the direction of some edges are flipped in order to produce a [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph).
 2. **Leveling**, where vertices are assigned into horizontal layers according to their depth in the graph, and dummy vertices are added to any edge that crosses multiple layers.
@@ -269,14 +269,15 @@ The algorithm used by `dot`, the typical hierarchical layout mode for Graphviz, 
 
 ![A screenshot from the lectures, showing the five steps above](</assets/img/kindermann.png>)
 
-As we looked through these steps, they seemed surprisingly straightforward, and provided useful opportunities to insert our own knowledge of the problem:
+These steps struck me as surprisingly straightforward, and provided useful opportunities to insert our own knowledge of the problem:
 
-- Cycle breaking was trivial for us, since the only cycles in our data are loops, and loop backedges are explicitly labeled. We could simply ignore backedges when laying out the graph.
-- Leveling was straightforward, and could easily be modified to better mimic the source code. Specifically, any blocks that came after a loop in the source code could be artificially pushed down in the layout, solving the confusing early-exit problem.
+- Cycle breaking would be trivial for us, since the only cycles in our data are loops, and loop backedges are explicitly labeled. We could simply ignore backedges when laying out the graph.
+- Leveling would be straightforward, and could easily be modified to better mimic the source code. Specifically, any blocks coming after a loop in the source code could be artificially pushed down in the layout, solving the confusing early-exit problem.
 - Permuting vertices to reduce edge crossings was actually just a bad idea, since our goal was stability from graph to graph. The true and false branches of a condition should always appear in the same order, for example, and a few edge crossings is a small price to pay for this stability.
 - Since reducible control flow ensures that a program's loops form a tree, vertex positioning could ensure that loops are always well-nested in the final graph.
 
-Notably, these simplifications avoided the most computationally difficult parts of the Sugiyama algorithm. This was quite convenient, not only because it simplified the implementation, but because it improved performance as well.
+Notably, these simplifications would avoid the most computationally difficult parts of the Sugiyama algorithm. This proved quite convenient in the end, not only because it simplified the final implementation, but because it improved performance as well.
+
 
 ## iongraph from start to finish
 
@@ -288,7 +289,7 @@ We first sort the basic blocks into horizontal tracks called "layers". This is v
 
 We also take this opportunity to vertically position nodes "inside" and "outside" of loops. Whenever we see an edge that exits a loop, we defer the layering of the destination block until we are done layering the loop contents, at which point we know the loop's height.
 
-A note on implementation: nodes are visited multiple times throughout the process, not just once. This can produce a quadratic explosion for large graphs, but we find that an early-out is sufficient to avoid this problem in practice.
+A note on implementation: nodes are visited multiple times throughout the process, not just once. This can produce a quadratic explosion for large graphs, but I find that an early-out is sufficient to avoid this problem in practice.
 
 The animation below shows the layering algorithm in action. Notice how the final block in the graph is visited twice, once after each loop that branches to it, and in each case, the block is deferred until the entire loop has been layered, rather than processed immediately after its predecessor block. The final position of the block is below the entirety of both loops, rather than directly below one of its predecessors as Graphviz would do. (Remember, horizontal and vertical positions have not yet been computed; the positions of the blocks in this diagram are hardcoded for demonstration purposes.)
 
@@ -697,7 +698,7 @@ This is the fuzziest and most ad-hoc part of the process. Basically, we run lots
 
 It is important to note that dummy nodes participate fully in this system. If for example you have two side-by-side loops, straightening the left loop's backedge will push the right loop to the side, avoiding overlaps and preserving the graph's visual structure.
 
-We do not reach a fixed point with this strategy, nor do we attempt to. We find that if you continue to repeatedly apply these particular layout passes, nodes will wander to the right forever. Instead, the layout passes are hand-tuned to produce decent-looking results for most of the graphs we look at on a regular basis. That said, this could certainly be improved, especially for larger graphs which do benefit from more iterations.
+We do not reach a fixed point with this strategy, nor do we attempt to. I find that if you continue to repeatedly apply these particular layout passes, nodes will wander to the right forever. Instead, the layout passes are hand-tuned to produce decent-looking results for most of the graphs we look at on a regular basis. That said, this could certainly be improved, especially for larger graphs which do benefit from more iterations.
 
 At the end of this step, all nodes have a fixed X-coordinate and will not be modified further.
 
@@ -863,7 +864,7 @@ At the end of this step, all nodes have a fixed X-coordinate and will not be mod
 
 Edges may overlap visually as they run horizontally between layers. To resolve this, we sort edges into parallel "tracks", giving each a vertical offset. After tracking all the edges, we record the total height of the tracks and store it on the preceding layer as its "track height". This allows us to leave room for the edges in the final layout step.
 
-We first sort edges by their starting position, left to right. This produces a consistent arrangement of edges that has few vertical crossings in practice. Edges are then placed into tracks from the "outside in"—stacking rightward edges on top and leftward edges on the bottom, creating a new track if the edge would overlap with or cross any other edge.
+We first sort edges by their starting position, left to right. This produces a consistent arrangement of edges that has few vertical crossings in practice. Edges are then placed into tracks from the "outside in", stacking rightward edges on top and leftward edges on the bottom, creating a new track if the edge would overlap with or cross any other edge.
 
 The diagram below is interactive. Click and drag the blocks to see how the horizontal edges get assigned to tracks.
 
@@ -1152,24 +1153,24 @@ Now that every node has both an X and Y coordinate, the layout process is comple
 
 ### Step 6: Render
 
-The details of rendering are out of scope for this article, and depend on the specific application. However, we wish to highlight a stylistic decision that we feel makes our graphs more readable.
+The details of rendering are out of scope for this article, and depend on the specific application. However, I wish to highlight a stylistic decision that I feel makes our graphs more readable.
 
 When rendering edges, we use a style inspired by [railroad diagrams](https://en.wikipedia.org/wiki/Syntax_diagram). These have many advantages over the Bézier curves employed by Graphviz. First, straight lines feel more organized and are easier to follow when scrolling up and down. Second, they are easy to route (vertical when crossing layers, horizontal between layers). Third, they are easy to coalesce when they share a destination, and the junctions provide a clear indication of the edge's direction. Fourth, they always cross at right angles, improving clarity and reducing the need to avoid edge crossings in the first place.
 
-Consider the following example. There are several edge crossings that may traditionally be considered undesirable—yet the edges and their directions remain clear. Of particular note is the vertical junction highlighted in red on the left: not only is it immediately clear that these edges share a destination, but the junction itself signals that the edges are flowing downward. We find this much more pleasant than the "rat's nest" that Graphviz tends to produce.
+Consider the following example. There are several edge crossings that may traditionally be considered undesirable—yet the edges and their directions remain clear. Of particular note is the vertical junction highlighted in red on the left: not only is it immediately clear that these edges share a destination, but the junction itself signals that the edges are flowing downward. I find this much more pleasant than the "rat's nest" that Graphviz tends to produce.
 
 <img alt="Examples of railroad-diagram edges" src="/assets/img/iongraph-edge-examples-highlighted.png" width="716">
 
 
 ## Why does this work?
 
-It may seem surprising that such a simple (and stupid) layout algorithm could produce such readable graphs, when more sophisticated layout algorithms struggle. However, we feel that the algorithm succeeds _because_ of its simplicity.
+It may seem surprising that such a simple (and stupid) layout algorithm could produce such readable graphs, when more sophisticated layout algorithms struggle. However, I feel that the algorithm succeeds _because_ of its simplicity.
 
 Most graph layout algorithms are optimization problems, where error is minimized on some chosen metrics. However, these metrics seem to correlate poorly to readability in practice. For example, it seems good in theory to rearrange nodes to minimize edge crossings. But a predictable order of nodes seems to produce more sensible results overall, and simple rules for edge routing are sufficient to keep things tidy. (As a bonus, this also gives us layout stability from pass to pass.) Similarly, layout rules like "align parents with their children" produce more readable results than "minimize the lengths of edges".
 
 Furthermore, by rejecting the optimization problem, a human author gains more control over the layout. We are able to position nodes "inside" of loops, and push post-loop content down in the graph, _because_ we reject this global constraint-solver approach. Minimizing "error" is meaningless compared to a human _maximizing_ meaning through thoughtful design.
 
-And finally, the resulting algorithm is simply more efficient. All the layout passes in iongraph are easy to program and scale gracefully to large graphs because they run in roughly linear time. It is better, in our view, to run a fixed number of layout iterations according to your graph complexity and time budget, rather than to run a complex constraint solver until it is "done".
+And finally, the resulting algorithm is simply more efficient. All the layout passes in iongraph are easy to program and scale gracefully to large graphs because they run in roughly linear time. It is better, in my view, to run a fixed number of layout iterations according to your graph complexity and time budget, rather than to run a complex constraint solver until it is "done".
 
 By following this philosophy, even the worst graphs become tractable. Below is a screenshot of a zlib function, compiled to WebAssembly, and rendered using the old tool.
 
@@ -1183,13 +1184,13 @@ Perhaps programmers ought to put less trust into magic optimizing systems, espec
 
 ## Future work
 
-We have already integrated iongraph into the Firefox profiler, making it easy for us to view the graphs of the most expensive or impactful functions we find in our performance work. Unfortunately, this is only available in specific builds of the SpiderMonkey shell, and is not available in full browser builds. This is due to architectural differences in how profiling data is captured and the flags with which the browser and shell are built. We would love for Firefox users to someday be able to view these graphs themselves, but at the moment we have no plans to expose this to the browser. However, one bug tracking some related work can be found [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1987005).
+We have already integrated iongraph into the Firefox profiler, making it easy for us to view the graphs of the most expensive or impactful functions we find in our performance work. Unfortunately, this is only available in specific builds of the SpiderMonkey shell, and is not available in full browser builds. This is due to architectural differences in how profiling data is captured and the flags with which the browser and shell are built. I would love for Firefox users to someday be able to view these graphs themselves, but at the moment we have no plans to expose this to the browser. However, one bug tracking some related work can be found [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1987005).
 
-In the meantime, however, we plan to continue updating iongraph with more features to assist us in our work. We may in the future update the tool to add richer navigation, search features, and visualization of register allocation info. Ultimately, though, we are likely to work on iongraph sporadically as we need it, with little mind for a product roadmap.
+In the meantime, however, I plan to continue updating iongraph with more features to assist us in our work. I may in the future update the tool to add richer navigation, search features, and visualization of register allocation info. Ultimately, though, I am likely to work on iongraph sporadically as we need it, with little mind for a product roadmap.
 
 To experiment with iongraph locally, you can run a debug build of the SpiderMonkey shell with `IONFLAGS=logs`; this will dump information to `/tmp/ion.json`. This file can then be loaded into the [standalone deployment of iongraph](https://mozilla-spidermonkey.github.io/iongraph/). Please be aware that the user experience is rough and unpolished in its current state.
 
-The source code for iongraph can be found on [GitHub](https://github.com/mozilla-spidermonkey/iongraph). If this subject interests you, we would welcome contributions to both the browser and iongraph itself. The best place to reach us is our [Matrix chat](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org).
+The source code for iongraph can be found on [GitHub](https://github.com/mozilla-spidermonkey/iongraph). If this subject interests you, we would welcome contributions to iongraph and its integration into the browser. The best place to reach us is our [Matrix chat](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org).
 
 <script>
   // Terrible code to put code blocks inside HTML tags, because our markdown
