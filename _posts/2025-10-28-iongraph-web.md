@@ -2,6 +2,8 @@
 layout: post
 title: Who needs Graphviz when you can build it yourself?
 author: Ben Visness
+description: Exploring a new layout algorithm for control flow graphs.
+image: /assets/img/iongraph-opengraph.png
 ---
 
 <link rel="stylesheet" href="/assets/js/iongraph/main.css">
