@@ -963,6 +963,7 @@ The diagram below is interactive. Click and drag the blocks to see how the horiz
   #trackdiagram {
     .demoblock {
       cursor: move;
+      touch-action: none;
     }
   }
 </style>
@@ -1112,14 +1113,16 @@ The diagram below is interactive. Click and drag the blocks to see how the horiz
       trackOffset += TRACK_SPACING;
     }
 
-    // Render
-    svg.innerHTML = "";
+    // total hack!
     for (const block of blocks) {
-      // total hack!
       if (block.id >= 3) {
         block.y = 20 + 48 + 20 + tracksHeight;
       }
+    }
 
+    // Render
+    svg.innerHTML = "";
+    for (const block of blocks) {
       const el = container.querySelector(`[data-blockid="${block.id}"]`);
       el.style.transform = `translate(${block.x}px, ${block.y}px)`;
 
