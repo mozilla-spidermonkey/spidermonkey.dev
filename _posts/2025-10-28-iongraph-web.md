@@ -249,7 +249,7 @@ function foo(n) {
 
 Counterintuitively, the `return` appears _before_ the two assignments in the body of the loop. Since this graph mirrors JavaScript control flow, we'd expect to see the return at the bottom. This problem only gets worse as graphs grow larger and more complex.
 
-The second, related problem is that Graphviz's output is unstable. Small changes to the input can result in large changes to the output. As you page through the graphs of each pass within Ion, nodes will jump left and right, true and false branches will swap, loops will run up the right side instead of the left, and so on. This makes it very hard to understand the actual effect of any given pass. Consider the following before and after, and notice how almost the second graph is almost—but not quite—a mirror image of the first, despite very minimal changes to the graph's structure:
+The second, related problem is that Graphviz's output is unstable. Small changes to the input can result in large changes to the output. As you page through the graphs of each pass within Ion, nodes will jump left and right, true and false branches will swap, loops will run up the right side instead of the left, and so on. This makes it very hard to understand the actual effect of any given pass. Consider the following before and after, and notice how the second graph is almost—but not quite—a mirror image of the first, despite very minimal changes to the graph's structure:
 
 <div style="contain: inline-size">
   <div class="full-width ba flex-column flex-row-ns" style="overflow: auto; background-color: white; padding: 1rem; display: flex; gap: 1rem; min-width: 100%; max-height: 80vh">
