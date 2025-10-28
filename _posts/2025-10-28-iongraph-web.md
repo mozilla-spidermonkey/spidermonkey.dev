@@ -2,6 +2,7 @@
 layout: post
 title: Who needs Graphviz when you can build it yourself?
 author: Ben Visness
+date: 2025-10-28 12:00:00 -0500
 description: Exploring a new layout algorithm for control flow graphs.
 image: /assets/img/iongraph-opengraph.png
 ---
@@ -145,6 +146,10 @@ image: /assets/img/iongraph-opengraph.png
       right: 0;
       height: 0.2rem;
     }
+
+    &.loopheader::after {
+      background-color: #1fa411;
+    }
   }
 
   .demodummy {
@@ -283,7 +288,9 @@ Notably, these simplifications would avoid the most computationally difficult pa
 
 ## iongraph from start to finish
 
-We will now go through the entire iongraph layout algorithm from start to finish. Each section contains explanatory diagrams; however, be aware that the block positions in these diagrams are not representative of the actual computed layout position at each point in the process. For example, vertical positions are not calculated until the very end, but it would be hard to communicate what the algorithm was doing if all blocks were drawn on a single line!
+We will now go through the entire iongraph layout algorithm from start to finish. Each section contains explanatory diagrams, in which rectangles are basic blocks and circles are dummy nodes. Loop header blocks (the single entry point to each loop) are additionally colored green.
+
+Be aware that the block positions in these diagrams are not representative of the actual computed layout position at each point in the process. For example, vertical positions are not calculated until the very end, but it would be hard to communicate what the algorithm was doing if all blocks were drawn on a single line!
 
 ### Step 1: Layering
 
@@ -392,6 +399,7 @@ The animation below shows the layering algorithm in action. Notice how the final
   for (let i = blocks.length - 1; i >= 0; i--) {
     const el = document.createElement("div");
     el.classList.add("demoblock");
+    el.classList.toggle("loopheader", !!blocks[i].isLoopHeader);
     el.setAttribute("data-blockid", blocks[i].id);
     container.appendChild(el);
   }
@@ -607,7 +615,7 @@ function test(n) {
   const blocks = [
     // Blocks
     { id: 0,   layer: 1, successors: [1] },
-    { id: 1,   layer: 2, successors: [2, 300] },
+    { id: 1,   layer: 2, successors: [2, 300], isLoopHeader: true },
     { id: 2,   layer: 3, successors: [3, 4] },
     { id: 3,   layer: 4, successors: [501, 5, 6, 7] },
     { id: 4,   layer: 4, successors: [500] },
@@ -647,6 +655,7 @@ function test(n) {
       const el = document.createElement("div");
       const isDummy = block.upward !== undefined;
       el.classList.add(isDummy ? "demodummy" : "demoblock");
+      el.classList.toggle("loopheader", !!block.isLoopHeader);
       el.style.left = `${x}px`;
       el.style.top = `${y}px`;
       container.appendChild(el);
@@ -691,7 +700,7 @@ function test(n) {
 
 This is the fuzziest and most ad-hoc part of the process. Basically, we run lots of small passes that walk up and down the graph, aligning layout nodes with each other. Our edge-straightening passes include:
 
-- Pushing nodes to the right of their loop header (moving them "inside" the loop).
+- Pushing nodes to the right of their loop header to "indent" them.
 - Walking a layer left to right, moving children to the right to line up with their parents. If any nodes overlap as a result, they are pushed further to the right.
 - Walking a layer right to left, moving parents to the right to line up with their children. This version is more conservative and will not move a node if it would overlap with another. This cleans up most issues from the first pass.
 - Straightening runs of dummy nodes so we have clean vertical lines.
@@ -729,7 +738,7 @@ At the end of this step, all nodes have a fixed X-coordinate and will not be mod
 
   const blocks = [
     { id: 0,   layer: 1, lh: null, succs: [1] },
-    { id: 1,   layer: 2, lh: 1,    succs: [2, 300] },
+    { id: 1,   layer: 2, lh: 1,    succs: [2, 300], isLoopHeader: true },
     { id: 200, layer: 2,           succs: [9],   dummy: true, upward: true,  dst: 9 },
     { id: 300, layer: 3,           succs: [400], dummy: true, upward: false, dst: 10 },
     { id: 2,   layer: 3, lh: 1,    succs: [3, 4] },
@@ -779,6 +788,7 @@ At the end of this step, all nodes have a fixed X-coordinate and will not be mod
     for (const node of layer) {
       const el = document.createElement("div");
       el.classList.add(node.dummy ? "demodummy" : "demoblock");
+      el.classList.toggle("loopheader", !!node.isLoopHeader);
       el.setAttribute("data-blockid", node.id);
       container.appendChild(el);
     }
@@ -1153,6 +1163,246 @@ Now that every node has both an X and Y coordinate, the layout process is comple
 }
 ```
 
+<style>
+  #verticalizediagram {
+    .demodummy {
+      display: none;
+    }
+  }
+
+  @media (max-width: 440px) {
+    #verticalizediagram {
+      transform: scale(0.87);
+      transform-origin: top left;
+    }
+  }
+</style>
+<div id="verticalizediagram" class="ba" style="background-color: white; width: 384px; height: 518px; position: relative; margin: 1rem auto">
+  <svg id="verticalizearrows" style="position: absolute; left: 0; top: 0; width: 100%; height: 100%"></svg>
+</div>
+
+<script type="module">
+  import {
+    downwardArrow,
+    arrowFromBlockToBackedgeDummy,
+    upwardArrow,
+    arrowToBackedge,
+    loopHeaderArrow,
+    straightenEdges,
+    filerp,
+  } from "/assets/js/iongraph/main.js";
+
+  const PORT_START = 5;
+  const PORT_SPACING = 10;
+  const TRACK_SPACING = 4;
+  const TRACK_PADDING = 10;
+  const ARROW_RADIUS = 5;
+
+  const blocks = [
+    { id: 0,   layer: 1, lh: null, succs: [1] },
+    { id: 1,   layer: 2, lh: 1,    succs: [2, 300], isLoopHeader: true },
+    { id: 200, layer: 2,           succs: [9],   dummy: true, upward: true,  dst: 9 },
+    { id: 300, layer: 3,           succs: [400], dummy: true, upward: false, dst: 10 },
+    { id: 2,   layer: 3, lh: 1,    succs: [3, 4] },
+    { id: 301, layer: 3,           succs: [200], dummy: true, upward: true,  dst: 9 },
+    { id: 400, layer: 4,           succs: [500], dummy: true, upward: false, dst: 10 },
+    { id: 3,   layer: 4, lh: 1,    succs: [501, 5, 6, 7] },
+    { id: 4,   layer: 4, lh: 1,    succs: [500] },
+    { id: 401, layer: 4,           succs: [301], dummy: true, upward: true,  dst: 9 },
+    { id: 500, layer: 5,           succs: [600], dummy: true, upward: false, dst: 10 },
+    { id: 501, layer: 5,           succs: [8],   dummy: true, upward: false, dst: 8 },
+    { id: 5,   layer: 5, lh: 1,    succs: [8] },
+    { id: 6,   layer: 5, lh: 1,    succs: [8] },
+    { id: 7,   layer: 5, lh: 1,    succs: [8] },
+    { id: 502, layer: 5,           succs: [401], dummy: true, upward: true,  dst: 9 },
+    { id: 600, layer: 6,           succs: [10],  dummy: true, upward: false, dst: 10 },
+    { id: 8,   layer: 6, lh: 1,    succs: [601] },
+    { id: 601, layer: 6,           succs: [502], dummy: true, upward: true,  dst: 9 },
+    { id: 9,   layer: 2, lh: 1,    succs: [1] },
+    { id: 10,  layer: 7, lh: null, succs: [] },
+  ];
+
+  let numLayers = 0;
+  for (const block of blocks) {
+    numLayers = Math.max(numLayers, block.layer);
+    block.srcNodes = blocks.filter(b => b.succs.includes(block.id));
+    block.dstNodes = block.succs.map(s => blocks.find(b => b.id === s));
+    block.loop = block.lh ? blocks.find(b => b.id === block.lh) : null;
+    block.dstNode = block.dst ? blocks.find(b => b.id === block.dst) : null;
+  }
+  const layoutNodesByLayer = [];
+  for (let i = 1; i <= numLayers; i++) {
+    layoutNodesByLayer.push([
+      ...blocks.filter(b => b.layer === i && b.upward === false),
+      ...blocks.filter(b => b.layer === i && !b.dummy),
+      ...blocks.filter(b => b.layer === i && b.upward === true),
+    ]);
+  }
+  for (let i = 0; i < layoutNodesByLayer.length; i++) {
+    for (const node of layoutNodesByLayer[i]) {
+      node.x = 20;
+    }
+  }
+
+  const container = document.querySelector("#verticalizediagram");
+  for (const layer of layoutNodesByLayer) {
+    for (const node of layer) {
+      const el = document.createElement("div");
+      el.classList.add(node.dummy ? "demodummy" : "demoblock");
+      el.classList.toggle("loopheader", !!node.isLoopHeader);
+      el.setAttribute("data-blockid", node.id);
+      container.appendChild(el);
+    }
+  }
+
+  // Layout
+  for (const block of blocks) {
+    block.x = 20;
+    block.trackOffsets = new Array(block.succs.length).fill(0);
+  }
+  straightenEdges(layoutNodesByLayer, 100);
+
+  // Track edges
+  const layerTrackHeights = [];
+  {
+    // Gather all edges on the layer, and sort left to right by starting coordinate
+    for (let i = 0; i < layoutNodesByLayer.length; i++) {
+      const layerEdges = [];
+      for (const block of layoutNodesByLayer[i]) {
+        for (const [srcPort, dstID] of block.succs.entries()) {
+          const dst = blocks.find(b => b.id === dstID);
+          const x1 = block.x + PORT_START + PORT_SPACING * srcPort;
+          const x2 = dst.x + PORT_START;
+          if (Math.abs(x2 - x1) < 2 * ARROW_RADIUS) {
+            // Ignore edges that are narrow enough not to render with a joint.
+            continue;
+          }
+          layerEdges.push({ x1, x2, src: block, srcPort, dst });
+        }
+      }
+      layerEdges.sort((a, b) => a.x1 - b.x1);
+
+      // Assign edges to "tracks" based on whether they overlap horizontally with
+      // each other. We walk the tracks from the outside in and stop if we ever
+      // overlap with any other edge.
+      const rightwardTracks = []; // [][]Edge
+      const leftwardTracks = [];  // [][]Edge
+      nextEdge:
+      for (const edge of layerEdges) {
+        const trackSet = edge.x2 - edge.x1 >= 0 ? rightwardTracks : leftwardTracks;
+        let lastValidTrack = null; // []Edge | null
+
+        // Iterate through the tracks in reverse order (outside in)
+        for (let i = trackSet.length - 1; i >= 0; i--) {
+          const track = trackSet[i];
+          let overlapsWithAnyInThisTrack = false;
+          for (const otherEdge of track) {
+            if (edge.dst === otherEdge.dst) {
+              // Assign the edge to this track to merge arrows
+              track.push(edge);
+              continue nextEdge;
+            }
+
+            const al = Math.min(edge.x1, edge.x2);
+            const ar = Math.max(edge.x1, edge.x2);
+            const bl = Math.min(otherEdge.x1, otherEdge.x2);
+            const br = Math.max(otherEdge.x1, otherEdge.x2);
+            const overlaps = ar >= bl && al <= br;
+            if (overlaps) {
+              overlapsWithAnyInThisTrack = true;
+              break;
+            }
+          }
+
+          if (overlapsWithAnyInThisTrack) {
+            break;
+          } else {
+            lastValidTrack = track;
+          }
+        }
+
+        if (lastValidTrack) {
+          lastValidTrack.push(edge);
+        } else {
+          trackSet.push([edge]);
+        }
+      }
+
+      // Use track info to apply offsets to each edge for rendering.
+      const tracksHeight = TRACK_SPACING * Math.max(
+        0,
+        rightwardTracks.length + leftwardTracks.length - 1,
+      );
+      let trackOffset = -tracksHeight / 2;
+      for (const track of [...rightwardTracks.toReversed(), ...leftwardTracks]) {
+        for (const edge of track) {
+          edge.src.trackOffsets[edge.srcPort] = trackOffset;
+        }
+        trackOffset += TRACK_SPACING;
+      }
+
+      layerTrackHeights.push(tracksHeight);
+    }
+  }
+  console.log({ layerTrackHeights });
+
+  // Verticalize
+  let layerY = 20;
+  for (let i = 0; i < layoutNodesByLayer.length; i++) {
+    let layerHeight = 0;
+    for (const node of layoutNodesByLayer[i]) {
+      node.layer = i;
+      node.y = layerY;
+      layerHeight = Math.max(layerHeight, 48);
+    }
+    layerY += layerHeight;
+    layerY += TRACK_PADDING + layerTrackHeights[i] + TRACK_PADDING;
+  }
+
+  // Apply layout
+  for (const block of blocks) {
+    const el = container.querySelector(`[data-blockid="${block.id}"]`);
+    el.style.transform = `translate(${block.x}px, ${block.y}px)`;
+  }
+
+  // Render
+  const svg = document.querySelector("#verticalizearrows");
+  svg.innerHTML = "";
+  for (const block of blocks) {
+    for (const [i, succID] of block.succs.entries()) {
+      const succ = blocks.find(b => b.id === succID);
+      const x1 = block.x + 5 + i * 10;
+      const y1 = block.upward ? block.y : block.y + (block.upward === undefined ? 48 : 0);
+      if (succ.upward) {
+        const x2 = succ.x + 5;
+        const y2 = succ.y;
+        if (block.upward) {
+          const succsucc = blocks.find(b => b.id === succ.succs[0]);
+          svg.appendChild(upwardArrow(x1, y1, x2, y2 + (succsucc.dummy ? 0 : 10), y1 - 8, 5));
+        } else {
+          const ym = y1 + TRACK_PADDING + layerTrackHeights[block.layer] / 2 + block.trackOffsets[i];
+          svg.appendChild(arrowFromBlockToBackedgeDummy(x1, y1, x2, y2, ym, 5));
+        }
+      } else if (block.upward && succ.upward === undefined) {
+        const x2 = succ.x + 64;
+        const y2 = succ.y + 5;
+        svg.appendChild(arrowToBackedge(x1, y1 + 10, x2, y2, 5, 2));
+      } else if (block.layer === succ.layer) {
+        const x1 = block.x;
+        const y1 = block.y + 5;
+        const x2 = succ.x + 64;
+        const y2 = succ.y + 5;
+        svg.appendChild(loopHeaderArrow(x1, y1, x2, y2, 5, 2));
+      } else {
+        const x2 = succ.x + 5;
+        const y2 = succ.y;
+        const ym = y1 + TRACK_PADDING + layerTrackHeights[block.layer] / 2 + block.trackOffsets[i];
+        svg.appendChild(downwardArrow(x1, y1, x2, y2, ym, 5, !succ.dummy, 2));
+      }
+    }
+  }
+</script>
+
 ### Step 6: Render
 
 The details of rendering are out of scope for this article, and depend on the specific application. However, I wish to highlight a stylistic decision that I feel makes our graphs more readable.
@@ -1193,6 +1443,10 @@ In the meantime, however, I plan to continue updating iongraph with more feature
 To experiment with iongraph locally, you can run a debug build of the SpiderMonkey shell with `IONFLAGS=logs`; this will dump information to `/tmp/ion.json`. This file can then be loaded into the [standalone deployment of iongraph](https://mozilla-spidermonkey.github.io/iongraph/). Please be aware that the user experience is rough and unpolished in its current state.
 
 The source code for iongraph can be found on [GitHub](https://github.com/mozilla-spidermonkey/iongraph). If this subject interests you, we would welcome contributions to iongraph and its integration into the browser. The best place to reach us is our [Matrix chat](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org).
+
+---
+
+_Thanks to Matthew Gaudet and Asaf Gartner for their feedback on this article._
 
 <script>
   // Terrible code to put code blocks inside HTML tags, because our markdown
