@@ -31,11 +31,11 @@ h1 {
 }
 
 .hidden {
-  display:none;
+  display: none;
 }
 
 @media (min-width: $bp-tablet) {
   .container {
-    padding: 0 45px;
+    padding: 0 45px 30px;
   }
 }

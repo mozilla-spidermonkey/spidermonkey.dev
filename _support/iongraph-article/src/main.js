@@ -12,6 +12,8 @@ const containerEl = document.getElementById("graph-container");
 const passNameEl = document.getElementById("pass-name")
 const passSliderEl = document.getElementById("pass-slider");
 const passSliderMarkersEl = document.getElementById("pass-slider-markers");
+const passPrevEl = document.getElementById("pass-prev");
+const passNextEl = document.getElementById("pass-next");
 
 export async function run(editorExtraStyles) {
   const editor = basicEditor(
@@ -71,7 +73,7 @@ for (let i = 0; i < 30; i++) {
   let graph;
   let passes = [];
   function updateGraph(pass) {
-    passNameEl.innerText = pass.name;
+    passNameEl.innerText = `After ${pass.name}`;
 
     const previousState = graph?.exportState();
 
@@ -88,12 +90,24 @@ for (let i = 0; i < 30; i++) {
   function setUIEnabled(enabled) {
     if (enabled) {
       passSliderEl.removeAttribute("disabled");
+      passPrevEl.removeAttribute("disabled");
+      passNextEl.removeAttribute("disabled");
     } else {
       passSliderEl.setAttribute("disabled", "disabled");
+      passPrevEl.setAttribute("disabled", "disabled");
+      passNextEl.setAttribute("disabled", "disabled");
     }
   }
 
   passSliderEl.addEventListener("input", () => {
+    updateGraph(passes[passSliderEl.value]);
+  });
+  passPrevEl.addEventListener("click", () => {
+    passSliderEl.value = Math.max(0, Number(passSliderEl.value) - 1);
+    updateGraph(passes[passSliderEl.value]);
+  });
+  passNextEl.addEventListener("click", () => {
+    passSliderEl.value = Math.min(passes.length - 1, Number(passSliderEl.value) + 1);
     updateGraph(passes[passSliderEl.value]);
   });
 

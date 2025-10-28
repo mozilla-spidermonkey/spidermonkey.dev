@@ -11,6 +11,14 @@ author: Ben Visness
     width: calc(min(100vw, 1280px) - (45px * 2));
   }
 
+  .flex {
+    display: flex;
+  }
+
+  .g2 {
+    gap: 0.5rem;
+  }
+
   .ba {
     border: 1px solid var(--color-primary);
   }
@@ -101,6 +109,10 @@ author: Ben Visness
     outline: none;
   }
 
+  #pass-slider {
+    flex-grow: 1;
+  }
+
   .demoblock {
     width: 64px;
     height: 48px;
@@ -159,8 +171,12 @@ We recently overhauled our internal tools for visualizing the compilation of Jav
       <div id="graph-container"></div>
       <div id="legend">
         <span id="pass-name">&nbsp;</span>
-        <input id="pass-slider" type="range" list="pass-slider-markers" value="0" disabled>
-        <datalist id="pass-slider-markers"></datalist>
+        <div class="flex g2">
+          <button id="pass-prev" disabled>Prev</button>
+          <input id="pass-slider" type="range" list="pass-slider-markers" value="0" disabled>
+          <datalist id="pass-slider-markers"></datalist>
+          <button id="pass-next" disabled>Next</button>
+        </div>
       </div>
     </div>
   </div>
@@ -268,13 +284,13 @@ We will now go through the entire iongraph layout algorithm from start to finish
 
 ### Step 1: Layering
 
-We first assign the basic blocks into horizontal tracks. This is very simple; we just start at layer 0 and recursively walk the graph, incrementing the layer number as we go. As we go, we track the "height" of each loop, not in pixels, but in layers.
+We first sort the basic blocks into horizontal tracks called "layers". This is very simple; we just start at layer 0 and recursively walk the graph, incrementing the layer number as we go. As we go, we track the "height" of each loop, not in pixels, but in layers.
 
-We also take this opportunity to start positioning nodes "inside" and "outside" of loops. Whenever we see an edge that exits a loop, we defer the layering of the destination block until we are done layering the loop contents, at which point we know the loop's height.
+We also take this opportunity to vertically position nodes "inside" and "outside" of loops. Whenever we see an edge that exits a loop, we defer the layering of the destination block until we are done layering the loop contents, at which point we know the loop's height.
 
 A note on implementation: nodes are visited multiple times throughout the process, not just once. This can produce a quadratic explosion for large graphs, but we find that an early-out is sufficient to avoid this problem in practice.
 
-The animation below shows the layering algorithm in action. Notice how the final block in the graph is visited twice, once after each loop that branches to it, and in each case, the block is deferred until the entire loop has been layered. The final position of the block is below the entirety of both loops, rather than directly below one of its predecessors as Graphviz would do. (Remember, horizontal and vertical positions have not yet been computed; the positions of the blocks in this diagram are hardcoded for demonstration purposes.)
+The animation below shows the layering algorithm in action. Notice how the final block in the graph is visited twice, once after each loop that branches to it, and in each case, the block is deferred until the entire loop has been layered, rather than processed immediately after its predecessor block. The final position of the block is below the entirety of both loops, rather than directly below one of its predecessors as Graphviz would do. (Remember, horizontal and vertical positions have not yet been computed; the positions of the blocks in this diagram are hardcoded for demonstration purposes.)
 
 <details>
 <summary>Implementation pseudocode</summary>
@@ -713,7 +729,7 @@ At the end of this step, all nodes have a fixed X-coordinate and will not be mod
     { id: 1,   layer: 2, lh: 1,    succs: [2, 300] },
     { id: 200, layer: 2,           succs: [9],   dummy: true, upward: true,  dst: 9 },
     { id: 300, layer: 3,           succs: [400], dummy: true, upward: false, dst: 10 },
-    { id: 2,   layer: 3, lh: 1,     succs: [3, 4] },
+    { id: 2,   layer: 3, lh: 1,    succs: [3, 4] },
     { id: 301, layer: 3,           succs: [200], dummy: true, upward: true,  dst: 9 },
     { id: 400, layer: 4,           succs: [500], dummy: true, upward: false, dst: 10 },
     { id: 3,   layer: 4, lh: 1,    succs: [501, 5, 6, 7] },
@@ -1140,15 +1156,16 @@ The details of rendering are out of scope for this article, and depend on the sp
 
 When rendering edges, we use a style inspired by [railroad diagrams](https://en.wikipedia.org/wiki/Syntax_diagram). These have many advantages over the Bézier curves employed by Graphviz. First, straight lines feel more organized and are easier to follow when scrolling up and down. Second, they are easy to route (vertical when crossing layers, horizontal between layers). Third, they are easy to coalesce when they share a destination, and the junctions provide a clear indication of the edge's direction. Fourth, they always cross at right angles, improving clarity and reducing the need to avoid edge crossings in the first place.
 
-Consider the following example. There are several edge crossings that may be considered undesirable, yet the edges and their directions remain clear. Of particular note is the vertical junction on the left: not only is it immediately clear that these edges share a destination, but the junction itself signals that the edges are flowing downward. We find this much more pleasant than the "rat's nest" that Graphviz tends to produce.
+Consider the following example. There are several edge crossings that may traditionally be considered undesirable—yet the edges and their directions remain clear. Of particular note is the vertical junction highlighted in red on the left: not only is it immediately clear that these edges share a destination, but the junction itself signals that the edges are flowing downward. We find this much more pleasant than the "rat's nest" that Graphviz tends to produce.
 
-<img alt="Examples of railroad-diagram edges" src="/assets/img/iongraph-edge-examples.png" width="716">
+<img alt="Examples of railroad-diagram edges" src="/assets/img/iongraph-edge-examples-highlighted.png" width="716">
+
 
 ## Why does this work?
 
 It may seem surprising that such a simple (and stupid) layout algorithm could produce such readable graphs, when more sophisticated layout algorithms struggle. However, we feel that the algorithm succeeds _because_ of its simplicity.
 
-Most graph layout algorithms are optimization problems, where error is minimized on some chosen metrics. However, these metrics seem to correlate poorly to readability in practice. For example, it seems good in theory to rearrange nodes to minimize edge crossings. But in practice, simple rules for edge routing seem to produce more readable results, and we achieve greater layout stability as a result. Similarly, layout rules like "align parents with their children" produce more readable results than "minimize the lengths of edges".
+Most graph layout algorithms are optimization problems, where error is minimized on some chosen metrics. However, these metrics seem to correlate poorly to readability in practice. For example, it seems good in theory to rearrange nodes to minimize edge crossings. But a predictable order of nodes seems to produce more sensible results overall, and simple rules for edge routing are sufficient to keep things tidy. (As a bonus, this also gives us layout stability from pass to pass.) Similarly, layout rules like "align parents with their children" produce more readable results than "minimize the lengths of edges".
 
 Furthermore, by rejecting the optimization problem, a human author gains more control over the layout. We are able to position nodes "inside" of loops, and push post-loop content down in the graph, _because_ we reject this global constraint-solver approach. Minimizing "error" is meaningless compared to a human _maximizing_ meaning through thoughtful design.
 
@@ -1166,13 +1183,13 @@ Perhaps programmers ought to put less trust into magic optimizing systems, espec
 
 ## Future work
 
-We have already integrated iongraph into the Firefox profiler, making it easy for us to view the graphs of the most expensive or impactful functions we find in our performance work. Unfortunately, this is only available in specific builds of the SpiderMonkey shell, and is not available in full browser builds. This is due to architectural differences in how profiling data is captured and the flags with which the browser and shell are built. We would love for Firefox users to someday be able to view these graphs themselves, but at the moment we have no plans to expose this to the browser.
+We have already integrated iongraph into the Firefox profiler, making it easy for us to view the graphs of the most expensive or impactful functions we find in our performance work. Unfortunately, this is only available in specific builds of the SpiderMonkey shell, and is not available in full browser builds. This is due to architectural differences in how profiling data is captured and the flags with which the browser and shell are built. We would love for Firefox users to someday be able to view these graphs themselves, but at the moment we have no plans to expose this to the browser. However, one bug tracking some related work can be found [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1987005).
 
 In the meantime, however, we plan to continue updating iongraph with more features to assist us in our work. We may in the future update the tool to add richer navigation, search features, and visualization of register allocation info. Ultimately, though, we are likely to work on iongraph sporadically as we need it, with little mind for a product roadmap.
 
 To experiment with iongraph locally, you can run a debug build of the SpiderMonkey shell with `IONFLAGS=logs`; this will dump information to `/tmp/ion.json`. This file can then be loaded into the [standalone deployment of iongraph](https://mozilla-spidermonkey.github.io/iongraph/). Please be aware that the user experience is rough and unpolished in its current state.
 
-The source code for iongraph can be found on [GitHub](https://github.com/mozilla-spidermonkey/iongraph).
+The source code for iongraph can be found on [GitHub](https://github.com/mozilla-spidermonkey/iongraph). If this subject interests you, we would welcome contributions to both the browser and iongraph itself. The best place to reach us is our [Matrix chat](https://chat.mozilla.org/#/room/#spidermonkey:mozilla.org).
 
 <script>
   // Terrible code to put code blocks inside HTML tags, because our markdown
