@@ -222,9 +222,7 @@ We are not the first to visualize our compiler's internal graphs, of course, nor
 
 As readers of this blog already know, SpiderMonkey has several tiers of execution for JavaScript and WebAssembly code. The highest tier is known as Ion, an optimizing SSA compiler that takes the most time to compile but produces the highest-quality output.
 
-If you don't know what SSA means, you are not alone. The internals of the Ion compiler are a mystery to most. At some point, your JavaScript gets turned into highly-efficient machine code, but there is no easy way to view the transformations it goes through along the way. Of course, _we_ have long had tools to show us this process, since we have to do our jobs over here, but until this point our tools have been fairly primitive.
-
-Since 2011 we have used a tool called [iongraph](https://github.com/sstangl/iongraph), built by Sean Stangl. It is a simple Python script that takes a JSON dump of our compiler graphs and uses Graphviz to produce a PDF. It is perfectly adequate, and very much the status quo for compiler authors, but unfortunately the Graphviz output has many problems that make our work tedious and frustrating.
+Working with Ion frequently requires us to visualize and debug the SSA graph. Since 2011 we have used a tool for this purpose called [iongraph](https://github.com/sstangl/iongraph), built by Sean Stangl. It is a simple Python script that takes a JSON dump of our compiler graphs and uses Graphviz to produce a PDF. It is perfectly adequate, and very much the status quo for compiler authors, but unfortunately the Graphviz output has many problems that make our work tedious and frustrating.
 
 The first problem is that the Graphviz output rarely bears any resemblance to the source code that produced it. Graphviz will place nodes wherever it feels will minimize error, resulting in a graph that snakes left and right seemingly at random. There is no visual intuition for how deeply nested a block of code is, nor is it easy to determine which blocks are inside or outside of loops. Consider the following function, and its Graphviz graph:
 
@@ -283,12 +281,12 @@ These steps struck me as surprisingly straightforward, and provided useful oppor
 - Permuting vertices to reduce edge crossings was actually just a bad idea, since our goal was stability from graph to graph. The true and false branches of a condition should always appear in the same order, for example, and a few edge crossings is a small price to pay for this stability.
 - Since reducible control flow ensures that a program's loops form a tree, vertex positioning could ensure that loops are always well-nested in the final graph.
 
-Notably, these simplifications would avoid the most computationally difficult parts of the Sugiyama algorithm. This proved quite convenient in the end, not only because it simplified the final implementation, but because it improved performance as well.
+Taken all together, these simplifications resulted in a remarkably straightforward algorithm, with the [initial implementation](https://github.com/mozilla-spidermonkey/iongraph/blob/fc27ee3e8f3bd3c020aaf2498de9a260da089bc1/src/Graph.ts) being just 1000 lines of JavaScript. (See this [demo](https://x.com/its_bvisness/status/1957565307809329465?s=46) for what it looked like at the time.) It also proved to be very efficient, since it avoided the most computationally complex parts of the Sugiyama algorithm.
 
 
 ## iongraph from start to finish
 
-We will now go through the entire iongraph layout algorithm from start to finish. Each section contains explanatory diagrams, in which rectangles are basic blocks and circles are dummy nodes. Loop header blocks (the single entry point to each loop) are additionally colored green.
+We will now go through the entire iongraph layout algorithm. Each section contains explanatory diagrams, in which rectangles are basic blocks and circles are dummy nodes. Loop header blocks (the single entry point to each loop) are additionally colored green.
 
 Be aware that the block positions in these diagrams are not representative of the actual computed layout position at each point in the process. For example, vertical positions are not calculated until the very end, but it would be hard to communicate what the algorithm was doing if all blocks were drawn on a single line!
 
@@ -1441,7 +1439,7 @@ Perhaps programmers ought to put less trust into magic optimizing systems, espec
 
 We have already integrated iongraph into the Firefox profiler, making it easy for us to view the graphs of the most expensive or impactful functions we find in our performance work. Unfortunately, this is only available in specific builds of the SpiderMonkey shell, and is not available in full browser builds. This is due to architectural differences in how profiling data is captured and the flags with which the browser and shell are built. I would love for Firefox users to someday be able to view these graphs themselves, but at the moment we have no plans to expose this to the browser. However, one bug tracking some related work can be found [here](https://bugzilla.mozilla.org/show_bug.cgi?id=1987005).
 
-In the meantime, however, I plan to continue updating iongraph with more features to assist us in our work. I may in the future update the tool to add richer navigation, search features, and visualization of register allocation info. Ultimately, though, I am likely to work on iongraph sporadically as we need it, with little mind for a product roadmap.
+We will continue to sporadically update iongraph with more features to aid us in our work. We have several ideas for new features, including [richer navigation](https://github.com/mozilla-spidermonkey/iongraph/issues/9), search, and visualization of [register allocation info](https://github.com/mozilla-spidermonkey/iongraph/issues/4). However, we have no explicit roadmap for when these features may be released.
 
 To experiment with iongraph locally, you can run a debug build of the SpiderMonkey shell with `IONFLAGS=logs`; this will dump information to `/tmp/ion.json`. This file can then be loaded into the [standalone deployment of iongraph](https://mozilla-spidermonkey.github.io/iongraph/). Please be aware that the user experience is rough and unpolished in its current state.
 
@@ -1449,7 +1447,7 @@ The source code for iongraph can be found on [GitHub](https://github.com/mozilla
 
 ---
 
-_Thanks to Matthew Gaudet and Asaf Gartner for their feedback on this article._
+_Thanks to Matthew Gaudet, Asaf Gartner, and Colin Davidson for their feedback on this article._
 
 <script>
   // Terrible code to put code blocks inside HTML tags, because our markdown
