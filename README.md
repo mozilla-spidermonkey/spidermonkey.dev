@@ -80,3 +80,14 @@ If you get `Error:  undefined method `[]' for nil` make sure you are using ruby 
    sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
    sudo xcodebuild -license
    ```
+
+
+#### Arch Linux failures
+- If you get `cannot load such file -- erb (LoadError)`
+
+   This is caused because [*Ruby package doesn't require ruby-erb*](https://gitlab.archlinux.org/archlinux/packaging/packages/ruby-erb/-/issues/1)
+
+   You can fix it by installing the `ruby-erb` package
+   ```
+   sudo pacman -S ruby-erb
+   ```
