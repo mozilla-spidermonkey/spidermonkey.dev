@@ -91,3 +91,9 @@ If you get `Error:  undefined method `[]' for nil` make sure you are using ruby 
    ```
    sudo pacman -S ruby-erb
    ```
+
+# Domain Notes
+
+The domain spidermonkey.dev is managed by Mozilla IT. 
+
+Mozillia Employees: Changes for it can be done through the MozCloud intake process. 
