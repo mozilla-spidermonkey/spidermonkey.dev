@@ -12,8 +12,9 @@ permalink: /docs/
 * [Overview of SpiderMonkey](https://firefox-source-docs.mozilla.org/js/index.html)
 * [Browse the code](https://searchfox.org/mozilla-central/source/js/src)
 * [SMDOC Source Comments](https://searchfox.org/mozilla-central/search?q=[SMDOC]&path=js%2F)
+* [SpiderMonkey Walkthrough (talk, 2018)](https://mozilla.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=14c5c021-e5d7-4604-ae5f-ac32013870a1)
 
-## In-depth Articles:
+## In-depth Articles
 
 ---
 * [Warp: Improved JS Performance](https://hacks.mozilla.org/2020/11/warp-improved-js-performance-in-firefox-83/)
