@@ -62,7 +62,7 @@
     stroke: var(--color-tech-tree-frame) !important;
 }
 
-#renderedTree .node.done > * {
+#renderedTree .node.Done > * {
     fill: var(--color-tech-tree-done) !important;
     stroke: var(--color-tech-tree-frame) !important;
 }
