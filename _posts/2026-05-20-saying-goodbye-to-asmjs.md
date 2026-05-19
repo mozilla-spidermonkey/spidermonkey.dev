@@ -16,15 +16,15 @@ If you maintain a site that uses asm.js, nothing will break. asm.js is just a su
 
 ## History
 
-[asm.js](http://asmjs.org/) was Mozilla's response to the question posed by [NaCl/PNaCl](https://en.wikipedia.org/wiki/Google_Native_Client): how can the web run code at native speeds?
+[asm.js](http://asmjs.org/) was Mozilla's response to the question posed by [NaCl and PNaCl](https://en.wikipedia.org/wiki/Google_Native_Client): how can the web run code at native speeds?
 
-The idea was clever: pick a strict, statically-typed subset of JavaScript that an engine could recognize on the fly and compile down to native code. In other words, "an extraordinarily optimizable, low-level subset of JavaScript".
+The idea was clever: pick a strict, statically-typed subset of JavaScript that an engine could recognize on the fly and compile down to native code. We could get performance similar to NaCl/PNaCl and still have code live inside web content and use web API's (no separate sandbox, IPC, or [alternative API's](https://en.wikipedia.org/wiki/NPAPI#PPAPI)).
 
 asm.js shipped in [Firefox 22](https://blog.mozilla.org/mbest/2013/06/25/asm-js-its-really-fast-backwards-compatible-and-now-in-the-release-version-of-firefox/) back in 2013 and was a success. It let projects like Unity and Unreal ship C/C++ codebases to the web for the first time, using just standard web technologies. The [Epic Citadel demo](https://blog.mozilla.org/futurereleases/2013/05/02/epic-citadel-demo-shows-the-power-of-the-web-as-a-platform-for-gaming/) was ported to the web in just four days. It was a landmark achievement, and a fond memory for the original asm.js team.
 
 <iframe width="560" height="315" style="display: block; margin: 0 auto;" src="https://www.youtube.com/embed/BV32Cs_CMqo" title="Unreal Engine 3 in Firefox with asm.js" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-asm.js proved that we could run code at near-native speed on the web using just web technologies (no plugins or separate sandbox). This opened the door to [WebAssembly](https://webassembly.org/), which shipped several years later in [Firefox 52](https://www.firefox.com/en-US/firefox/52.0/releasenotes/). Without asm.js, we likely wouldn't have WebAssembly.
+asm.js proved that we could run code at near-native speed on the web using just web technologies (no plugins or separate sandbox). This opened the door to [WebAssembly](https://webassembly.org/), which shipped several years later in [Firefox 52](https://www.firefox.com/en-US/firefox/52.0/releasenotes/). Without asm.js, [we likely wouldn't have WebAssembly](https://robert.ocallahan.org/2017/06/webassembly-mozilla-won.html).
 
 ## Why now?
 
