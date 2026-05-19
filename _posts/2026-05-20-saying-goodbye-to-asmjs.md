@@ -2,7 +2,7 @@
 layout: post
 title: "Saying goodbye to asm.js"
 author: Ryan Hunt
-date: 2026-05-18 12:00:00 -0500
+date: 2026-05-20 12:00:00 -0500
 description: Disabling asm.js optimizations in SpiderMonkey
 ---
 
@@ -43,7 +43,7 @@ The asm.js compiler is called OdinMonkey. As was foretold long ago, OdinMonkey m
 
 All is not lost however, for born of OdinMonkey is BaldrMonkey, our WebAssembly optimizing compiler. OdinMonkey may be swallowed whole by the wolf, Fenrir, but BaldrMonkey will rule over the reborn world alongside RabaldrMonkey (["commotion"](https://en.wiktionary.org/wiki/rabalder)), our WebAssembly baseline compiler.
 
-Thank you to OdinMonkey for thirteen years of service. Skål!
+On this Odin's day (Wednesday) we thank OdinMonkey for thirteen years of service. Skål!
 
 > Then fields unsowed bear ripened fruit,  
 > all ills grow better, and Baldr comes back;  
