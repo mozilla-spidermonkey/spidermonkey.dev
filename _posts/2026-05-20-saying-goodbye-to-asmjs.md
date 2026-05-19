@@ -24,7 +24,7 @@ asm.js shipped in [Firefox 22](https://blog.mozilla.org/mbest/2013/06/25/asm-js-
 
 <iframe width="560" height="315" style="display: block; margin: 0 auto;" src="https://www.youtube.com/embed/BV32Cs_CMqo" title="Unreal Engine 3 in Firefox with asm.js" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-asm.js proved that we could run code at near-native speed on the web using just web technologies (no plugins or separate sandbox). This opened the door to [WebAssembly](https://webassembly.org/), which shipped several years later in [Firefox 52](https://www.firefox.com/en-US/firefox/52.0/releasenotes/). Without asm.js, [we likely wouldn't have WebAssembly](https://robert.ocallahan.org/2017/06/webassembly-mozilla-won.html).
+asm.js proved that we could run code at near-native speed on the web using just web technologies. This opened the door to [WebAssembly](https://webassembly.org/), which shipped several years later in [Firefox 52](https://www.firefox.com/en-US/firefox/52.0/releasenotes/). Without asm.js, [we likely wouldn't have WebAssembly](https://robert.ocallahan.org/2017/06/webassembly-mozilla-won.html).
 
 ## Why now?
 
