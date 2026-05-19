@@ -34,7 +34,10 @@ If you are shipping asm.js content, please consider recompiling to WebAssembly! 
 
 ## Ragnarök
 
-<img src="/assets/img/odin.jpg" alt="OdinMonkey, by John Howard" style="max-width: 400px; display: block; margin: 0 auto;">
+<div style="display: flex; gap: 16px; justify-content: center;">
+  <img src="/assets/img/odin.jpg" alt="OdinMonkey, by John Howard" style="max-width: 48%;">
+  <img src="/assets/img/baldr.jpg" alt="BaldrMonkey" style="max-width: 48%;">
+</div>
 
 The asm.js compiler is called OdinMonkey. As was foretold long ago, OdinMonkey must meet his fated doom. The bug [Ragnarök](https://bugzilla.mozilla.org/show_bug.cgi?id=ragnarok) tracks the "Twilight of OdinMonkey".
 
